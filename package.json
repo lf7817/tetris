@@ -18,6 +18,7 @@
     "build": "react-app-rewired build",
     "test": "react-app-rewired test",
     "eject": "react-scripts eject",
+    "lint": "eslint \"src/**/*.{ts|tsx}\"",
     "lint:style": "stylelint \"src/**/*.scss\" --syntax scss",
     "clear:node_modules": "rimraf node_modules"
   },
@@ -29,6 +30,10 @@
   "lint-staged": {
     "src/**/*.scss": [
       "yarn lint:style",
+      "git add"
+    ],
+    "src/**/*.{ts|tsc}": [
+      "yarn lint",
       "git add"
     ]
   },
