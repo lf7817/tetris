@@ -1,9 +1,10 @@
 import '@babel/polyfill';
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.scss';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
+
+import './index.scss';
 
 ReactDOM.render(<App />, document.getElementById('root'));
 
@@ -12,4 +13,16 @@ ReactDOM.render(<App />, document.getElementById('root'));
 // Learn more about service workers: http://bit.ly/CRA-PWA
 serviceWorker.register();
 
-let a:string = '1';
+interface Person {
+  name: string;
+  age: number;
+}
+
+let tom: Person = {
+  name: 'Tom',
+  age: 25
+};
+
+if (tom.age === 25) {
+  console.log(tom.name + 'is 25 years old.');
+}
