@@ -2,6 +2,7 @@
   "name": "tetris",
   "version": "0.1.0",
   "private": true,
+  "homepage": "https://lf7817.github.io/tetris/",
   "dependencies": {
     "@babel/polyfill": "^7.0.0",
     "@types/jest": "23.3.10",
@@ -19,7 +20,8 @@
     "test": "react-app-rewired test",
     "eject": "react-scripts eject",
     "lint:style": "stylelint \"src/**/*.scss\" --syntax scss",
-    "clear:node_modules": "rimraf node_modules"
+    "clear:node_modules": "rimraf node_modules",
+    "deploy": "gh-pages -d build"
   },
   "husky": {
     "hooks": {
@@ -46,6 +48,7 @@
     "eslint-config-alloy": "^1.4.2",
     "eslint-plugin-react": "^7.11.1",
     "eslint-plugin-typescript": "^0.14.0",
+    "gh-pages": "^2.0.1",
     "husky": "^1.2.0",
     "lint-staged": "^8.1.0",
     "node-sass": "^4.10.0",

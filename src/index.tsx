@@ -8,21 +8,24 @@ import './index.scss';
 
 ReactDOM.render(<App />, document.getElementById('root'));
 
+interface Registration {
+  waiting: any;
+  [propName: string]: any;
+}
+
+function update(registration: Registration) {
+  console.log(registration);
+  try {
+    registration.waiting.postMessage('skipWaiting');
+  } catch (e) {
+    window.location.reload();
+  }
+}
+
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.
 // Learn more about service workers: http://bit.ly/CRA-PWA
-serviceWorker.register();
+serviceWorker.register({
+  onUpdate: update
+});
 
-interface Person {
-  name: string;
-  age: number;
-}
-
-let tom: Person = {
-  name: 'Tom',
-  age: 25
-};
-
-if (tom.age === 25) {
-  console.log(tom.name + 'is 25 years old.');
-}

@@ -17,7 +17,7 @@
   "include": [
     "src"
   ],
-  "files": [
-    "src/index.d.ts"
-  ],
+  "exclude": [
+    "src/sw.js"
+  ]
 }
