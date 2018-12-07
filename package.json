@@ -2,7 +2,7 @@
   "name": "tetris",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://lf7817.github.io/tetris/",
+  "homepage": ".",
   "dependencies": {
     "@babel/polyfill": "^7.0.0",
     "@types/jest": "23.3.10",

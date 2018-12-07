@@ -2,9 +2,9 @@
  * @Author: lifan
  * @Date: 2018-11-23 15:22:07
  * @Last Modified by: lifan
- * @Last Modified time: 2018-12-06 23:12:04
+ * @Last Modified time: 2018-12-07 15:53:26
  */
-const { override, addBundleVisualizer, useEslintRc, enableEslintTypescript, adjustWorkbox, } = require('customize-cra');
+const { override, addBundleVisualizer, useEslintRc, enableEslintTypescript } = require('customize-cra');
 const StyleLintPlugin = require('stylelint-webpack-plugin');
 const { InjectManifest } = require('workbox-webpack-plugin');
 const path = require('path');
@@ -26,11 +26,19 @@ const addStylint = () => (config) => {
 };
 
 const injectManifest = () => (config) => {
-  config.plugins.push(
+  let plugins = config.plugins.filter(p => {
+    return p.constructor.name !== 'GenerateSW';
+  });
+
+  plugins.push(
     new InjectManifest({
-      swSrc: './src/sw.js',
+      swSrc: './src/service-worker.js',
+      exclude: [/\.map$/, /asset-manifest\.json$/],
+      importWorkboxFrom: 'cdn',
     }),
   );
+
+  config.plugins = plugins;
 
   return config;
 };
@@ -39,7 +47,6 @@ module.exports = override(
   addStylint(),
   useEslintRc(),
   enableEslintTypescript(),
-  adjustWorkbox(wb => wb),
-  // injectManifest(),
+  injectManifest(),
   process.env.NODE_ENV === 'production' && addBundleVisualizer(),
 );
