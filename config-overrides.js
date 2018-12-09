@@ -2,7 +2,7 @@
  * @Author: lifan
  * @Date: 2018-11-23 15:22:07
  * @Last Modified by: lifan
- * @Last Modified time: 2018-12-07 15:53:26
+ * @Last Modified time: 2018-12-09 15:14:34
  */
 const { override, addBundleVisualizer, useEslintRc, enableEslintTypescript } = require('customize-cra');
 const StyleLintPlugin = require('stylelint-webpack-plugin');
@@ -32,7 +32,7 @@ const injectManifest = () => (config) => {
 
   plugins.push(
     new InjectManifest({
-      swSrc: './src/service-worker.js',
+      swSrc: './public/service-worker.js',
       exclude: [/\.map$/, /asset-manifest\.json$/],
       importWorkboxFrom: 'cdn',
     }),

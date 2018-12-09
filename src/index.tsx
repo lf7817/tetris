@@ -1,10 +1,16 @@
+/*
+ * @Author: lifan
+ * @Date: 2018-12-09 21:11:01
+ * @Last Modified by: lifan
+ * @Last Modified time: 2018-12-09 21:20:20
+ */
 import '@babel/polyfill';
 import React from 'react';
 import ReactDOM from 'react-dom';
-import App from './App';
-import * as serviceWorker from './serviceWorker';
-
-import './index.scss';
+import App from './containers';
+import * as serviceWorker from './utils/serviceWorker';
+import 'normalize.css';
+import './assets/scss/index.scss';
 
 ReactDOM.render(<App />, document.getElementById('root'));
 
