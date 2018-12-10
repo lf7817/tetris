@@ -2,7 +2,7 @@
  * @Author: lifan
  * @Date: 2018-12-09 21:11:01
  * @Last Modified by: lifan
- * @Last Modified time: 2018-12-09 21:20:20
+ * @Last Modified time: 2018-12-10 09:57:31
  */
 import '@babel/polyfill';
 import React from 'react';
@@ -36,4 +36,3 @@ serviceWorker.register({
     console.log('success');
   }
 });
-
