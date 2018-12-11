@@ -12,12 +12,13 @@
     "resolveJsonModule": true,
     "isolatedModules": true,
     "noEmit": true,
-    "jsx": "preserve"
+    "jsx": "preserve",
+    "lib": [
+      "dom", "scripthost", "es5", "es2015.promise", "es2015.core"
+    ],
+    "experimentalDecorators": true
   },
   "include": [
     "src"
-  ],
-  "exclude": [
-    "src/service-worker.js"
   ]
 }

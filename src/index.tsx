@@ -2,21 +2,22 @@
  * @Author: lifan
  * @Date: 2018-12-09 21:11:01
  * @Last Modified by: lifan
- * @Last Modified time: 2018-12-10 09:57:31
+ * @Last Modified time: 2018-12-11 16:41:01
  */
 import '@babel/polyfill';
 import React from 'react';
 import ReactDOM from 'react-dom';
-// import { Provider } from 'react-redux';
+import { Provider } from 'react-redux';
 import App from './containers';
 import * as serviceWorker from './utils/serviceWorker';
+import store from './store';
 import 'normalize.css';
 import './assets/scss/index.scss';
 
 ReactDOM.render(
-  // <Provider store={{}}>
-  <App />,
-  // </Provider>,
+  <Provider store={store}>
+    <App />,
+  </Provider>,
   document.getElementById('root')
 );
 
