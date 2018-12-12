@@ -1,19 +1,32 @@
-import { init, RematchRootState } from '@rematch/core'; // eslint-disable-line
-import * as models from './models';
+/*
+ * @Author: lifan
+ * @Date: 2018-12-12 09:46:29
+ * @Last Modified by: lifan
+ * @Last Modified time: 2018-12-12 15:43:46
+ */
+import { createStore, compose } from 'redux';
+import { persistReducer, persistStore, PersistConfig } from 'redux-persist';
+import storage from 'redux-persist/lib/storage';
+import rootReducer from './reducers';
 
-const isProduction = process.env.NODE_ENV === 'production';
+const devTools: any = (<any>window).__REDUX_DEVTOOLS_EXTENSION__;
+const persistConfig: PersistConfig = {
+  key: 'root',
+  storage
+};
+const persistedReducer = persistReducer(persistConfig, rootReducer);
 
-const store = init({
-  models,
-  redux: {
-    devtoolOptions: {
-      disabled: isProduction,
-    },
-  },
-  plugins: [],
-});
+export default () => {
+  const store = createStore(
+    persistedReducer,
+    compose(
+      devTools && devTools(),
+    )
+  );
+  const persistor = persistStore(store);
 
-export type Store = typeof store;
-export type Dispatch = typeof store.dispatch;
-export type iRootState = RematchRootState<typeof models>;
-export default store;
+  return {
+    store,
+    persistor
+  };
+};

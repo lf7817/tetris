@@ -1,14 +1,16 @@
 import React, { Component } from 'react';
+import { Dispatch } from 'redux';
+import { State } from '../store/reducers';
 import { connect } from 'react-redux';
-import { iRootState, Dispatch } from '../store';
+import { addCount } from '../store/actions';
 import './style.css';
 
-const mapState = (state: iRootState) => ({
+const mapState = (state: State) => ({
   count: state.count,
 });
 
 const mapDispatch = (dispatch: Dispatch) => ({
-  incrementAsync: dispatch.count.incrementAsync
+  addCount: (num: number) => dispatch(addCount(num))
 });
 
 type connectedProps = ReturnType<typeof mapState> & ReturnType<typeof mapDispatch>;
@@ -16,11 +18,12 @@ type Props = connectedProps;
 
 class App extends Component<Props> {
   render() {
-    const { count, incrementAsync } = this.props;
+    console.log(this.props);
+    const { count, addCount } = this.props;
     return (
       <div className="app">
         <p>{count}</p>
-        <button onClick={() => incrementAsync(1)}>add</button>
+        <button onClick={() => addCount(2)}>add</button>
       </div>
     );
   }

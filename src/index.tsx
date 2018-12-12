@@ -2,21 +2,26 @@
  * @Author: lifan
  * @Date: 2018-12-09 21:11:01
  * @Last Modified by: lifan
- * @Last Modified time: 2018-12-11 16:41:01
+ * @Last Modified time: 2018-12-12 15:47:25
  */
 import '@babel/polyfill';
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
+import { PersistGate } from 'redux-persist/integration/react';
 import App from './containers';
 import * as serviceWorker from './utils/serviceWorker';
-import store from './store';
+import configureStore from './store';
 import 'normalize.css';
 import './assets/scss/index.scss';
 
+const cStore = configureStore();
+
 ReactDOM.render(
-  <Provider store={store}>
-    <App />,
+  <Provider store={cStore.store}>
+    <PersistGate persistor={cStore.persistor}>
+      <App />
+    </PersistGate>,
   </Provider>,
   document.getElementById('root')
 );
