@@ -20,7 +20,7 @@ export default () => {
   const store = createStore(
     persistedReducer,
     compose(
-      devTools && devTools(),
+      devTools && devTools(), // 这里演示用，生产模式不禁用
     )
   );
   const persistor = persistStore(store);

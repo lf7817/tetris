@@ -11,6 +11,8 @@ export default (state = 0, action: Action) => {
   switch (action.type) {
     case Types.ADD_COUNT:
       return state + action.payload.num;
+    case Types.REDUCE_COUNT:
+      return state - action.payload.num;
     default: return state;
   }
 };

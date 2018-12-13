@@ -2,7 +2,7 @@
  * @Author: lifan
  * @Date: 2018-12-09 21:11:01
  * @Last Modified by: lifan
- * @Last Modified time: 2018-12-12 15:47:25
+ * @Last Modified time: 2018-12-13 13:35:41
  */
 import '@babel/polyfill';
 import React from 'react';
@@ -12,14 +12,15 @@ import { PersistGate } from 'redux-persist/integration/react';
 import App from './containers';
 import * as serviceWorker from './utils/serviceWorker';
 import configureStore from './store';
+import { isMobile } from './utils';
 import 'normalize.css';
 import './assets/scss/index.scss';
 
-const cStore = configureStore();
-
+const configStore = configureStore();
+console.log(isMobile());
 ReactDOM.render(
-  <Provider store={cStore.store}>
-    <PersistGate persistor={cStore.persistor}>
+  <Provider store={configStore.store}>
+    <PersistGate persistor={configStore.persistor}>
       <App />
     </PersistGate>,
   </Provider>,
