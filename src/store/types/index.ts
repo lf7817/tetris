@@ -8,6 +8,7 @@
 /* eslint-disable no-unused-vars */
 enum Types {
   ADD_COUNT = 'ADD_COUNT',
+  ADD_COUNT_ASYNC = 'ADD_COUNT_ASYNC',
   REDUCE_COUNT = 'REDUCE_COUNT',
   UPDATE_LOCALES = 'UPDATE_LOCALES',
 }

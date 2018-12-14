@@ -4,7 +4,7 @@ import { State } from '../store/reducers';
 import { connect } from 'react-redux';
 import intl from 'react-intl-universal';
 import { LOCALES, TYPE_LOCALES } from '../locales';
-import { addCount, reduceCount, updateLocales } from '../store/actions';
+import * as action from '../store/actions';
 import { getUrlParam } from '../utils';
 import Test from '../components/Test';
 
@@ -14,6 +14,7 @@ interface Props {
   count: number;
   locales: TYPE_LOCALES;
   addCount: (num: number) => void;
+  addCountAsync: () => void;
   reduceCount: (num: number) => void;
   updateLocales: (locales: TYPE_LOCALES) => void;
 }
@@ -63,7 +64,7 @@ class App extends Component<Props> {
 
   render() {
     const { initLocales } = this.state;
-    const { count, addCount, reduceCount, locales, updateLocales } = this.props;
+    const { count, addCount, reduceCount, locales, updateLocales, addCountAsync } = this.props;
 
     if (!initLocales) {
       return null;
@@ -72,7 +73,8 @@ class App extends Component<Props> {
     return (
       <div className="app">
         <p>{intl.get('count')}:{count}</p>
-        <button onClick={() => addCount(2)}>add</button>
+        <button onClick={() => addCount(1)}>add</button>
+        <button onClick={() => addCountAsync()}>add async</button>
         <button onClick={() => reduceCount(1)}>reduce</button>
         <br />
 
@@ -92,9 +94,10 @@ const mapState = (state: State) => ({
 });
 
 const mapDispatch = (dispatch: Dispatch) => ({
-  addCount: (num: number) => dispatch(addCount(num)),
-  reduceCount: (num: number) => dispatch(reduceCount(num)),
-  updateLocales: (locales: TYPE_LOCALES) => dispatch(updateLocales(locales)),
+  addCount: (num: number) => dispatch(action.addCount(num)),
+  addCountAsync: () => dispatch(action.addCountAsync()),
+  reduceCount: (num: number) => dispatch(action.reduceCount(num)),
+  updateLocales: (locales: TYPE_LOCALES) => dispatch(action.updateLocales(locales)),
 });
 
 export default connect(

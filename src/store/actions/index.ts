@@ -16,6 +16,11 @@ export const addCount = (num: number) => ({
   }
 });
 
+export type AddCountAsync = ReturnType<typeof addCountAsync>;
+export const addCountAsync = () => ({
+  type: <Types.ADD_COUNT_ASYNC>Types.ADD_COUNT_ASYNC,
+});
+
 export type ReduceCount = ReturnType<typeof reduceCount>;
 export const reduceCount = (num: number) => ({
   type: <Types.REDUCE_COUNT>Types.REDUCE_COUNT,
@@ -34,5 +39,6 @@ export const updateLocales = (locales: TYPE_LOCALES) => ({
 
 export type Action =
   | AddCount
+  | AddCountAsync
   | ReduceCount
   | UpdateLocales;
