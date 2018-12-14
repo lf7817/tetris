@@ -3,43 +3,41 @@ import { Dispatch } from 'redux';
 import { State } from '../store/reducers';
 import { connect } from 'react-redux';
 import intl from 'react-intl-universal';
+import { LOCALES, TYPE_LOCALES } from '../locales';
 import { addCount, reduceCount, updateLocales } from '../store/actions';
 import { getUrlParam } from '../utils';
 import Test from '../components/Test';
 
 import './style.css';
 
-const LOCALES = {
-  'en-US': require('../locales/en-US.json'),
-  'zh-CN': require('../locales/zh-CN.json'),
-};
-
 interface Props {
   count: number;
-  locales: string;
+  locales: TYPE_LOCALES;
   addCount: (num: number) => void;
   reduceCount: (num: number) => void;
-  updateLocales: (locales: string) => void;
+  updateLocales: (locales: TYPE_LOCALES) => void;
 }
 
 class App extends Component<Props> {
-  public state = {
+  state = {
     initLocales: false
   };
 
-  loadLocales(str: string) {
-    intl.init({
-      currentLocale: str,
-      locales: LOCALES,
-    }).then(() => {
+  async loadLocales(str: TYPE_LOCALES) {
+    try {
+      await intl.init({
+        currentLocale: str,
+        locales: LOCALES,
+      });
+    } finally {
       this.setState({
         initLocales: true
       });
-    });
+    }
   }
 
-  initLocales(locales: string) {
-    const lang = getUrlParam('lang');
+  initLocales(locales: TYPE_LOCALES) {
+    const lang = getUrlParam('lang') as TYPE_LOCALES;
 
     if (lang && LOCALES.hasOwnProperty(lang)) {
       this.props.updateLocales(lang);
@@ -49,17 +47,23 @@ class App extends Component<Props> {
     }
   }
 
-  switchLocales = (locales: keyof typeof LOCALES) => {
-    window.location.href = window.location.origin + '?lang=' + locales;
+  switchLocales = (locales: TYPE_LOCALES) => {
+    window.location.href = `${window.location.origin}${window.location.pathname}?lang=${locales}`;
   }
 
   componentDidMount() {
     this.initLocales(this.props.locales);
   }
 
+  componentDidUpdate(prevProps: Props) {
+    if (prevProps.locales !== this.props.locales) {
+      this.switchLocales(this.props.locales);
+    }
+  }
+
   render() {
     const { initLocales } = this.state;
-    const { count, addCount, reduceCount, locales } = this.props;
+    const { count, addCount, reduceCount, locales, updateLocales } = this.props;
 
     if (!initLocales) {
       return null;
@@ -73,8 +77,8 @@ class App extends Component<Props> {
         <br />
 
         <p>{locales}</p>
-        <button onClick={() => this.switchLocales('en-US')}>switch locales(en)</button>
-        <button onClick={() => this.switchLocales('zh-CN')}>switch locales(zh-CN)</button>
+        <button onClick={() => updateLocales('en-US')}>switch locales(en)</button>
+        <button onClick={() => updateLocales('zh-CN')}>switch locales(zh-CN)</button>
 
         <Test />
       </div>
@@ -90,7 +94,7 @@ const mapState = (state: State) => ({
 const mapDispatch = (dispatch: Dispatch) => ({
   addCount: (num: number) => dispatch(addCount(num)),
   reduceCount: (num: number) => dispatch(reduceCount(num)),
-  updateLocales: (locales: string) => dispatch(updateLocales(locales)),
+  updateLocales: (locales: TYPE_LOCALES) => dispatch(updateLocales(locales)),
 });
 
 export default connect(

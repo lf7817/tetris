@@ -2,9 +2,10 @@
  * @Author: lifan
  * @Date: 2018-12-12 14:50:48
  * @Last Modified by: lifan
- * @Last Modified time: 2018-12-13 13:56:50
+ * @Last Modified time: 2018-12-14 10:19:03
  */
 import Types from '../types';
+import { TYPE_LOCALES } from '../../locales';
 
 /* eslint-disable no-use-before-define */
 export type AddCount = ReturnType<typeof addCount>;
@@ -24,7 +25,7 @@ export const reduceCount = (num: number) => ({
 });
 
 export type UpdateLocales = ReturnType<typeof updateLocales>;
-export const updateLocales = (locales: string) => ({
+export const updateLocales = (locales: TYPE_LOCALES) => ({
   type: <Types.UPDATE_LOCALES>Types.UPDATE_LOCALES,
   payload: {
     locales

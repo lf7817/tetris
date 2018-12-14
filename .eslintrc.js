@@ -14,8 +14,12 @@ module.exports = {
       pragma: 'React',
     }
   },
+  plugins: [
+    'react-hooks'
+  ],
   rules: {
     'indent': ["error", 2, { "SwitchCase": 1 }],
-    'react/jsx-indent-props': ['error', 2]
+    'react/jsx-indent-props': ['error', 2],
+    "react-hooks/rules-of-hooks": "error"
   }
 };

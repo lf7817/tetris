@@ -1,8 +1,17 @@
-import React from 'react';
-import intl from 'react-intl-universal';
+import React, { useState } from 'react';
 
-const Test = () => (
-  <p>{intl.get('count')}</p>
-);
+function Example() {
+  // Declare a new state variable, which we'll call "count"
+  const [count, setCount] = useState(0);
 
-export default Test;
+  return (
+    <div>
+      <p>You clicked {count} times</p>
+      <button onClick={() => setCount(count + 1)}>
+        Click me
+      </button>
+    </div>
+  );
+}
+
+export default Example;
