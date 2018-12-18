@@ -12,12 +12,12 @@ import { PersistGate } from 'redux-persist/integration/react';
 import App from './containers';
 import * as serviceWorker from './utils/serviceWorker';
 import configureStore from './store';
-import { isMobile } from './utils';
+
 import 'normalize.css';
 import './assets/scss/index.scss';
 
 const configStore = configureStore();
-console.log(isMobile());
+
 ReactDOM.render(
   <Provider store={configStore.store}>
     <PersistGate persistor={configStore.persistor}>
@@ -44,3 +44,9 @@ serviceWorker.register({
     console.log('success');
   }
 });
+
+
+let v: Tetris = {
+  version: '12'
+};
+console.log(v);

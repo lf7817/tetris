@@ -54,6 +54,7 @@ class App extends Component<Props> {
 
   componentDidMount() {
     this.initLocales(this.props.locales);
+    console.log(this.props);
   }
 
   componentDidUpdate(prevProps: Props) {
