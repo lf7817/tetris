@@ -12,7 +12,7 @@ import rootReducer from './reducers';
 import rootSaga from './sagas';
 
 
-const devTools: any = (<any>window).__REDUX_DEVTOOLS_EXTENSION__;
+const composeEnhancers = (window as any).__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 const persistConfig: PersistConfig = {
   key: 'root',
   storage
@@ -21,28 +21,14 @@ const persistedReducer = persistReducer(persistConfig, rootReducer);
 const sagaMiddleware  = createSagaMiddleware();
 
 export default () => {
-  let store: Store;
-
-  if (devTools) {
-    store = createStore(
-      persistedReducer,
-      compose(
-        applyMiddleware(
-          sagaMiddleware,
-        ),
-        devTools()
+  let store: Store = createStore(
+    persistedReducer,
+    composeEnhancers(
+      applyMiddleware(
+        sagaMiddleware,
       )
-    );
-  } else {
-    store = createStore(
-      persistedReducer,
-      compose(
-        applyMiddleware(
-          sagaMiddleware,
-        )
-      )
-    );
-  }
+    )
+  );
 
   const persistor = persistStore(store);
   sagaMiddleware.run(rootSaga);

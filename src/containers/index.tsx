@@ -84,6 +84,21 @@ class App extends Component<Props> {
         <button onClick={() => updateLocales('zh-CN')}>switch locales(zh-CN)</button>
 
         <Test />
+
+        <svg width={300} height={300} fill="#9ead86">
+          <g>
+            <rect x="100" y="100" width="16" height="16" style={{ fill: '#9ead86', strokeWidth: 2, stroke: '#879372' }} />
+            <rect x="102" y="102" width="12" height="12" style={{ fill: '#879372' }} />
+          </g>
+          <g>
+            <rect x="120" y="100" width="16" height="16" style={{ fill: '#9ead86', strokeWidth: 2, stroke: '#879372' }} />
+            <rect x="122" y="102" width="12" height="12" style={{ fill: '#879372' }} />
+          </g>
+          {/* <g>
+            <rect x="0" y="0" width="16" height="16" style={{ strokeWidth: 2, stroke: '#879372' }} />
+            <rect x="2" y="2" width="12" height="12" style={{ fill: '#879372' }} />
+          </g> */}
+        </svg>
       </div>
     );
   }

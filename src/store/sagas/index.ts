@@ -1,9 +1,8 @@
-import { delay } from 'redux-saga';
-import { call, put, takeEvery, fork } from 'redux-saga/effects';
+import { call, put, takeEvery, fork, delay } from 'redux-saga/effects';
 import Types from '../types';
 
 export function* incrementAsync() {
-  yield call(delay, 1000);
+  yield delay(1000);
   yield put({
     type: Types.ADD_COUNT,
     payload: {
@@ -30,6 +29,14 @@ function* fetchData() {
   const task = yield fork(fn);
   console.log('task: ', task);
 }
+
+// function* watcher() {
+//   while (true) {
+//     yield delay(1000);
+//     console.log(1000);
+//     yield fork(fetchData);
+//   }
+// }
 
 export function* watchIncrementAsync() {
   yield takeEvery(Types.ADD_COUNT_ASYNC, incrementAsync);
