@@ -1,8 +1,5 @@
 @import "../assets/scss/variable.scss";
-
-@function rem($px) {
-  @return ($px / $vm_fontsize ) * 1rem;
-}
+@import "../assets/scss/func.scss";
 
 .app {
   width: 100%;
