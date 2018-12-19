@@ -2,16 +2,22 @@
  * @Author: lifan
  * @Date: 2018-12-09 21:20:51
  * @Last Modified by: lifan
- * @Last Modified time: 2018-12-19 16:02:05
+ * @Last Modified time: 2018-12-19 22:32:56
  */
 @import 'variable';
 
+* {
+  box-sizing: border-box;
+}
+
 html {
-  font-size: ($vm_fontsize / ($vm_design / 2)) * 100vw;
+  font-family: "HanHei SC","PingHei","PingFang SC","STHeitiSC-Light","Helvetica Neue","Helvetica","Arial",sans-serif;
+  font-size: ($font-size-root / ($design-width / 2)) * 100vw;
   // 同时，通过Media Queries 限制根元素最大最小值
   @media screen and (max-width: 320px) {
     font-size: 64px;
   }
+
   @media screen and (min-width: 540px) {
     font-size: 108px;
   }

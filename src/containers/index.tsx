@@ -6,7 +6,7 @@ import intl from 'react-intl-universal';
 import { LOCALES, TYPE_LOCALES } from '../locales';
 import * as action from '../store/actions';
 import { getUrlParam } from '../utils';
-import Pixel from '../components/Pixel';
+import Screen from '../components/Screen';
 
 import style from './style.module.scss';
 
@@ -68,10 +68,7 @@ class App extends Component<Props> {
 
     return (
       <div className={style.app}>
-        <svg width={140} height={140}>
-          <Pixel x={100} y={100} width={16} highlight />
-          <Pixel x={120} y={100} width={16} />
-        </svg>
+        <Screen />
       </div>
     );
   }

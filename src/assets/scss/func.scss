@@ -1,3 +1,5 @@
-@function rem($px) {
-  @return ($px / $vm_fontsize ) * 1rem;
+@import "variable";
+
+@function px2rem($px) {
+  @return ($px / $font-size-root / 2) * 1rem;
 }

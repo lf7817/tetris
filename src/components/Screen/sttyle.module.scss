@@ -1,0 +1,33 @@
+/*
+ * @Author: lifan
+ * @Date: 2018-12-19 21:10:55
+ * @Last Modified by: lifan
+ * @Last Modified time: 2018-12-19 23:05:03
+ */
+@import "../../assets/scss/variable.scss";
+@import "../../assets/scss/func.scss";
+
+.wrapper {
+  position: relative;
+  width: 100%;
+
+  .decorate {
+    position: absolute;
+  }
+
+  .center {
+    margin: 0 auto;
+    padding: px2rem(48);
+    width: px2rem(564);
+    border: px2rem(10) solid #000;
+    border-top: none;
+
+    .screen {
+      width: 100%;
+      height: px2rem(560);
+      border: px2rem(5) solid;
+      border-color: #987f0f #fae36c #fae36c #987f0f;
+      background-color: $color-screen;
+    }
+  }
+}

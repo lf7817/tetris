@@ -1,8 +1,17 @@
+/*
+ * @Author: lifan
+ * @Date: 2018-12-19 21:12:48
+ * @Last Modified by: lifan
+ * @Last Modified time: 2018-12-19 22:12:20
+ */
 @import "../assets/scss/variable.scss";
 @import "../assets/scss/func.scss";
 
 .app {
-  width: 100%;
-  height: rem(400);
+  margin: 0 auto;
+  padding-top: px2rem(116);
+  height: 100vh;
+  font-size: px2rem(32);
+  border-radius: px2rem(20);
   background-color: $color-theme;
 }

@@ -2,13 +2,18 @@
  * @Author: lifan
  * @Date: 2018-12-09 21:20:43
  * @Last Modified by: lifan
- * @Last Modified time: 2018-12-19 16:01:59
+ * @Last Modified time: 2018-12-19 22:03:52
  */
+
+/* 设计稿尺寸 */
+$design-width: 750;
 
 /* 颜色规范 */
 $color-theme-background: #009688;
 $color-theme: #efcc19;
+$color-screen: #9ead86;
+$color-block: #879372;
+$color-block-highlight: #000;
 
 /* 字体规范 */
-$vm_fontsize: 75;
-$vm_design: 750;
+$font-size-root: $design-width / 10;
