@@ -2,7 +2,7 @@
  * @Author: lifan
  * @Date: 2018-12-09 21:11:01
  * @Last Modified by: lifan
- * @Last Modified time: 2018-12-13 13:35:41
+ * @Last Modified time: 2018-12-19 14:16:49
  */
 import '@babel/polyfill';
 import React from 'react';
@@ -22,7 +22,7 @@ ReactDOM.render(
   <Provider store={configStore.store}>
     <PersistGate persistor={configStore.persistor}>
       <App />
-    </PersistGate>,
+    </PersistGate>
   </Provider>,
   document.getElementById('root')
 );

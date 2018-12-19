@@ -2,12 +2,26 @@
  * @Author: lifan
  * @Date: 2018-12-09 21:20:51
  * @Last Modified by: lifan
- * @Last Modified time: 2018-12-10 12:16:18
+ * @Last Modified time: 2018-12-19 15:32:35
  */
 @import 'variable';
 
+html {
+  font-size: ($vm_fontsize / ($vm_design / 2)) * 100vw;
+  // 同时，通过Media Queries 限制根元素最大最小值
+  @media screen and (max-width: 320px) {
+    font-size: 64px;
+  }
+
+  @media screen and (min-width: 540px) {
+    font-size: 108px;
+  }
+}
+
 body {
-  margin: 0;
+  margin: 0 auto;
   padding: 0;
+  max-width: 540px;
+  min-width: 320px;
   background: $color-theme-background;
 }

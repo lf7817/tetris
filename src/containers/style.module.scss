@@ -1,0 +1,11 @@
+@import "../assets/scss/variable.scss";
+
+@function rem($px) {
+  @return ($px / $vm_fontsize ) * 1rem;
+}
+
+.app {
+  width: 100%;
+  height: rem(400);
+  background-color: $color-theme;
+}

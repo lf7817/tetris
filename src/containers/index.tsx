@@ -6,16 +6,12 @@ import intl from 'react-intl-universal';
 import { LOCALES, TYPE_LOCALES } from '../locales';
 import * as action from '../store/actions';
 import { getUrlParam } from '../utils';
-import Test from '../components/Test';
+import Pixel from '../components/Pixel';
 
-import './style.css';
+import style from './style.module.scss';
 
 interface Props {
-  count: number;
   locales: TYPE_LOCALES;
-  addCount: (num: number) => void;
-  addCountAsync: () => void;
-  reduceCount: (num: number) => void;
   updateLocales: (locales: TYPE_LOCALES) => void;
 }
 
@@ -65,39 +61,16 @@ class App extends Component<Props> {
 
   render() {
     const { initLocales } = this.state;
-    const { count, addCount, reduceCount, locales, updateLocales, addCountAsync } = this.props;
 
     if (!initLocales) {
       return null;
     }
 
     return (
-      <div className="app">
-        <p>{intl.get('count')}:{count}</p>
-        <button onClick={() => addCount(1)}>add</button>
-        <button onClick={() => addCountAsync()}>add async</button>
-        <button onClick={() => reduceCount(1)}>reduce</button>
-        <br />
-
-        <p>{locales}</p>
-        <button onClick={() => updateLocales('en-US')}>switch locales(en)</button>
-        <button onClick={() => updateLocales('zh-CN')}>switch locales(zh-CN)</button>
-
-        <Test />
-
-        <svg width={300} height={300} fill="#9ead86">
-          <g>
-            <rect x="100" y="100" width="16" height="16" style={{ fill: '#9ead86', strokeWidth: 2, stroke: '#879372' }} />
-            <rect x="102" y="102" width="12" height="12" style={{ fill: '#879372' }} />
-          </g>
-          <g>
-            <rect x="120" y="100" width="16" height="16" style={{ fill: '#9ead86', strokeWidth: 2, stroke: '#879372' }} />
-            <rect x="122" y="102" width="12" height="12" style={{ fill: '#879372' }} />
-          </g>
-          {/* <g>
-            <rect x="0" y="0" width="16" height="16" style={{ strokeWidth: 2, stroke: '#879372' }} />
-            <rect x="2" y="2" width="12" height="12" style={{ fill: '#879372' }} />
-          </g> */}
+      <div className={style.app}>
+        <svg width={140} height={140}>
+          <Pixel x={100} y={100} width={16} highlight />
+          <Pixel x={120} y={100} width={16} />
         </svg>
       </div>
     );
@@ -105,14 +78,10 @@ class App extends Component<Props> {
 }
 
 const mapState = (state: State) => ({
-  count: state.count,
   locales: state.locales,
 });
 
 const mapDispatch = (dispatch: Dispatch) => ({
-  addCount: (num: number) => dispatch(action.addCount(num)),
-  addCountAsync: () => dispatch(action.addCountAsync()),
-  reduceCount: (num: number) => dispatch(action.reduceCount(num)),
   updateLocales: (locales: TYPE_LOCALES) => dispatch(action.updateLocales(locales)),
 });
 
