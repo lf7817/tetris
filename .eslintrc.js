@@ -20,6 +20,7 @@ module.exports = {
   rules: {
     'indent': ["error", 2, { "SwitchCase": 1 }],
     'react/jsx-indent-props': ['error', 2],
-    "react-hooks/rules-of-hooks": "error"
+    'react-hooks/rules-of-hooks': 'error',
+    'typescript/member-ordering': 0
   }
 };

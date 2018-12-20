@@ -2,7 +2,7 @@
  * @Author: lifan
  * @Date: 2018-12-12 09:46:29
  * @Last Modified by: lifan
- * @Last Modified time: 2018-12-14 13:47:15
+ * @Last Modified time: 2018-12-20 15:34:50
  */
 import { createStore, compose, applyMiddleware, Store } from 'redux';
 import createSagaMiddleware from 'redux-saga';

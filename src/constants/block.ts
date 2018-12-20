@@ -2,7 +2,7 @@
  * @Author: lifan
  * @Date: 2018-12-19 09:55:19
  * @Last Modified by: lifan
- * @Last Modified time: 2018-12-19 10:43:10
+ * @Last Modified time: 2018-12-20 15:46:20
  */
 // 方块类型
 export const BLOCK_SHAPE = {

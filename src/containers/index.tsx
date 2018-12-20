@@ -12,6 +12,7 @@ import style from './style.module.scss';
 
 interface Props {
   locales: TYPE_LOCALES;
+  matrix: number[][];
   updateLocales: (locales: TYPE_LOCALES) => void;
 }
 
@@ -61,6 +62,7 @@ class App extends Component<Props> {
 
   render() {
     const { initLocales } = this.state;
+    const { matrix } = this.props;
 
     if (!initLocales) {
       return null;
@@ -68,7 +70,7 @@ class App extends Component<Props> {
 
     return (
       <div className={style.app}>
-        <Screen />
+        <Screen matrix={matrix} />
       </div>
     );
   }
@@ -76,6 +78,7 @@ class App extends Component<Props> {
 
 const mapState = (state: State) => ({
   locales: state.locales,
+  matrix: state.matrix,
 });
 
 const mapDispatch = (dispatch: Dispatch) => ({

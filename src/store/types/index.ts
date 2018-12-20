@@ -2,7 +2,7 @@
  * @Author: lifan
  * @Date: 2018-12-12 13:31:05
  * @Last Modified by: lifan
- * @Last Modified time: 2018-12-13 13:53:47
+ * @Last Modified time: 2018-12-20 15:36:09
  */
 
 /* eslint-disable no-unused-vars */
@@ -17,7 +17,8 @@ enum Types {
   RESTART = 'RESTART', // 重新开始
   RORATE = 'RORATE', // 旋转
   SET_SPEED = 'SET_SPEED', // 设置速度
-  SET_DEFAULT_LINES = 'SET_DEFAULT_LINES' // 设置初始行数
+  SET_DEFAULT_LINES = 'SET_DEFAULT_LINES', // 设置初始行数
+  UPDATE_MATRIX = 'UPDATE_MATRIX', // 更新矩阵
 }
 
 export default Types;

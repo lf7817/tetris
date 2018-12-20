@@ -1,0 +1,12 @@
+@import "../../assets/scss/variable.scss";
+
+.fillDefault {
+  fill: $color-block;
+}
+.fillHighlight {
+  fill: $color-block-highlight;
+}
+.strokeDefault {
+  stroke: $color-screen;
+  stroke-width: 2;
+}

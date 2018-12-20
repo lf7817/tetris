@@ -6,3 +6,16 @@
  */
 @import "../../assets/scss/variable.scss";
 @import "../../assets/scss/func.scss";
+
+.wrapper {
+  padding: px2rem(10);
+  width: 100%;
+  border: px2rem(2) solid #453e36;
+
+  .panl {
+    width: px2rem(258);
+    height: px2rem(520);
+    border: px2rem(4) solid #333;
+    border-radius: px2rem(4);
+  }
+}

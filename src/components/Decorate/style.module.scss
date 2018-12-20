@@ -1,24 +1,79 @@
 @import "../../assets/scss/variable.scss";
 @import "../../assets/scss/func.scss";
 
+$border-size: 12;
+$border-color: #111;
+
 .wrapper {
   position: relative;
   width: 100%;
 
   .decorate {
     position: absolute;
+    top: 0;
+    z-index: 100;
+    width: 100%;
+
+    .logo {
+      position: relative;
+      top: - px2rem(16);
+      margin: 0 auto;
+      padding: 0;
+      text-align: center;
+      font-size: px2rem(32);
+      font-weight: 400;
+    }
   }
 
   .center {
+    position: relative;
+    z-index: 99;
     margin: 0 auto;
     padding: px2rem(48);
     width: px2rem(564);
-    border: px2rem(10) solid #000;
+    border: px2rem($border-size) solid $border-color;
     border-top: none;
+    border-radius: 0 0 px2rem(10) px2rem(10);
+
+    .dotsLeft, .dotsRight {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      display: flex;
+
+      .dot {
+        display: inline-block;
+        width: px2rem($border-size);
+        height: px2rem($border-size);
+        background-color: $border-color;
+      }
+    }
+
+    .dotsLeft {
+      .dot {
+        margin-right: px2rem($border-size);
+
+        &:first-child {
+          width: px2rem($border-size * 5);
+        }
+      }
+    }
+
+    .dotsRight {
+      justify-content: flex-end;
+
+      /* stylelint-disable-next-line */
+      .dot {
+        margin-left: px2rem($border-size);
+        &:last-child {
+          width: px2rem($border-size * 5);
+        }
+      }
+    }
 
     .screen {
       width: 100%;
-      height: px2rem(560);
       border: px2rem(5) solid;
       border-color: #987f0f #fae36c #fae36c #987f0f;
       background-color: $color-screen;

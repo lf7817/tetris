@@ -2,7 +2,7 @@
  * @Author: lifan
  * @Date: 2018-12-12 14:50:48
  * @Last Modified by: lifan
- * @Last Modified time: 2018-12-14 10:19:03
+ * @Last Modified time: 2018-12-20 15:46:16
  */
 import Types from '../types';
 import { TYPE_LOCALES } from '../../locales';
@@ -37,8 +37,17 @@ export const updateLocales = (locales: TYPE_LOCALES) => ({
   }
 });
 
+export type UpdateMatrix = ReturnType<typeof updateMatrix>;
+export const updateMatrix = (matrix: number[][]) => ({
+  type: <Types.UPDATE_MATRIX>Types.UPDATE_MATRIX,
+  payload: {
+    matrix
+  }
+});
+
 export type Action =
   | AddCount
   | AddCountAsync
   | ReduceCount
-  | UpdateLocales;
+  | UpdateLocales
+  | UpdateMatrix;
