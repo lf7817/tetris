@@ -2,7 +2,7 @@
  * @Author: lifan
  * @Date: 2018-12-19 21:10:55
  * @Last Modified by: lifan
- * @Last Modified time: 2018-12-19 23:05:03
+ * @Last Modified time: 2018-12-20 20:48:28
  */
 @import "../../assets/scss/variable.scss";
 @import "../../assets/scss/func.scss";
@@ -12,10 +12,15 @@
   width: 100%;
   border: px2rem(2) solid #453e36;
 
+  .container {
+    padding: px2rem(2) px2rem(4) ;
+    width: px2rem(260);
+    border: px2rem(4) solid #000000;
+    font-size: 0;
+  }
+
   .panl {
-    width: px2rem(258);
-    height: px2rem(520);
-    border: px2rem(4) solid #333;
-    border-radius: px2rem(4);
+    width: 100%;
+    font-size: 0;
   }
 }

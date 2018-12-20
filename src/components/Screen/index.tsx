@@ -2,7 +2,7 @@
  * @Author: lifan
  * @Date: 2018-12-19 21:05:34
  * @Last Modified by: lifan
- * @Last Modified time: 2018-12-20 17:12:29
+ * @Last Modified time: 2018-12-20 20:46:31
  */
 import React, { Component } from 'react';
 import Decorate from '../Decorate';
@@ -38,20 +38,23 @@ class Screen extends Component<ScreenProps, State> {
 
   public render() {
     const { matrix } = this.props;
+    const pixelWidth = this.state.w / matrix[0].length || 10;
 
     return (
       <Decorate>
         <div className={style.wrapper}>
-          <div ref={this.$ref_Panl} className={style.panl}>
-            <svg width="100%" height="100%">
-              {
-                matrix.map((row, index) => (
-                  row.map((b, i) => (
-                    <Pixel key={`${index}_${i}`} width={12} x={50} y={50} highlight={!!b} />
+          <div className={style.container}>
+            <div ref={this.$ref_Panl} className={style.panl}>
+              <svg width="100%" height={this.state.w * 2}>
+                {
+                  matrix.map((row, i) => (
+                    row.map((b, j) => (
+                      <Pixel key={`${i}_${j}`} width={pixelWidth} x={j * pixelWidth} y={i * pixelWidth} highlight={!!b} />
+                    ))
                   ))
-                ))
-              }
-            </svg>
+                }
+              </svg>
+            </div>
           </div>
         </div>
       </Decorate>

@@ -2,7 +2,7 @@
  * @Author: lifan
  * @Date: 2018-12-19 09:02:19
  * @Last Modified by: lifan
- * @Last Modified time: 2018-12-20 16:27:32
+ * @Last Modified time: 2018-12-20 20:30:00
  */
 import React, { memo } from 'react';
 import style from './style.module.scss';
@@ -18,8 +18,9 @@ const Block = ({ highlight, x, y, width }: BlockProps) => {
   const fillColor = highlight ? style.fillHighlight : style.fillDefault;
   return (
     <g>
-      <rect x={x} y={y} width={width} height={width} className={fillColor} />
-      <rect x={x + 2} y={y + 2} width={width - 4} height={width - 4} className={`${fillColor} ${style.strokeDefault}`} />
+      <rect x={x} y={y} width={width} height={width} opacity={0} />
+      <rect x={x + 1} y={y + 1} width={width - 2} height={width - 2} className={fillColor} />
+      <rect x={x + 3} y={y + 3} width={width - 6} height={width - 6} className={`${fillColor} ${style.strokeDefault}`} />
     </g>
   );
 };

@@ -10,18 +10,22 @@ import Screen from '../components/Screen';
 
 import style from './style.module.scss';
 
-interface Props {
+interface AppProps {
   locales: TYPE_LOCALES;
   matrix: number[][];
   updateLocales: (locales: TYPE_LOCALES) => void;
 }
 
-class App extends Component<Props> {
-  state = {
+interface AppState {
+  initLocales: boolean;
+}
+
+class App extends Component<AppProps, AppState> {
+  public state = {
     initLocales: false
   };
 
-  async loadLocales(str: TYPE_LOCALES) {
+  private async loadLocales(str: TYPE_LOCALES) {
     try {
       await intl.init({
         currentLocale: str,
@@ -34,7 +38,7 @@ class App extends Component<Props> {
     }
   }
 
-  initLocales(locales: TYPE_LOCALES) {
+  private initLocales(locales: TYPE_LOCALES) {
     const lang = getUrlParam('lang') as TYPE_LOCALES;
 
     if (lang && LOCALES.hasOwnProperty(lang)) {
@@ -45,22 +49,24 @@ class App extends Component<Props> {
     }
   }
 
-  switchLocales = (locales: TYPE_LOCALES) => {
-    window.location.href = `${window.location.origin}${window.location.pathname}?lang=${locales}`;
+  private switchLocales = (locales: TYPE_LOCALES) => {
+    this.props.updateLocales(locales);
+    setTimeout(() => {
+      window.location.href = `${window.location.origin}${window.location.pathname}?lang=${locales}`;
+    }, 20);
   }
 
-  componentDidMount() {
+  public componentDidMount() {
     this.initLocales(this.props.locales);
-    console.log(this.props);
   }
 
-  componentDidUpdate(prevProps: Props) {
-    if (prevProps.locales !== this.props.locales) {
+  public componentDidUpdate(prevProps: AppProps) {
+    if (this.state.initLocales && prevProps.locales !== this.props.locales) {
       this.switchLocales(this.props.locales);
     }
   }
 
-  render() {
+  public render() {
     const { initLocales } = this.state;
     const { matrix } = this.props;
 
