@@ -1,5 +1,5 @@
 @import "variable";
 
 @function px2rem($px) {
-  @return ($px / $font-size-root / 2) * 1rem;
+  @return ($px / $font-size-root / $design-dpi) * 1rem;
 }

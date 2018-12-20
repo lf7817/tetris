@@ -2,27 +2,15 @@
  * @Author: lifan
  * @Date: 2018-12-19 21:05:34
  * @Last Modified by: lifan
- * @Last Modified time: 2018-12-19 23:04:09
+ * @Last Modified time: 2018-12-20 09:35:29
  */
-import React, { memo, ReactNode } from 'react';
-import style from './sttyle.module.scss';
-
-const Wrapper = ({ children }: { children: ReactNode }) => (
-  <div className={style.wrapper}>
-    <div className={style.center}>
-      <div className={style.screen}>
-        {
-          children
-        }
-      </div>
-    </div>
-  </div>
-);
+import React, { memo } from 'react';
+import Decorate from '../Decorate';
 
 const Screen = () => (
-  <Wrapper>
+  <Decorate>
     hello
-  </Wrapper>
+  </Decorate>
 );
 
 export default memo(Screen);
