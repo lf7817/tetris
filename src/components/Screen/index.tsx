@@ -49,7 +49,7 @@ class Screen extends Component<ScreenProps, State> {
                 {
                   matrix.map((row, i) => (
                     row.map((b, j) => (
-                      <Pixel key={`${i}_${j}`} width={pixelWidth} x={j * pixelWidth} y={i * pixelWidth} highlight={!!b} />
+                      <Pixel key={`${i}_${j}`} width={pixelWidth} x={j * pixelWidth} y={i * pixelWidth} highlight={!b} />
                     ))
                   ))
                 }
