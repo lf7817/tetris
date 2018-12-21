@@ -2,7 +2,7 @@
  * @Author: lifan
  * @Date: 2018-12-19 21:12:48
  * @Last Modified by: lifan
- * @Last Modified time: 2018-12-21 12:34:35
+ * @Last Modified time: 2018-12-21 16:35:27
  */
 @import "../assets/scss/variable.scss";
 @import "../assets/scss/func.scss";
@@ -17,6 +17,7 @@
 
   @media screen and (min-width: 540px) {
     border-radius: 20px;
+    padding-top: px2rem(64);
   }
 }
 

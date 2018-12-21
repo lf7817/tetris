@@ -1,6 +1,7 @@
 import React, { PureComponent, ReactNode } from 'react';
 import intl from 'react-intl-universal';
 import Matrix from '../Matrix';
+import { BLOCK_DECORATE, BLOCK_DECORATE_REVERSE } from '../../constants/block';
 import style from './style.module.scss';
 
 interface DecorateProps {
@@ -12,11 +13,6 @@ interface DecorateState {
   w: number;
 }
 
-const m = [
-  [0, 1],
-  [1, 1],
-  [1, 0],
-];
 class Decorate extends PureComponent<DecorateProps, DecorateState> {
   private readonly $ref_Left: React.RefObject<HTMLDivElement> = React.createRef();
 
@@ -25,6 +21,7 @@ class Decorate extends PureComponent<DecorateProps, DecorateState> {
   }
 
   private calcWidth() {
+    console.log(1221);
     if (this.$ref_Left.current) {
       const width = this.$ref_Left.current.clientWidth;
       this.setState({
@@ -37,8 +34,10 @@ class Decorate extends PureComponent<DecorateProps, DecorateState> {
     this.calcWidth();
   }
 
-  componentDidUpdate() {
-    this.calcWidth();
+  componentDidUpdate(preProps: DecorateProps) {
+    if (this.props.windowWidth !== preProps.windowWidth) {
+      this.calcWidth();
+    }
   }
 
   render() {
@@ -55,10 +54,10 @@ class Decorate extends PureComponent<DecorateProps, DecorateState> {
           </h1>
         </div>
         <div className={style.left} ref={this.$ref_Left}>
-          <Matrix matrix={m} width={w} hideBlankPixel />
+          <Matrix matrix={BLOCK_DECORATE} width={w} hideBlankPixel />
         </div>
         <div className={style.right}>
-
+          <Matrix matrix={BLOCK_DECORATE_REVERSE} width={w} hideBlankPixel />
         </div>
         <div className={style.center}>
           <div className={style.dotsLeft}>

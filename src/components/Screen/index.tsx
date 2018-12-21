@@ -2,7 +2,7 @@
  * @Author: lifan
  * @Date: 2018-12-19 21:05:34
  * @Last Modified by: lifan
- * @Last Modified time: 2018-12-21 13:46:56
+ * @Last Modified time: 2018-12-21 15:17:51
  */
 import React, { PureComponent } from 'react';
 import Decorate from '../Decorate';
@@ -46,7 +46,6 @@ class Screen extends PureComponent<ScreenProps, ScreenState> {
   public render() {
     const { matrix, windowWidth } = this.props;
     const { w } = this.state;
-    console.log('resize');
 
     return (
       <Decorate windowWidth={windowWidth}>

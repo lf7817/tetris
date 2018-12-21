@@ -2,7 +2,7 @@
  * @Author: lifan
  * @Date: 2018-12-21 10:13:15
  * @Last Modified by: lifan
- * @Last Modified time: 2018-12-21 13:26:42
+ * @Last Modified time: 2018-12-21 15:12:53
  */
 import React, { Component } from 'react';
 import { Dispatch } from 'redux';
@@ -75,9 +75,9 @@ class App extends Component<AppProps, AppState> {
     this.initLocales(this.props.locales);
     window.addEventListener('resize', debounce(this.resizeChangeHander, 50));
     // const ii = new Array(10).fill(Math.round(Math.random()));
-    // setInterval(() => {
-    //   this.props.updateMatrix(new Array(20).fill(0).map(() => new Array(10).fill(Math.round(Math.random()))));
-    // }, 800);
+    setInterval(() => {
+      this.props.updateMatrix(new Array(20).fill(0).map(() => new Array(10).fill(Math.round(Math.random()))));
+    }, 800);
   }
 
   public componentDidUpdate(prevProps: AppProps) {

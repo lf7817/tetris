@@ -16,11 +16,11 @@ $border-color: #111;
 
     .logo {
       position: relative;
-      top: - px2rem(16);
+      top: - px2rem(22);
       margin: 0 auto;
       padding: 0;
       text-align: center;
-      font-size: px2rem(32);
+      font-size: px2rem(38);
       font-weight: 400;
     }
   }
@@ -28,7 +28,7 @@ $border-color: #111;
   .left, .right {
     position: absolute;
     top: px2rem(14);
-    width: px2rem(48);
+    width: px2rem(52);
   }
 
   .left {
@@ -69,7 +69,7 @@ $border-color: #111;
         margin-right: px2rem($border-size);
 
         &:first-child {
-          width: px2rem($border-size * 5);
+          width: px2rem($border-size * 4);
         }
       }
     }
@@ -81,7 +81,7 @@ $border-color: #111;
       .dot {
         margin-left: px2rem($border-size);
         &:last-child {
-          width: px2rem($border-size * 5);
+          width: px2rem($border-size * 4);
         }
       }
     }
