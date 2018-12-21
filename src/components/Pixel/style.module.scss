@@ -3,10 +3,15 @@
 .fillDefault {
   fill: $color-block;
 }
+
 .fillHighlight {
   fill: $color-block-highlight;
 }
+
 .strokeDefault {
-  stroke: $color-screen;
-  // stroke-width: 1.5;
+  stroke: $color-block;
+}
+
+.strokeHighlight {
+  stroke: $color-block-highlight;
 }

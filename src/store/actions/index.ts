@@ -2,7 +2,7 @@
  * @Author: lifan
  * @Date: 2018-12-12 14:50:48
  * @Last Modified by: lifan
- * @Last Modified time: 2018-12-20 15:46:16
+ * @Last Modified time: 2018-12-21 12:13:10
  */
 import Types from '../types';
 import { TYPE_LOCALES } from '../../locales';
@@ -45,9 +45,18 @@ export const updateMatrix = (matrix: number[][]) => ({
   }
 });
 
+export type WindowResize = ReturnType<typeof windowResize>;
+export const windowResize = (width: number) => ({
+  type: <Types.WINDOW_RESIZE>Types.WINDOW_RESIZE,
+  payload: {
+    width
+  }
+});
+
 export type Action =
   | AddCount
   | AddCountAsync
   | ReduceCount
   | UpdateLocales
-  | UpdateMatrix;
+  | UpdateMatrix
+  | WindowResize;

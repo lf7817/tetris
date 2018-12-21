@@ -2,7 +2,7 @@
  * @Author: lifan
  * @Date: 2018-12-12 13:31:05
  * @Last Modified by: lifan
- * @Last Modified time: 2018-12-20 15:36:09
+ * @Last Modified time: 2018-12-21 12:11:51
  */
 
 /* eslint-disable no-unused-vars */
@@ -10,6 +10,7 @@ enum Types {
   ADD_COUNT = 'ADD_COUNT',
   ADD_COUNT_ASYNC = 'ADD_COUNT_ASYNC',
   REDUCE_COUNT = 'REDUCE_COUNT',
+  WINDOW_RESIZE = 'WINDOW_RESIZE',
   UPDATE_LOCALES = 'UPDATE_LOCALES',
   GAME_OVER = 'GAME_OVER', // 游戏结束
   PAUSE = 'PAUSE', // 暂停

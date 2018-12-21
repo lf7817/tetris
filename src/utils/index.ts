@@ -2,7 +2,7 @@
  * @Author: lifan
  * @Date: 2018-12-13 13:36:59
  * @Last Modified by: lifan
- * @Last Modified time: 2018-12-13 16:06:01
+ * @Last Modified time: 2018-12-21 12:51:50
  */
 
 /**
@@ -24,4 +24,21 @@ export const getUrlParam = (name: string) => {
   }
 
   return;
+};
+
+/**
+ * 比较matrix是否相等
+ * @param {number[][]} prevMatrix 先前的matrix
+ * @param {number[][]} matrix 当前的matrix
+ */
+export const compareMatrix = (prevMatrix: number[][], matrix: number[][]) => {
+  for (let i = 0; i < prevMatrix.length; i++) {
+    for (let j = 0; j < prevMatrix[i].length; j++) {
+      if (prevMatrix[i][j] !== matrix[i][j]) {
+        return false;
+      }
+    }
+  }
+
+  return true;
 };

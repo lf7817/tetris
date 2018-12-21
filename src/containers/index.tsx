@@ -2,12 +2,13 @@
  * @Author: lifan
  * @Date: 2018-12-21 10:13:15
  * @Last Modified by: lifan
- * @Last Modified time: 2018-12-21 10:15:03
+ * @Last Modified time: 2018-12-21 13:26:42
  */
 import React, { Component } from 'react';
 import { Dispatch } from 'redux';
 import { State } from '../store/reducers';
 import { connect } from 'react-redux';
+import debounce from 'lodash.debounce';
 import ReactLoading from 'react-loading';
 import intl from 'react-intl-universal';
 import { LOCALES, TYPE_LOCALES } from '../locales';
@@ -20,7 +21,10 @@ import style from './style.module.scss';
 interface AppProps {
   locales: TYPE_LOCALES;
   matrix: number[][];
+  window_width: number;
   updateLocales: (locales: TYPE_LOCALES) => void;
+  updateWindowWidth: (num: number) => void;
+  updateMatrix: (matrix: number[][]) => void;
 }
 
 interface AppState {
@@ -62,9 +66,18 @@ class App extends Component<AppProps, AppState> {
       window.location.href = `${window.location.origin}${window.location.pathname}?lang=${locales}`;
     }, 20);
   }
+  private resizeChangeHander = () => {
+    const width = document.body.clientWidth;
+    this.props.updateWindowWidth(width);
+  }
 
   public componentDidMount() {
     this.initLocales(this.props.locales);
+    window.addEventListener('resize', debounce(this.resizeChangeHander, 50));
+    // const ii = new Array(10).fill(Math.round(Math.random()));
+    // setInterval(() => {
+    //   this.props.updateMatrix(new Array(20).fill(0).map(() => new Array(10).fill(Math.round(Math.random()))));
+    // }, 800);
   }
 
   public componentDidUpdate(prevProps: AppProps) {
@@ -75,7 +88,7 @@ class App extends Component<AppProps, AppState> {
 
   public render() {
     const { initLocales } = this.state;
-    const { matrix } = this.props;
+    const { matrix, window_width } = this.props;
 
     if (!initLocales) {
       return <ReactLoading type={'spinningBubbles'} delay={500} className={style.loading} />;
@@ -83,7 +96,7 @@ class App extends Component<AppProps, AppState> {
 
     return (
       <div className={style.app}>
-        <Screen matrix={matrix} />
+        <Screen matrix={matrix} windowWidth={window_width} />
       </div>
     );
   }
@@ -92,10 +105,13 @@ class App extends Component<AppProps, AppState> {
 const mapState = (state: State) => ({
   locales: state.locales,
   matrix: state.matrix,
+  window_width: state.window_width,
 });
 
 const mapDispatch = (dispatch: Dispatch) => ({
   updateLocales: (locales: TYPE_LOCALES) => dispatch(action.updateLocales(locales)),
+  updateWindowWidth: (num: number) => dispatch(action.windowResize(num)),
+  updateMatrix: (matrix: number[][]) => dispatch(action.updateMatrix(matrix)),
 });
 
 export default connect(

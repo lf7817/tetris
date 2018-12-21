@@ -2,10 +2,9 @@
  * @Author: lifan
  * @Date: 2018-12-19 21:05:34
  * @Last Modified by: lifan
- * @Last Modified time: 2018-12-21 10:46:46
+ * @Last Modified time: 2018-12-21 13:46:56
  */
-import React, { Component } from 'react';
-import debounce from 'lodash.debounce';
+import React, { PureComponent } from 'react';
 import Decorate from '../Decorate';
 import Matrix from '../Matrix';
 
@@ -13,13 +12,14 @@ import style from './style.module.scss';
 
 interface ScreenProps {
   matrix: number[][];
+  windowWidth: number;
 }
 
-interface State {
+interface ScreenState {
   w: number;
 }
 
-class Screen extends Component<ScreenProps, State> {
+class Screen extends PureComponent<ScreenProps, ScreenState> {
   private readonly $ref_Panl: React.RefObject<HTMLDivElement> = React.createRef();
   public state = {
     w: 0
@@ -35,19 +35,25 @@ class Screen extends Component<ScreenProps, State> {
 
   public componentDidMount() {
     this.calcWidth();
-    window.addEventListener('resize', debounce(this.calcWidth, 50));
+  }
+
+  public componentDidUpdate(prevProps: ScreenProps) {
+    if (this.props.windowWidth !== prevProps.windowWidth) {
+      this.calcWidth();
+    }
   }
 
   public render() {
-    const { matrix } = this.props;
+    const { matrix, windowWidth } = this.props;
     const { w } = this.state;
+    console.log('resize');
 
     return (
-      <Decorate>
+      <Decorate windowWidth={windowWidth}>
         <div className={style.wrapper}>
           <div className={style.container}>
             <div ref={this.$ref_Panl} className={style.panl}>
-              <Matrix matrix={matrix} width={w} height={w * 2} />
+              <Matrix matrix={matrix} width={w} />
             </div>
           </div>
         </div>

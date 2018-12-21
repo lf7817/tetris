@@ -26,9 +26,17 @@ $border-color: #111;
   }
 
   .left, .right {
-    width: px2rem {
+    position: absolute;
+    top: px2rem(14);
+    width: px2rem(48);
+  }
 
-    }
+  .left {
+    left: px2rem(20);
+  }
+
+  .right {
+    right: px2rem(20);
   }
 
   .center {
