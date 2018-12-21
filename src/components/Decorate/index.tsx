@@ -1,5 +1,6 @@
 import React, { memo, ReactNode } from 'react';
 import intl from 'react-intl-universal';
+import Matrix from '../Matrix';
 import style from './style.module.scss';
 
 interface DecorateProps {
@@ -15,6 +16,10 @@ const Decorate = ({ children }: DecorateProps) => (
         }
       </h1>
     </div>
+    <div className={style.left}>
+
+    </div>
+    <div className={style.right}></div>
     <div className={style.center}>
       <div className={style.dotsLeft}>
         <span className={style.dot}></span>

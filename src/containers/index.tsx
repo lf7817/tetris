@@ -1,7 +1,14 @@
+/*
+ * @Author: lifan
+ * @Date: 2018-12-21 10:13:15
+ * @Last Modified by: lifan
+ * @Last Modified time: 2018-12-21 10:15:03
+ */
 import React, { Component } from 'react';
 import { Dispatch } from 'redux';
 import { State } from '../store/reducers';
 import { connect } from 'react-redux';
+import ReactLoading from 'react-loading';
 import intl from 'react-intl-universal';
 import { LOCALES, TYPE_LOCALES } from '../locales';
 import * as action from '../store/actions';
@@ -71,7 +78,7 @@ class App extends Component<AppProps, AppState> {
     const { matrix } = this.props;
 
     if (!initLocales) {
-      return null;
+      return <ReactLoading type={'spinningBubbles'} delay={500} className={style.loading} />;
     }
 
     return (

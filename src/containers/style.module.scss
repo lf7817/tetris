@@ -2,7 +2,7 @@
  * @Author: lifan
  * @Date: 2018-12-19 21:12:48
  * @Last Modified by: lifan
- * @Last Modified time: 2018-12-19 22:12:20
+ * @Last Modified time: 2018-12-21 10:08:08
  */
 @import "../assets/scss/variable.scss";
 @import "../assets/scss/func.scss";
@@ -13,4 +13,33 @@
   min-height: 100vh;
   font-size: px2rem(32);
   background-color: $color-theme;
+  animation: fadeIn 0.5s;
+}
+
+.loading {
+  margin: px2rem(116) auto;
+  width: px2rem(200) !important;
+  height: px2rem(200) !important;
+  fill: $color-theme !important;
+  animation: fadeOut 0.5s;
+}
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0.01;
+  }
+
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes fadeOut {
+  0% {
+    opacity: 1;
+  }
+
+  100% {
+    opacity: 0.01;
+  }
 }

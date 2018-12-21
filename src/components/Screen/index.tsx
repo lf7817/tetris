@@ -2,11 +2,13 @@
  * @Author: lifan
  * @Date: 2018-12-19 21:05:34
  * @Last Modified by: lifan
- * @Last Modified time: 2018-12-20 20:46:31
+ * @Last Modified time: 2018-12-21 10:46:46
  */
 import React, { Component } from 'react';
+import debounce from 'lodash.debounce';
 import Decorate from '../Decorate';
-import Pixel from '../Pixel';
+import Matrix from '../Matrix';
+
 import style from './style.module.scss';
 
 interface ScreenProps {
@@ -33,27 +35,19 @@ class Screen extends Component<ScreenProps, State> {
 
   public componentDidMount() {
     this.calcWidth();
-    window.addEventListener('resize', this.calcWidth);
+    window.addEventListener('resize', debounce(this.calcWidth, 50));
   }
 
   public render() {
     const { matrix } = this.props;
-    const pixelWidth = this.state.w / matrix[0].length || 10;
+    const { w } = this.state;
 
     return (
       <Decorate>
         <div className={style.wrapper}>
           <div className={style.container}>
             <div ref={this.$ref_Panl} className={style.panl}>
-              <svg width="100%" height={this.state.w * 2}>
-                {
-                  matrix.map((row, i) => (
-                    row.map((b, j) => (
-                      <Pixel key={`${i}_${j}`} width={pixelWidth} x={j * pixelWidth} y={i * pixelWidth} highlight={!b} />
-                    ))
-                  ))
-                }
-              </svg>
+              <Matrix matrix={matrix} width={w} height={w * 2} />
             </div>
           </div>
         </div>

@@ -966,6 +966,18 @@
   resolved "http://registry.npm.taobao.org/@types/jest/download/@types/jest-23.3.10.tgz#4897974cc317bf99d4fe6af1efa15957fa9c94de"
   integrity sha1-SJeXTMMXv5nU/mrx76FZV/qclN4=
 
+"@types/lodash.debounce@^4.0.4":
+  version "4.0.4"
+  resolved "http://registry.npm.taobao.org/@types/lodash.debounce/download/@types/lodash.debounce-4.0.4.tgz#a3d082628ef1bb1964c2b6a2d4f45acae7209e7a"
+  integrity sha1-o9CCYo7xuxlkwrai1PRayucgnno=
+  dependencies:
+    "@types/lodash" "*"
+
+"@types/lodash@*":
+  version "4.14.119"
+  resolved "http://registry.npm.taobao.org/@types/lodash/download/@types/lodash-4.14.119.tgz#be847e5f4bc3e35e46d041c394ead8b603ad8b39"
+  integrity sha1-voR+X0vD415G0EHDlOrYtgOtizk=
+
 "@types/node@10.12.12":
   version "10.12.12"
   resolved "http://registry.npm.taobao.org/@types/node/download/@types/node-10.12.12.tgz#e15a9d034d9210f00320ef718a50c4a799417c47"
@@ -8988,6 +9000,11 @@ react-is@^16.3.2, react-is@^16.6.3:
   version "16.7.0"
   resolved "http://registry.npm.taobao.org/react-is/download/react-is-16.7.0.tgz#c1bd21c64f1f1364c6f70695ec02d69392f41bfa"
   integrity sha1-wb0hxk8fE2TG9waV7ALWk5L0G/o=
+
+react-loading@^2.0.3:
+  version "2.0.3"
+  resolved "http://registry.npm.taobao.org/react-loading/download/react-loading-2.0.3.tgz#e8138fb0c3e4674e481b320802ac7048ae14ffb9"
+  integrity sha1-6BOPsMPkZ05IGzIIAqxwSK4U/7k=
 
 react-redux@^6.0.0:
   version "6.0.0"
