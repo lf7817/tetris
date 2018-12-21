@@ -2,7 +2,7 @@
  * @Author: lifan
  * @Date: 2018-12-21 10:13:15
  * @Last Modified by: lifan
- * @Last Modified time: 2018-12-21 15:12:53
+ * @Last Modified time: 2018-12-21 17:00:16
  */
 import React, { Component } from 'react';
 import { Dispatch } from 'redux';
@@ -76,7 +76,10 @@ class App extends Component<AppProps, AppState> {
     window.addEventListener('resize', debounce(this.resizeChangeHander, 50));
     // const ii = new Array(10).fill(Math.round(Math.random()));
     setInterval(() => {
-      this.props.updateMatrix(new Array(20).fill(0).map(() => new Array(10).fill(Math.round(Math.random()))));
+      const newArr = this.props.matrix.map(item => {
+        return item.map(() => Math.round(Math.random()));
+      });
+      this.props.updateMatrix(newArr);
     }, 800);
   }
 
