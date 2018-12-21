@@ -13,9 +13,21 @@ import rootSaga from './sagas';
 
 
 const composeEnhancers = (window as any).__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+// const migrations = {
+//   0: (state: State) => {
+//     // migration clear out device state
+//     return state;
+//   },
+//   1: (state: State) => {
+//     // migration to keep only device state
+//     return state;
+//   }
+// };
 const persistConfig: PersistConfig = {
   key: 'root',
-  storage
+  storage,
+  version: 1,
+  // migrate: createMigrate(migrations, { debug: true })
 };
 const persistedReducer = persistReducer(persistConfig, rootReducer);
 const sagaMiddleware  = createSagaMiddleware();
@@ -31,6 +43,8 @@ export default () => {
   );
 
   const persistor = persistStore(store);
+  // persistor.pause();
+
   sagaMiddleware.run(rootSaga);
 
   return {

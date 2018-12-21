@@ -9,7 +9,7 @@ import Types from '../types';
 import { Action } from '../actions';
 import { TYPE_LOCALES } from '../../locales';
 
-export default (state: TYPE_LOCALES = 'zh-CN', action: Action) => {
+export default (state: TYPE_LOCALES = 'en-US', action: Action) => {
   switch (action.type) {
     case Types.UPDATE_LOCALES:
       return action.payload.locales;

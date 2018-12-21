@@ -2,7 +2,7 @@
  * @Author: lifan
  * @Date: 2018-12-21 10:13:15
  * @Last Modified by: lifan
- * @Last Modified time: 2018-12-21 17:02:44
+ * @Last Modified time: 2018-12-21 22:35:19
  */
 import React, { Component } from 'react';
 import { Dispatch } from 'redux';
@@ -15,6 +15,7 @@ import { LOCALES, TYPE_LOCALES } from '../locales';
 import * as action from '../store/actions';
 import { getUrlParam } from '../utils';
 import Screen from '../components/Screen';
+import Keyboard from '../components/Keyboard';
 
 import style from './style.module.scss';
 
@@ -68,6 +69,7 @@ class App extends Component<AppProps, AppState> {
       window.location.href = `${window.location.origin}${window.location.pathname}?lang=${locales}`;
     }, 20);
   }
+
   private resizeChangeHander = () => {
     const width = document.body.clientWidth;
     this.props.updateWindowWidth(width);
@@ -102,6 +104,7 @@ class App extends Component<AppProps, AppState> {
     return (
       <div className={style.app}>
         <Screen matrix={matrix} windowWidth={window_width} />
+        <Keyboard />
       </div>
     );
   }
