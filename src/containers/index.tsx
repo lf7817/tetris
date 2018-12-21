@@ -2,7 +2,7 @@
  * @Author: lifan
  * @Date: 2018-12-21 10:13:15
  * @Last Modified by: lifan
- * @Last Modified time: 2018-12-21 17:00:16
+ * @Last Modified time: 2018-12-21 17:02:44
  */
 import React, { Component } from 'react';
 import { Dispatch } from 'redux';
@@ -43,9 +43,11 @@ class App extends Component<AppProps, AppState> {
         locales: LOCALES,
       });
     } finally {
-      this.setState({
-        initLocales: true
-      });
+      setTimeout(() => {
+        this.setState({
+          initLocales: true
+        });
+      }, 2000);
     }
   }
 
@@ -94,7 +96,7 @@ class App extends Component<AppProps, AppState> {
     const { matrix, window_width } = this.props;
 
     if (!initLocales) {
-      return <ReactLoading type={'spinningBubbles'} delay={500} className={style.loading} />;
+      return <ReactLoading type={'spinningBubbles'} className={style.loading} />;
     }
 
     return (
