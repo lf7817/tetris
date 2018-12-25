@@ -44,9 +44,3 @@ serviceWorker.register({
     console.log('success');
   }
 });
-
-
-let v: Tetris = {
-  version: '12'
-};
-console.log(v);

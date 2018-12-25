@@ -50,10 +50,13 @@ class Screen extends PureComponent<ScreenProps, ScreenState> {
     return (
       <Decorate windowWidth={windowWidth}>
         <div className={style.wrapper}>
-          <div className={style.container}>
-            <div ref={this.$ref_Panl} className={style.panl}>
+          <div className={style.main}>
+            <div ref={this.$ref_Panl}>
               <Matrix matrix={matrix} width={w} />
             </div>
+          </div>
+          <div className={style.record}>
+            record
           </div>
         </div>
       </Decorate>
