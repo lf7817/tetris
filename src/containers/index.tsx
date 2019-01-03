@@ -2,7 +2,7 @@
  * @Author: lifan
  * @Date: 2018-12-21 10:13:15
  * @Last Modified by: lifan
- * @Last Modified time: 2018-12-21 22:35:19
+ * @Last Modified time: 2019-01-03 14:29:24
  */
 import React, { Component } from 'react';
 import { Dispatch } from 'redux';
@@ -44,11 +44,17 @@ class App extends Component<AppProps, AppState> {
         locales: LOCALES,
       });
     } finally {
-      setTimeout(() => {
+      if (process.env.NODE_ENV === 'development') {
         this.setState({
           initLocales: true
         });
-      }, 2000);
+      } else {
+        setTimeout(() => {
+          this.setState({
+            initLocales: true
+          });
+        }, 2000);
+      }
     }
   }
 

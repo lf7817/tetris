@@ -1,0 +1,16 @@
+/*
+ * @Author: lifan
+ * @Date: 2019-01-03 13:18:50
+ * @Last Modified by: lifan
+ * @Last Modified time: 2019-01-03 14:59:23
+ */
+.myButton {
+  display: flex;
+  flex-direction: column;
+
+  .button {
+    width: 100px;
+    height: 100px;
+  }
+}
+

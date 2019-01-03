@@ -21,7 +21,6 @@ class Decorate extends PureComponent<DecorateProps, DecorateState> {
   }
 
   private calcWidth() {
-    console.log(1221);
     if (this.$ref_Left.current) {
       const width = this.$ref_Left.current.clientWidth;
       this.setState({

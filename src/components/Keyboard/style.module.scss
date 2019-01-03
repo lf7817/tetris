@@ -2,12 +2,22 @@
  * @Author: lifan
  * @Date: 2018-12-21 22:40:36
  * @Last Modified by: lifan
- * @Last Modified time: 2018-12-21 22:51:36
+ * @Last Modified time: 2019-01-03 15:00:48
  */
 @import "../../assets/scss/variable.scss";
 @import "../../assets/scss/func.scss";
 
 .keyboard {
+  position: relative;
+  display: flex;
+  align-items: center;
   width: 100%;
+  // background: red;
+  min-height: px2rem(346);
   padding: px2rem(120) px2rem(60) 0 px2rem(60);
+}
+
+.keyPause span:first-child {
+  width: 200px;
+  height: 200px;
 }

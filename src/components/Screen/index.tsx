@@ -55,9 +55,9 @@ class Screen extends PureComponent<ScreenProps, ScreenState> {
               <Matrix matrix={matrix} width={w} />
             </div>
           </div>
-          <div className={style.record}>
+          {/* <div className={style.record}>
             record
-          </div>
+          </div> */}
         </div>
       </Decorate>
     );

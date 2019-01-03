@@ -5,6 +5,7 @@
   "homepage": ".",
   "dependencies": {
     "@babel/polyfill": "^7.0.0",
+    "@types/classnames": "^2.2.6",
     "@types/jest": "23.3.10",
     "@types/lodash.debounce": "^4.0.4",
     "@types/node": "10.12.12",
@@ -12,6 +13,7 @@
     "@types/react-dom": "16.0.11",
     "@types/react-redux": "^6.0.11",
     "@types/react-responsive": "^3.0.2",
+    "classnames": "^2.2.6",
     "immer": "^1.8.2",
     "lodash.debounce": "^4.0.8",
     "normalize.css": "^8.0.1",
