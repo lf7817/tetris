@@ -33,17 +33,17 @@ class Screen extends PureComponent<ScreenProps, ScreenState> {
     }
   }
 
-  public componentDidMount() {
+  componentDidMount() {
     this.calcWidth();
   }
 
-  public componentDidUpdate(prevProps: ScreenProps) {
+  componentDidUpdate(prevProps: ScreenProps) {
     if (this.props.windowWidth !== prevProps.windowWidth) {
       this.calcWidth();
     }
   }
 
-  public render() {
+  render() {
     const { matrix, windowWidth } = this.props;
     const { w } = this.state;
 

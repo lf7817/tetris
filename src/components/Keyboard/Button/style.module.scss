@@ -4,13 +4,43 @@
  * @Last Modified by: lifan
  * @Last Modified time: 2019-01-03 14:59:23
  */
+ @import "../../../assets/scss/func.scss";
+
 .myButton {
   display: flex;
-  flex-direction: column;
 
   .button {
-    width: 100px;
-    height: 100px;
+    position: relative;
+    display: inline-block;
+    width: px2rem(60);
+    height: px2rem(60);
+    border-radius: 50%;
+    margin-bottom: px2rem(6);
+    box-shadow: 1px 1px 1px rgba(0,0,0,.2);
+
+    &::before, &::after {
+      position: absolute;
+      display: block;
+      content: " ";
+      left: 0;
+      right: 0;
+      top: 0;
+      bottom: 0;
+      border-radius: 50%;
+      box-shadow: inset 0 3px 6px hsla(0,0%,100%,.8);
+    }
+
+    &::after {
+      box-shadow: inset 0 -3px 6px rgba(0,0,0,.8);
+    }
+
+    &.active {
+      background: red;
+    }
+  }
+
+  .title {
+    font-size: px2rem(16);
   }
 }
 

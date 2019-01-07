@@ -11,14 +11,21 @@ import styles from './style.module.scss';
 interface MyButtonProps {
   title: string;
   classNames: string;
+  textDirection?: 'column' | 'row';
+  active?: boolean;
 }
 
 class Button extends PureComponent<MyButtonProps> {
+  static defaultProps = {
+    textDirection: 'column',
+    active: false,
+  };
+
   render() {
-    const { classNames, title } = this.props;
+    const { classNames, title, textDirection, active } = this.props;
     return (
-      <div className={cn(styles.myButton, classNames)}>
-        <span className={styles.button}></span>
+      <div className={cn(styles.myButton, classNames)} style={{ flexDirection: textDirection }}>
+        <span className={cn(styles.button, { [styles.active]: active })} />
         <span className={styles.title}>{title}</span>
       </div>
     );

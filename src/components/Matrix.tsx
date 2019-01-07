@@ -4,7 +4,7 @@
  * @Last Modified by: lifan
  * @Last Modified time: 2018-12-21 14:08:30
  */
-import React, { PureComponent } from 'react';
+import React, { Component } from 'react';
 import Pixel from './Pixel';
 
 interface MatrixProps {
@@ -13,9 +13,18 @@ interface MatrixProps {
   hideBlankPixel?: boolean;
 }
 
-class Matrix extends PureComponent<MatrixProps> {
+class Matrix extends Component<MatrixProps> {
   static defaultProps = {
     hideBlankPixel: false
+  }
+
+  shouldComponentUpdate(nextProps: MatrixProps) {
+    const { matrix, width, hideBlankPixel } = this.props;
+    if (nextProps.matrix !== matrix || nextProps.width !== width ||
+        nextProps.hideBlankPixel !== hideBlankPixel) {
+      return true;
+    }
+    return false;
   }
 
   render() {

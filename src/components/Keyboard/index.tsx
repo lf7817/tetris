@@ -12,6 +12,7 @@ class Keyboard extends PureComponent {
   render() {
     return (
       <div className={styles.keyboard}>
+        <MyButton title={'Pause(P)'} classNames={styles.keyPause} active />
         <MyButton title={'Pause(P)'} classNames={styles.keyPause} />
       </div>
     );

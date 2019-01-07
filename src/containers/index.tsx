@@ -4,7 +4,7 @@
  * @Last Modified by: lifan
  * @Last Modified time: 2019-01-03 14:29:24
  */
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import { Dispatch } from 'redux';
 import { State } from '../store/reducers';
 import { connect } from 'react-redux';
@@ -32,7 +32,7 @@ interface AppState {
   initLocales: boolean;
 }
 
-class App extends Component<AppProps, AppState> {
+class App extends PureComponent<AppProps, AppState> {
   public state = {
     initLocales: false
   };
@@ -81,25 +81,24 @@ class App extends Component<AppProps, AppState> {
     this.props.updateWindowWidth(width);
   }
 
-  public componentDidMount() {
+  componentDidMount() {
     this.initLocales(this.props.locales);
     window.addEventListener('resize', debounce(this.resizeChangeHander, 50));
-    // const ii = new Array(10).fill(Math.round(Math.random()));
-    setInterval(() => {
-      const newArr = this.props.matrix.map(item => {
-        return item.map(() => Math.round(Math.random()));
-      });
-      this.props.updateMatrix(newArr);
-    }, 800);
+    // setInterval(() => {
+    //   const newArr = this.props.matrix.map(item => {
+    //     return item.map(() => Math.round(Math.random()));
+    //   });
+    //   this.props.updateMatrix(newArr);
+    // }, 800);
   }
 
-  public componentDidUpdate(prevProps: AppProps) {
+  componentDidUpdate(prevProps: AppProps) {
     if (this.state.initLocales && prevProps.locales !== this.props.locales) {
       this.switchLocales(this.props.locales);
     }
   }
 
-  public render() {
+  render() {
     const { initLocales } = this.state;
     const { matrix, window_width } = this.props;
 
