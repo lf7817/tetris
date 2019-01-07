@@ -8,17 +8,113 @@
 @import "../../assets/scss/func.scss";
 
 .keyboard {
-  position: relative;
+  position: absolute;
   display: flex;
   align-items: center;
   width: 100%;
-  // background: red;
-  min-height: px2rem(346);
-  padding: px2rem(120) px2rem(60) 0 px2rem(60);
 }
 
-.keyPause span:first-child {
-  width: px2rem(60);
-  height: px2rem(60);
-  background: #2dc421;
+.keyPause, .keySound, .keyReset {
+  position: absolute;
+  left: px2rem(60);
+  top: px2rem(90);
+  span:first-child {
+    width: px2rem(60);
+    height: px2rem(60);
+    background: #2dc421;
+  }
+  span:last-child {
+    min-width: px2rem(60);
+    text-align: center;
+  }
+}
+
+.keySound {
+  left: px2rem(160);
+  top: px2rem(90);
+}
+
+.keyReset {
+  left: px2rem(264);
+  top: px2rem(90);
+
+  span:first-child {
+    width: px2rem(60);
+    height: px2rem(60);
+    background: #dd1a1a;
+  }
+}
+
+.keyDrop {
+  position: absolute;
+  left: px2rem(96);
+  top: px2rem(208);
+  span:first-child {
+    width: px2rem(190);
+    height: px2rem(190);
+    background: #5a65f1;
+  }
+  span:last-child {
+    min-width: px2rem(190);
+    text-align: center;
+  }
+}
+
+.keyRotate, .keyLeft, .keyRight, .keyDown {
+  position: absolute;
+  left: px2rem(472);
+  top: px2rem(90);
+  span:first-child {
+    width: px2rem(120);
+    height: px2rem(120);
+    background: #5a65f1;
+  }
+  span:last-child {
+    min-width: px2rem(120);
+    text-align: center;
+  }
+}
+
+.keyLeft {
+  left: px2rem(365);
+  top: px2rem(200);
+}
+
+.keyRight {
+  left: px2rem(578);
+  top: px2rem(200);
+}
+
+.keyDown {
+  left: px2rem(472);
+  top: px2rem(300);
+}
+
+.keyDecorate {
+  position: absolute;
+  left: px2rem(494);
+  top: px2rem(216);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  width: px2rem(76);
+  height: px2rem(76);
+  font-size: 0;
+
+  .keyDecorateCenter {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+  }
+
+  .keyDecorateItem {
+    display: block;
+    width: 0;
+    height: 0;
+    border-style: solid;
+    border-width: px2rem(8) px2rem(8) px2rem(16) px2rem(8);
+    border-color: transparent transparent #111;
+  }
 }

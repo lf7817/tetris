@@ -1,3 +1,11 @@
 {
-  "gameName": "俄罗斯方块"
+  "gameName": "俄罗斯方块",
+  "key.pause": "暂停(P)",
+  "key.sound": "声音(S)",
+  "key.reset": "重玩(R)",
+  "key.drop": "掉落(space)",
+  "key.rotate": "旋转",
+  "key.left": "左移",
+  "key.right": "右移",
+  "key.down": "下移"
 }

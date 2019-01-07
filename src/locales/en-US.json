@@ -1,3 +1,11 @@
 {
-  "gameName": "T  E  T  R  I  S"
+  "gameName": "T  E  T  R  I  S",
+  "key.pause": "Pause(P)",
+  "key.sound": "Sound(S)",
+  "key.reset": "Reset(R)",
+  "key.drop": "Drop(space)",
+  "key.rotate": "Rotate",
+  "key.left": "Left",
+  "key.right": "Right",
+  "key.down": "Down"
 }

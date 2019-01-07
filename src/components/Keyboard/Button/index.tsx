@@ -26,7 +26,7 @@ class Button extends PureComponent<MyButtonProps> {
     return (
       <div className={cn(styles.myButton, classNames)} style={{ flexDirection: textDirection }}>
         <span className={cn(styles.button, { [styles.active]: active })} />
-        <span className={styles.title}>{title}</span>
+        <span className={styles.title} style={{ textAlign: textDirection === 'row' ? 'left' : 'center' }} >{title}</span>
       </div>
     );
   }
