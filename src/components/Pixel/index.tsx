@@ -48,7 +48,7 @@ const Block = ({ highlight, x, y, width, hide }: BlockProps) => {
           />
         </g>
       </MediaQuery>
-      <MediaQuery minWidth={415} maxWidth={539}>
+      <MediaQuery minWidth={414} maxWidth={539}>
         <g opacity={isHide}>
           <rect
             x={x}

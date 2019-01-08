@@ -8,16 +8,22 @@
 @import "../../assets/scss/func.scss";
 
 .keyboard {
-  position: absolute;
   display: flex;
   align-items: center;
   width: 100%;
+
+  .content {
+    margin: px2rem(20) 0;
+    position: relative;
+    width: 100%;
+    min-height: px2rem(360);
+  }
 }
 
 .keyPause, .keySound, .keyReset {
   position: absolute;
   left: px2rem(60);
-  top: px2rem(90);
+  top: px2rem(0);
   span:first-child {
     width: px2rem(60);
     height: px2rem(60);
@@ -31,12 +37,12 @@
 
 .keySound {
   left: px2rem(160);
-  top: px2rem(90);
+  top: 0;
 }
 
 .keyReset {
   left: px2rem(264);
-  top: px2rem(90);
+  top: 0;
 
   span:first-child {
     width: px2rem(60);
@@ -48,7 +54,7 @@
 .keyDrop {
   position: absolute;
   left: px2rem(96);
-  top: px2rem(208);
+  top: px2rem(118);
   span:first-child {
     width: px2rem(190);
     height: px2rem(190);
@@ -63,7 +69,7 @@
 .keyRotate, .keyLeft, .keyRight, .keyDown {
   position: absolute;
   left: px2rem(472);
-  top: px2rem(90);
+  top: 0;
   span:first-child {
     width: px2rem(120);
     height: px2rem(120);
@@ -77,23 +83,23 @@
 
 .keyLeft {
   left: px2rem(365);
-  top: px2rem(200);
+  top: px2rem(110);
 }
 
 .keyRight {
   left: px2rem(578);
-  top: px2rem(200);
+  top: px2rem(110);
 }
 
 .keyDown {
   left: px2rem(472);
-  top: px2rem(300);
+  top: px2rem(210);
 }
 
 .keyDecorate {
   position: absolute;
   left: px2rem(494);
-  top: px2rem(216);
+  top: px2rem(126);
   display: flex;
   flex-direction: column;
   align-items: center;

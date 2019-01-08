@@ -8,6 +8,7 @@
 @import "../assets/scss/func.scss";
 
 .app {
+  position: relative;
   margin: 0 auto;
   padding-top: px2rem(116);
   min-height: 100vh;
