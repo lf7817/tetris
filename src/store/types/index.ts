@@ -2,7 +2,7 @@
  * @Author: lifan
  * @Date: 2018-12-12 13:31:05
  * @Last Modified by: lifan
- * @Last Modified time: 2018-12-21 12:11:51
+ * @Last Modified time: 2019-01-08 13:33:55
  */
 
 /* eslint-disable no-unused-vars */
@@ -20,6 +20,14 @@ enum Types {
   SET_SPEED = 'SET_SPEED', // 设置速度
   SET_DEFAULT_LINES = 'SET_DEFAULT_LINES', // 设置初始行数
   UPDATE_MATRIX = 'UPDATE_MATRIX', // 更新矩阵
+  KEY_PAUSE = 'KEY_PAUSE', // 暂停
+  KEY_SOUND = 'KEY_SOUND', // 音效
+  KEY_RESET = 'KEY_RESET', // 重玩
+  KEY_DROP = 'KEY_DROP', // 掉落
+  KEY_ROTATE = 'KEY_ROTATE', // 旋转
+  KEY_LEFT = 'KEY_LEFT', // 左移
+  KEY_RIGHT = 'KEY_RIGHT', // 右移
+  KEY_DOWN = 'KEY_DOWN', // 下移
 }
 
 export default Types;

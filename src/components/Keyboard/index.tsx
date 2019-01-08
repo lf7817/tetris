@@ -9,8 +9,13 @@ import debounce from 'lodash.debounce';
 import MyButton from './Button';
 import intl from 'react-intl-universal';
 import styles from './style.module.scss';
-console.log(styles);
-class Keyboard extends PureComponent {
+
+interface KeyboardProps {
+  keyboard: GameKeyboard;
+  keyboardHandler: (key: keyof GameKeyboard, value: boolean) => void;
+}
+
+class Keyboard extends PureComponent<KeyboardProps> {
   private readonly $ref_keyboard: React.RefObject<HTMLDivElement> = React.createRef();
 
   calcWrapperPosition = debounce(() => {
@@ -23,6 +28,22 @@ class Keyboard extends PureComponent {
     }
   }, 100)
 
+  keyboardHandler(key: keyof GameKeyboard, value: boolean) {
+    if (key === 'left' || key === 'right' || key === 'down') {
+      this.props.keyboardHandler(key, value);
+    } else {
+      this.props.keyboardHandler(key, value);
+    }
+  }
+
+  mouseDownHandler = (event: GameEvent, key: keyof GameKeyboard) => {
+    this.keyboardHandler(key, true);
+  }
+
+  mouseUpHandler = (event: GameEvent, key: keyof GameKeyboard) => {
+    this.keyboardHandler(key, false);
+  }
+
   componentDidMount() {
     this.calcWrapperPosition();
     window.addEventListener('resize', this.calcWrapperPosition);
@@ -33,17 +54,24 @@ class Keyboard extends PureComponent {
   }
 
   render() {
+    const { keyboard } = this.props;
+
     return (
       <div className={styles.keyboard} ref={this.$ref_keyboard}>
         <div className={styles.content}>
-          <MyButton title={intl.get('key.pause')} classNames={styles.keyPause} />
-          <MyButton title={intl.get('key.sound')} classNames={styles.keySound} />
-          <MyButton title={intl.get('key.reset')} classNames={styles.keyReset} />
-          <MyButton title={intl.get('key.drop')} classNames={styles.keyDrop} />
-          <MyButton title={intl.get('key.rotate')} classNames={styles.keyRotate} textDirection="row" />
-          <MyButton title={intl.get('key.down')} classNames={styles.keyDown} />
-          <MyButton title={intl.get('key.left')} classNames={styles.keyLeft} />
-          <MyButton title={intl.get('key.right')} classNames={styles.keyRight} />
+          {
+            Object.keys(keyboard).map(key => (
+              <MyButton
+                key={key}
+                title={intl.get(`key.${key}`)}
+                classNames={styles[`key${key.toLowerCase().replace(/( |^)[a-z]/g, (L) => L.toUpperCase())}`]}
+                active={keyboard[key]}
+                textDirection={key === 'rotate' ? 'row' : 'column'}
+                mouseUpHandler={(event) => this.mouseUpHandler(event, key)}
+                mouseDownHandler={(event) => this.mouseDownHandler(event, key)}
+              />
+            ))
+          }
           <div className={styles.keyDecorate}>
             <span className={styles.keyDecorateItem}></span>
             <div className={styles.keyDecorateCenter}>

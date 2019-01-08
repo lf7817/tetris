@@ -13,6 +13,8 @@ interface MyButtonProps {
   classNames: string;
   textDirection?: 'column' | 'row';
   active?: boolean;
+  mouseDownHandler: ((event: GameEvent) => void) | undefined;
+  mouseUpHandler: ((event: GameEvent) => void) | undefined;
 }
 
 class Button extends PureComponent<MyButtonProps> {
@@ -22,11 +24,19 @@ class Button extends PureComponent<MyButtonProps> {
   };
 
   render() {
-    const { classNames, title, textDirection, active } = this.props;
+    const { classNames, title, textDirection, active, mouseDownHandler, mouseUpHandler } = this.props;
     return (
       <div className={cn(styles.myButton, classNames)} style={{ flexDirection: textDirection }}>
-        <span className={cn(styles.button, { [styles.active]: active })} />
-        <span className={styles.title} style={{ textAlign: textDirection === 'row' ? 'left' : 'center' }} >{title}</span>
+        <span
+          className={cn(styles.button, { [styles.active]: active })}
+          onTouchStart={mouseDownHandler}
+          onTouchEnd={mouseUpHandler}
+        />
+        <span
+          className={styles.title}
+          style={{ textAlign: textDirection === 'row' ? 'left' : 'center' }}>
+          {title}
+        </span>
       </div>
     );
   }

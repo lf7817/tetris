@@ -2,7 +2,7 @@
  * @Author: lifan
  * @Date: 2018-12-21 10:13:15
  * @Last Modified by: lifan
- * @Last Modified time: 2019-01-03 14:29:24
+ * @Last Modified time: 2019-01-08 14:14:25
  */
 import React, { PureComponent } from 'react';
 import { Dispatch } from 'redux';
@@ -11,7 +11,7 @@ import { connect } from 'react-redux';
 import debounce from 'lodash.debounce';
 import ReactLoading from 'react-loading';
 import intl from 'react-intl-universal';
-import { LOCALES, TYPE_LOCALES } from '../locales';
+import { LOCALES } from '../locales';
 import * as action from '../store/actions';
 import { getUrlParam } from '../utils';
 import Screen from '../components/Screen';
@@ -20,12 +20,14 @@ import Keyboard from '../components/Keyboard';
 import style from './style.module.scss';
 
 interface AppProps {
-  locales: TYPE_LOCALES;
+  locales: GameLocales;
   matrix: number[][];
   window_width: number;
-  updateLocales: (locales: TYPE_LOCALES) => void;
+  keyboard: GameKeyboard;
+  updateLocales: (locales: GameLocales) => void;
   updateWindowWidth: (num: number) => void;
   updateMatrix: (matrix: number[][]) => void;
+  dispatch: Dispatch;
 }
 
 interface AppState {
@@ -37,7 +39,7 @@ class App extends PureComponent<AppProps, AppState> {
     initLocales: false
   };
 
-  private async loadLocales(str: TYPE_LOCALES) {
+  private async loadLocales(str: GameLocales) {
     try {
       await intl.init({
         currentLocale: str,
@@ -58,8 +60,8 @@ class App extends PureComponent<AppProps, AppState> {
     }
   }
 
-  private initLocales(locales: TYPE_LOCALES) {
-    const lang = getUrlParam('lang') as TYPE_LOCALES;
+  private initLocales(locales: GameLocales) {
+    const lang = getUrlParam('lang') as GameLocales;
 
     if (lang && LOCALES.hasOwnProperty(lang)) {
       this.props.updateLocales(lang);
@@ -69,7 +71,7 @@ class App extends PureComponent<AppProps, AppState> {
     }
   }
 
-  private switchLocales = (locales: TYPE_LOCALES) => {
+  private switchLocales = (locales: GameLocales) => {
     this.props.updateLocales(locales);
     setTimeout(() => {
       window.location.href = `${window.location.origin}${window.location.pathname}?lang=${locales}`;
@@ -81,15 +83,32 @@ class App extends PureComponent<AppProps, AppState> {
     this.props.updateWindowWidth(width);
   }
 
+  keyboardHandler = (key: keyof GameKeyboard, value: boolean) => {
+    let a = null;
+
+    switch (key) {
+      case 'down': a = action.keyDown; break;
+      case 'left': a = action.keyLeft; break;
+      case 'right': a = action.keyRight; break;
+      case 'rotate': a = action.keyRotate; break;
+      case 'drop': a = action.keyDrop; break;
+      case 'reset': a = action.keyReset; break;
+      case 'sound': a = action.keySound; break;
+      case 'pause': a = action.keyPause; break;
+    }
+
+    a && this.props.dispatch(a(value));
+  }
+
   componentDidMount() {
     this.initLocales(this.props.locales);
     window.addEventListener('resize', debounce(this.resizeChangeHander, 50));
-    // setInterval(() => {
-    //   const newArr = this.props.matrix.map(item => {
-    //     return item.map(() => Math.round(Math.random()));
-    //   });
-    //   this.props.updateMatrix(newArr);
-    // }, 800);
+    setInterval(() => {
+      const newArr = this.props.matrix.map(item => {
+        return item.map(() => Math.round(Math.random()));
+      });
+      this.props.updateMatrix(newArr);
+    }, 800);
   }
 
   componentDidUpdate(prevProps: AppProps) {
@@ -100,7 +119,7 @@ class App extends PureComponent<AppProps, AppState> {
 
   render() {
     const { initLocales } = this.state;
-    const { matrix, window_width } = this.props;
+    const { matrix, window_width, keyboard } = this.props;
 
     if (!initLocales) {
       return <ReactLoading type={'spinningBubbles'} className={style.loading} />;
@@ -109,7 +128,7 @@ class App extends PureComponent<AppProps, AppState> {
     return (
       <div className={style.app}>
         <Screen matrix={matrix} windowWidth={window_width} />
-        <Keyboard />
+        <Keyboard keyboard={keyboard} keyboardHandler={this.keyboardHandler} />
       </div>
     );
   }
@@ -119,12 +138,14 @@ const mapState = (state: State) => ({
   locales: state.locales,
   matrix: state.matrix,
   window_width: state.window_width,
+  keyboard: state.keybord
 });
 
 const mapDispatch = (dispatch: Dispatch) => ({
-  updateLocales: (locales: TYPE_LOCALES) => dispatch(action.updateLocales(locales)),
+  updateLocales: (locales: GameLocales) => dispatch(action.updateLocales(locales)),
   updateWindowWidth: (num: number) => dispatch(action.windowResize(num)),
   updateMatrix: (matrix: number[][]) => dispatch(action.updateMatrix(matrix)),
+  dispatch
 });
 
 export default connect(
