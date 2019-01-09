@@ -2,10 +2,9 @@
  * @Author: lifan
  * @Date: 2018-12-19 21:05:34
  * @Last Modified by: lifan
- * @Last Modified time: 2018-12-21 15:17:51
+ * @Last Modified time: 2019-01-09 13:14:27
  */
 import React, { Component } from 'react';
-import debounce from 'lodash.debounce';
 import intl from 'react-intl-universal';
 import Matrix from '../Matrix';
 import { BLOCK_DECORATE, BLOCK_DECORATE_REVERSE } from '../../constants/block';
@@ -29,14 +28,14 @@ class Screen extends Component<ScreenProps, ScreenState> {
     w1: 0
   }
 
-  calcWidth = debounce(() => {
+  calcWidth = () => {
     if (this.$ref_Panl.current && this.$ref_Left.current) {
       this.setState({
         w: this.$ref_Panl.current.clientWidth,
         w1: this.$ref_Left.current.clientWidth
       });
     }
-  }, 0)
+  }
 
   componentDidMount() {
     this.calcWidth();

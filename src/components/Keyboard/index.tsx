@@ -2,10 +2,9 @@
  * @Author: lifan
  * @Date: 2018-12-21 22:32:13
  * @Last Modified by: lifan
- * @Last Modified time: 2019-01-03 14:50:44
+ * @Last Modified time: 2019-01-09 13:41:29
  */
 import React, { Component } from 'react';
-import debounce from 'lodash.debounce';
 import MyButton from './Button';
 import intl from 'react-intl-universal';
 import { isMobile } from '../../utils';
@@ -25,18 +24,19 @@ class Keyboard extends Component<KeyboardProps> {
     isMobile: isMobile()
   }
 
-  calcWrapperPosition = debounce(() => {
+  calcWrapperPosition = () => {
     const dom = this.$ref_keyboard.current;
-    this.setState({
-      isMobile: isMobile()
-    });
 
     if (dom) {
       const top = dom.getBoundingClientRect().top;
       const winHeight = document.documentElement && document.documentElement.clientHeight;
-      dom.style.minHeight = winHeight ? `${winHeight - top}px` : '';
+      dom.style.minHeight = winHeight ? `${winHeight - top}px` : '10px';
     }
-  }, 10)
+
+    this.setState({
+      isMobile: isMobile()
+    });
+  }
 
   keyboardHandler(key: keyof GameKeyboard, value: boolean) {
     if (key === 'left' || key === 'right' || key === 'down') {
@@ -55,7 +55,10 @@ class Keyboard extends Component<KeyboardProps> {
   }
 
   componentDidMount() {
-    this.calcWrapperPosition();
+    setTimeout(() => {
+      this.calcWrapperPosition();
+    }, 20);
+
     window.addEventListener('resize', this.calcWrapperPosition);
   }
 

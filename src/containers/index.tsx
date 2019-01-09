@@ -2,9 +2,8 @@
  * @Author: lifan
  * @Date: 2018-12-21 10:13:15
  * @Last Modified by: lifan
- * @Last Modified time: 2019-01-08 14:14:25
+ * @Last Modified time: 2019-01-09 12:24:07
  */
-
 import React, { PureComponent } from 'react';
 import { Dispatch } from 'redux';
 import { State } from '../store/reducers';
