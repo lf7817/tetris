@@ -4,7 +4,8 @@
  * @Last Modified by: lifan
  * @Last Modified time: 2019-01-03 14:53:14
  */
-import React, { PureComponent } from 'react';
+/* eslint-disable no-undefined */
+import React, { Component } from 'react';
 import cn from 'classnames';
 import styles from './style.module.scss';
 
@@ -13,25 +14,44 @@ interface MyButtonProps {
   classNames: string;
   textDirection?: 'column' | 'row';
   active?: boolean;
-  mouseDownHandler: ((event: GameEvent) => void) | undefined;
-  mouseUpHandler: ((event: GameEvent) => void) | undefined;
+  isMobile?: boolean;
+  touchStartHandler: ((event: GameEvent) => void) | undefined;
+  touchEndtHandler: ((event: GameEvent) => void) | undefined;
 }
 
-class Button extends PureComponent<MyButtonProps> {
+class Button extends Component<MyButtonProps> {
   static defaultProps = {
     textDirection: 'column',
     active: false,
+    isMobile: false,
   };
 
+  shouldComponentUpdate(nextProps: MyButtonProps) {
+    if (nextProps.active !== this.props.active || nextProps.isMobile !== this.props.isMobile) {
+      return true;
+    }
+
+    return false;
+  }
+
   render() {
-    const { classNames, title, textDirection, active, mouseDownHandler, mouseUpHandler } = this.props;
+    const { classNames, title, textDirection, active, touchStartHandler, touchEndtHandler, isMobile } = this.props;
+    console.log(12);
     return (
       <div className={cn(styles.myButton, classNames)} style={{ flexDirection: textDirection }}>
-        <span
-          className={cn(styles.button, { [styles.active]: active })}
-          onTouchStart={mouseDownHandler}
-          onTouchEnd={mouseUpHandler}
-        />
+        {
+          isMobile ?
+            <span
+              className={cn(styles.button, { [styles.active]: active })}
+              onTouchStart={touchStartHandler}
+              onTouchEnd={touchEndtHandler}
+            /> :
+            <span
+              className={cn(styles.button, { [styles.active]: active })}
+              onMouseDown={touchStartHandler}
+              onMouseUp={touchEndtHandler}
+            />
+        }
         <span
           className={styles.title}
           style={{ textAlign: textDirection === 'row' ? 'left' : 'center' }}>

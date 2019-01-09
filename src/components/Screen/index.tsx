@@ -4,62 +4,102 @@
  * @Last Modified by: lifan
  * @Last Modified time: 2018-12-21 15:17:51
  */
-import React, { PureComponent } from 'react';
-import Decorate from '../Decorate';
+import React, { Component } from 'react';
+import debounce from 'lodash.debounce';
+import intl from 'react-intl-universal';
 import Matrix from '../Matrix';
+import { BLOCK_DECORATE, BLOCK_DECORATE_REVERSE } from '../../constants/block';
 
 import style from './style.module.scss';
 
 interface ScreenProps {
   matrix: number[][];
-  windowWidth: number;
 }
 
 interface ScreenState {
   w: number;
+  w1: number;
 }
 
-class Screen extends PureComponent<ScreenProps, ScreenState> {
+class Screen extends Component<ScreenProps, ScreenState> {
   private readonly $ref_Panl: React.RefObject<HTMLDivElement> = React.createRef();
+  private readonly $ref_Left: React.RefObject<HTMLDivElement> = React.createRef();
   public state = {
-    w: 0
+    w: 0,
+    w1: 0
   }
 
-  private calcWidth = () => {
-    if (this.$ref_Panl.current) {
+  calcWidth = debounce(() => {
+    if (this.$ref_Panl.current && this.$ref_Left.current) {
       this.setState({
-        w: this.$ref_Panl.current.clientWidth
+        w: this.$ref_Panl.current.clientWidth,
+        w1: this.$ref_Left.current.clientWidth
       });
     }
-  }
+  }, 0)
 
   componentDidMount() {
     this.calcWidth();
+
+    window.addEventListener('resize', this.calcWidth);
   }
 
-  componentDidUpdate(prevProps: ScreenProps) {
-    if (this.props.windowWidth !== prevProps.windowWidth) {
-      this.calcWidth();
+  shouldComponentUpdate(nextProps: ScreenProps, nextState: ScreenState) {
+    if (nextProps.matrix !== this.props.matrix || nextState.w !== this.state.w) {
+      return true;
     }
+
+    return false;
   }
 
   render() {
-    const { matrix, windowWidth } = this.props;
-    const { w } = this.state;
+    const { matrix } = this.props;
+    const { w, w1 } = this.state;
 
     return (
-      <Decorate windowWidth={windowWidth}>
-        <div className={style.wrapper}>
-          <div className={style.main}>
-            <div ref={this.$ref_Panl}>
-              <Matrix matrix={matrix} width={w} />
+      <div className={style.wrapper}>
+        <div className={style.decorate}>
+          <h1 className={style.logo}>
+            {
+              intl.get('gameName')
+            }
+          </h1>
+        </div>
+        <div className={style.left} ref={this.$ref_Left}>
+          <Matrix matrix={BLOCK_DECORATE} width={w1} hideBlankPixel />
+        </div>
+        <div className={style.right}>
+          <Matrix matrix={BLOCK_DECORATE_REVERSE} width={w1} hideBlankPixel />
+        </div>
+        <div className={style.center}>
+          <div className={style.dotsLeft}>
+            <span className={style.dot}></span>
+            <span className={style.dot}></span>
+            <span className={style.dot}></span>
+            <span className={style.dot}></span>
+            <span className={style.dot}></span>
+          </div>
+          <div className={style.dotsRight}>
+            <span className={style.dot}></span>
+            <span className={style.dot}></span>
+            <span className={style.dot}></span>
+            <span className={style.dot}></span>
+            <span className={style.dot}></span>
+          </div>
+          <div className={style.screenWrapper}>
+            <div className={style.screen}>
+              <div className={style.main}>
+                <div ref={this.$ref_Panl}>
+                  <Matrix matrix={matrix} width={w} />
+                </div>
+              </div>
+              {/* <div className={style.record}>
+                record
+              </div> */}
             </div>
           </div>
-          {/* <div className={style.record}>
-            record
-          </div> */}
         </div>
-      </Decorate>
+      </div>
     );
   }
 }

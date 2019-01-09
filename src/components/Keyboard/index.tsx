@@ -4,29 +4,39 @@
  * @Last Modified by: lifan
  * @Last Modified time: 2019-01-03 14:50:44
  */
-import React, { PureComponent } from 'react';
+import React, { Component } from 'react';
 import debounce from 'lodash.debounce';
 import MyButton from './Button';
 import intl from 'react-intl-universal';
+import { isMobile } from '../../utils';
 import styles from './style.module.scss';
 
 interface KeyboardProps {
   keyboard: GameKeyboard;
   keyboardHandler: (key: keyof GameKeyboard, value: boolean) => void;
 }
+interface KeyboardState {
+  isMobile: boolean;
+}
 
-class Keyboard extends PureComponent<KeyboardProps> {
+class Keyboard extends Component<KeyboardProps> {
   private readonly $ref_keyboard: React.RefObject<HTMLDivElement> = React.createRef();
+  state = {
+    isMobile: isMobile()
+  }
 
   calcWrapperPosition = debounce(() => {
     const dom = this.$ref_keyboard.current;
+    this.setState({
+      isMobile: isMobile()
+    });
 
     if (dom) {
       const top = dom.getBoundingClientRect().top;
       const winHeight = document.documentElement && document.documentElement.clientHeight;
       dom.style.minHeight = winHeight ? `${winHeight - top}px` : '';
     }
-  }, 100)
+  }, 10)
 
   keyboardHandler(key: keyof GameKeyboard, value: boolean) {
     if (key === 'left' || key === 'right' || key === 'down') {
@@ -36,11 +46,11 @@ class Keyboard extends PureComponent<KeyboardProps> {
     }
   }
 
-  mouseDownHandler = (event: GameEvent, key: keyof GameKeyboard) => {
+  touchStartHandler = (event: GameEvent, key: keyof GameKeyboard) => {
     this.keyboardHandler(key, true);
   }
 
-  mouseUpHandler = (event: GameEvent, key: keyof GameKeyboard) => {
+  touchEndtHandler = (event: GameEvent, key: keyof GameKeyboard) => {
     this.keyboardHandler(key, false);
   }
 
@@ -51,6 +61,21 @@ class Keyboard extends PureComponent<KeyboardProps> {
 
   componentWillUnmount() {
     window.removeEventListener('resize', this.calcWrapperPosition);
+  }
+
+  shouldComponentUpdate(nextProps: KeyboardProps, nextState: KeyboardState) {
+    const keyboard = this.props.keyboard;
+    const nKeyboard = nextProps.keyboard;
+
+    if (keyboard.down !== nKeyboard.down || keyboard.drop !== nKeyboard.drop ||
+        keyboard.left !== nKeyboard.left || keyboard.pause !== nKeyboard.pause ||
+        keyboard.reset !== nKeyboard.reset || keyboard.right !== nKeyboard.right ||
+        keyboard.rotate !== nKeyboard.rotate || keyboard.sound !== nKeyboard.sound ||
+        nextState.isMobile !== this.state.isMobile) {
+      return true;
+    }
+
+    return false;
   }
 
   render() {
@@ -67,8 +92,9 @@ class Keyboard extends PureComponent<KeyboardProps> {
                 classNames={styles[`key${key.toLowerCase().replace(/( |^)[a-z]/g, (L) => L.toUpperCase())}`]}
                 active={keyboard[key]}
                 textDirection={key === 'rotate' ? 'row' : 'column'}
-                mouseUpHandler={(event) => this.mouseUpHandler(event, key)}
-                mouseDownHandler={(event) => this.mouseDownHandler(event, key)}
+                touchEndtHandler={(event) => this.touchEndtHandler(event, key)}
+                touchStartHandler={(event) => this.touchStartHandler(event, key)}
+                isMobile={this.state.isMobile}
               />
             ))
           }

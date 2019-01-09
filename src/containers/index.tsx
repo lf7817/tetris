@@ -4,11 +4,11 @@
  * @Last Modified by: lifan
  * @Last Modified time: 2019-01-08 14:14:25
  */
+
 import React, { PureComponent } from 'react';
 import { Dispatch } from 'redux';
 import { State } from '../store/reducers';
 import { connect } from 'react-redux';
-import debounce from 'lodash.debounce';
 import ReactLoading from 'react-loading';
 import intl from 'react-intl-universal';
 import { LOCALES } from '../locales';
@@ -22,10 +22,8 @@ import style from './style.module.scss';
 interface AppProps {
   locales: GameLocales;
   matrix: number[][];
-  window_width: number;
   keyboard: GameKeyboard;
   updateLocales: (locales: GameLocales) => void;
-  updateWindowWidth: (num: number) => void;
   updateMatrix: (matrix: number[][]) => void;
   dispatch: Dispatch;
 }
@@ -78,11 +76,6 @@ class App extends PureComponent<AppProps, AppState> {
     }, 20);
   }
 
-  private resizeChangeHander = () => {
-    const width = document.body.clientWidth;
-    this.props.updateWindowWidth(width);
-  }
-
   keyboardHandler = (key: keyof GameKeyboard, value: boolean) => {
     let a = null;
 
@@ -102,7 +95,6 @@ class App extends PureComponent<AppProps, AppState> {
 
   componentDidMount() {
     this.initLocales(this.props.locales);
-    window.addEventListener('resize', debounce(this.resizeChangeHander, 50));
     // setInterval(() => {
     //   const newArr = this.props.matrix.map(item => {
     //     return item.map(() => Math.round(Math.random()));
@@ -111,15 +103,9 @@ class App extends PureComponent<AppProps, AppState> {
     // }, 800);
   }
 
-  componentDidUpdate(prevProps: AppProps) {
-    if (this.state.initLocales && prevProps.locales !== this.props.locales) {
-      this.switchLocales(this.props.locales);
-    }
-  }
-
   render() {
     const { initLocales } = this.state;
-    const { matrix, window_width, keyboard } = this.props;
+    const { matrix, keyboard } = this.props;
 
     if (!initLocales) {
       return <ReactLoading type={'spinningBubbles'} className={style.loading} />;
@@ -127,7 +113,7 @@ class App extends PureComponent<AppProps, AppState> {
 
     return (
       <div className={style.app}>
-        <Screen matrix={matrix} windowWidth={window_width} />
+        <Screen matrix={matrix} />
         <Keyboard keyboard={keyboard} keyboardHandler={this.keyboardHandler} />
       </div>
     );
