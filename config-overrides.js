@@ -2,9 +2,9 @@
  * @Author: lifan
  * @Date: 2018-11-23 15:22:07
  * @Last Modified by: lifan
- * @Last Modified time: 2019-01-03 13:35:32
+ * @Last Modified time: 2019-01-09 15:51:38
  */
-const { override, addBundleVisualizer, useEslintRc, enableEslintTypescript } = require('customize-cra');
+const { override, addBundleVisualizer, useEslintRc, enableEslintTypescript, disableChunk } = require('customize-cra');
 const StyleLintPlugin = require('stylelint-webpack-plugin');
 const { InjectManifest } = require('workbox-webpack-plugin');
 const path = require('path');
@@ -48,5 +48,6 @@ module.exports = override(
   useEslintRc(),
   enableEslintTypescript(),
   injectManifest(),
+  disableChunk(),
   process.env.NODE_ENV === 'production' && addBundleVisualizer(),
 );

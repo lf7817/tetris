@@ -91,7 +91,7 @@ class Keyboard extends Component<KeyboardProps> {
         case keyCode.sound: opera = 'sound'; break;
         case keyCode.reset: opera = 'reset'; break;
         case keyCode.pause: opera = 'pause'; break;
-        default: opera = null;
+        default: opera = null; break;
       }
 
       opera && this.keyboardHandler(opera, false);
