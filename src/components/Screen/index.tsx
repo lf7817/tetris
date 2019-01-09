@@ -2,12 +2,11 @@
  * @Author: lifan
  * @Date: 2018-12-19 21:05:34
  * @Last Modified by: lifan
- * @Last Modified time: 2019-01-09 14:37:05
+ * @Last Modified time: 2019-01-09 14:54:37
  */
 import React, { Component } from 'react';
 import Matrix from '../Matrix';
 import Decorate from './Decorate';
-
 import style from './style.module.scss';
 
 interface ScreenProps {
@@ -56,12 +55,12 @@ class Screen extends Component<ScreenProps, ScreenState> {
         <div className={style.center}>
           <div className={style.screenWrapper}>
             <div className={style.screen}>
-              <div className={style.main}>
+              <div className={style.mainPanel}>
                 <div ref={this.$ref_Panl}>
                   <Matrix matrix={matrix} width={w} />
                 </div>
               </div>
-              <div className={style.record}>
+              <div className={style.statusPanel}>
                 record
               </div>
             </div>

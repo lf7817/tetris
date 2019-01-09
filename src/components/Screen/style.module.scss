@@ -2,7 +2,7 @@
  * @Author: lifan
  * @Date: 2018-12-19 21:10:55
  * @Last Modified by: lifan
- * @Last Modified time: 2019-01-09 14:27:23
+ * @Last Modified time: 2019-01-09 14:54:31
  */
 @import "../../assets/scss/variable.scss";
 @import "../../assets/scss/func.scss";
@@ -112,14 +112,14 @@ $border-color: #111;
         border: px2rem(2) solid #453e36;
         display: flex;
 
-        .main {
+        .mainPanel {
           padding: px2rem(2) px2rem(4) ;
           width: px2rem(260);
           border: px2rem(4) solid #000000;
           font-size: 0;
         }
 
-        .record {
+        .statusPanel {
           width: px2rem(160);
           background: red;
         }
