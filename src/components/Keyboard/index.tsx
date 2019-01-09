@@ -56,6 +56,8 @@ class Keyboard extends Component<KeyboardProps> {
   }
 
   registerPressEventHandler() {
+    let lastKey: null | string = null;
+
     window.addEventListener('keydown', (event) => {
       let opera = null;
 
@@ -71,8 +73,11 @@ class Keyboard extends Component<KeyboardProps> {
         default: opera = null;
       }
 
-      opera && this.keyboardHandler(opera, true);
-    });
+      if (lastKey !== opera) {
+        opera && this.keyboardHandler(opera, true);
+        lastKey = opera;
+      }
+    }, true);
 
     window.addEventListener('keyup', (event) => {
       let opera = null;
@@ -90,7 +95,8 @@ class Keyboard extends Component<KeyboardProps> {
       }
 
       opera && this.keyboardHandler(opera, false);
-    });
+      lastKey = null;
+    }, true);
   }
 
   touchStartHandler = (event: GameEvent, key: keyof GameKeyboard) => {

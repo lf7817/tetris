@@ -60,9 +60,9 @@ class Screen extends Component<ScreenProps, ScreenState> {
                   <Matrix matrix={matrix} width={w} />
                 </div>
               </div>
-              <div className={style.statusPanel}>
+              {/* <div className={style.statusPanel}>
                 record
-              </div>
+              </div> */}
             </div>
           </div>
         </div>
