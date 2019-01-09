@@ -2,10 +2,10 @@
  * @Author: lifan
  * @Date: 2018-12-21 22:32:13
  * @Last Modified by: lifan
- * @Last Modified time: 2019-01-09 13:41:29
+ * @Last Modified time: 2019-01-09 14:42:46
  */
 import React, { Component } from 'react';
-import MyButton from './Button';
+import MyButton from './MyButton';
 import intl from 'react-intl-universal';
 import { isMobile } from '../../utils';
 import styles from './style.module.scss';

@@ -1,5 +1,6 @@
 import { call, put, takeEvery, fork, delay } from 'redux-saga/effects';
 import Types from '../types';
+import { Action } from '../actions';
 
 export function* incrementAsync() {
   yield delay(1000);
@@ -42,8 +43,18 @@ export function* watchIncrementAsync() {
   yield takeEvery(Types.ADD_COUNT_ASYNC, incrementAsync);
 }
 
+export function* demo1(action: Action) {
+  yield delay(1000);
+  console.log(action);
+}
+
+export function* demo() {
+  yield takeEvery(Types.KEY_DOWN, demo1);
+}
+
 // single entry point to start all Sagas at once
 export default function* rootSaga() {
   yield fork(fetchData);
   yield fork(watchIncrementAsync);
+  yield fork(demo);
 }
