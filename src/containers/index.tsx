@@ -103,12 +103,12 @@ class App extends PureComponent<AppProps, AppState> {
   componentDidMount() {
     this.initLocales(this.props.locales);
     window.addEventListener('resize', debounce(this.resizeChangeHander, 50));
-    setInterval(() => {
-      const newArr = this.props.matrix.map(item => {
-        return item.map(() => Math.round(Math.random()));
-      });
-      this.props.updateMatrix(newArr);
-    }, 800);
+    // setInterval(() => {
+    //   const newArr = this.props.matrix.map(item => {
+    //     return item.map(() => Math.round(Math.random()));
+    //   });
+    //   this.props.updateMatrix(newArr);
+    // }, 800);
   }
 
   componentDidUpdate(prevProps: AppProps) {

@@ -25,18 +25,11 @@ const Block = ({ highlight, x, y, width, hide }: BlockProps) => {
       <MediaQuery maxWidth={414}>
         <g opacity={isHide}>
           <rect
-            x={x}
-            y={y}
-            width={width}
-            height={width}
-            opacity={0}
-          />
-          <rect
             x={x + 1.5}
             y={y + 1.5}
             width={width - 3}
             height={width - 3}
-            style={{ strokeWidth: 1.5, fillOpacity: 0.01 }}
+            style={{ strokeWidth: 1.75, fillOpacity: 0 }}
             className={strokeColor}
           />
           <rect
@@ -51,25 +44,18 @@ const Block = ({ highlight, x, y, width, hide }: BlockProps) => {
       <MediaQuery minWidth={414} maxWidth={539}>
         <g opacity={isHide}>
           <rect
-            x={x}
-            y={y}
-            width={width}
-            height={width}
-            opacity={0}
-          />
-          <rect
-            x={x + 1.5}
-            y={y + 1.5}
-            width={width - 3}
-            height={width - 3}
-            style={{ strokeWidth: 1.5, fillOpacity: 0.01 }}
+            x={x + 1.25}
+            y={y + 1.25}
+            width={width - 2.5}
+            height={width - 2.5}
+            style={{ strokeWidth: 1.5, fillOpacity: 0 }}
             className={strokeColor}
           />
           <rect
-            x={x + 4}
-            y={y + 4}
-            width={width - 8}
-            height={width - 8}
+            x={x + 3.5}
+            y={y + 3.5}
+            width={width - 7}
+            height={width - 7}
             className={fillColor}
           />
         </g>
@@ -77,18 +63,11 @@ const Block = ({ highlight, x, y, width, hide }: BlockProps) => {
       <MediaQuery minWidth={540}>
         <g opacity={isHide}>
           <rect
-            x={x}
-            y={y}
-            width={width}
-            height={width}
-            opacity={0}
-          />
-          <rect
             x={x + 2}
             y={y + 2}
             width={width - 4}
             height={width - 4}
-            style={{ strokeWidth: 2, fillOpacity: 0.01 }}
+            style={{ strokeWidth: 2, fillOpacity: 0 }}
             className={strokeColor}
           />
           <rect
