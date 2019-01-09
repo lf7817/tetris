@@ -2,12 +2,13 @@
  * @Author: lifan
  * @Date: 2018-12-19 21:05:34
  * @Last Modified by: lifan
- * @Last Modified time: 2019-01-09 14:54:37
+ * @Last Modified time: 2019-01-09 22:22:19
  */
 import React, { Component } from 'react';
 import Matrix from '../Matrix';
 import Decorate from './Decorate';
-import style from './style.module.scss';
+import cn from 'classnames';
+import styles from './style.module.scss';
 
 interface ScreenProps {
   matrix: number[][];
@@ -50,19 +51,20 @@ class Screen extends Component<ScreenProps, ScreenState> {
     const { w } = this.state;
 
     return (
-      <div className={style.wrapper}>
+      <div className={styles.wrapper}>
         <Decorate />
-        <div className={style.center}>
-          <div className={style.screenWrapper}>
-            <div className={style.screen}>
-              <div className={style.mainPanel}>
+        <div className={styles.center}>
+          <div className={styles.screenWrapper}>
+            <div className={styles.screen}>
+              <div className={styles.mainPanel}>
                 <div ref={this.$ref_Panl}>
                   <Matrix matrix={matrix} width={w} />
                 </div>
               </div>
-              {/* <div className={style.statusPanel}>
-                record
-              </div> */}
+              <div className={styles.statusPanel}>
+                <div className={cn(styles.sound, { [styles.soundActive]: true })} />
+                <div className={cn(styles.pause, { [styles.pauseActive]: true })} />
+              </div>
             </div>
           </div>
         </div>

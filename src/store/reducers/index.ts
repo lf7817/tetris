@@ -1,20 +1,23 @@
 import { combineReducers } from 'redux';
 import locales from './locales';
 import matrix from './matrix';
-import window_width from './windowWidth';
 import keybord from './keybord';
+import pause from './pause';
+import sound from './sound';
 
 
 export interface State {
   locales: GameLocales;
   matrix: number[][];
-  window_width: number;
   keybord: GameKeyboard;
+  pause: boolean;
+  sound: boolean;
 }
 
 export default combineReducers<State>({
   locales,
   matrix,
-  window_width,
-  keybord
+  keybord,
+  sound,
+  pause
 });

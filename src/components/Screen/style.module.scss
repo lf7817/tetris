@@ -2,130 +2,158 @@
  * @Author: lifan
  * @Date: 2018-12-19 21:10:55
  * @Last Modified by: lifan
- * @Last Modified time: 2019-01-09 14:54:31
+ * @Last Modified time: 2019-01-09 22:37:02
  */
 @import "../../assets/scss/variable.scss";
 @import "../../assets/scss/func.scss";
+
 $border-size: 12;
 $border-color: #111;
 
 .wrapper {
   position: relative;
   width: 100%;
+}
 
-  .decorate {
-    position: absolute;
-    top: 0;
-    z-index: 100;
-    width: 100%;
+.decorate {
+  position: absolute;
+  top: 0;
+  z-index: 100;
+  width: 100%;
 
-    .logo {
-      position: relative;
-      top: - px2rem(22);
-      margin: 0 auto;
-      padding: 0;
-      text-align: center;
-      font-size: px2rem(38);
-      font-weight: 400;
-    }
-
-    .left, .right {
-      position: absolute;
-      top: px2rem(44);
-      width: px2rem(48);
-    }
-
-    .left {
-      left: px2rem(28);
-    }
-
-    .right {
-      right: px2rem(28);
-    }
-
-    .dotWrapper {
-      position: relative;
-      top: - px2rem(44);
-      z-index: 100;
-      margin: 0 auto;
-      width: px2rem(564);
-
-      .dotsLeft, .dotsRight {
-        position: absolute;
-        top: 0;
-        left: 0;
-        right: 0;
-        display: flex;
-
-        .dot {
-          display: inline-block;
-          width: px2rem($border-size);
-          height: px2rem($border-size);
-          background-color: $border-color;
-        }
-      }
-
-      .dotsLeft {
-        .dot {
-          margin-right: px2rem($border-size);
-
-          &:first-child {
-            width: px2rem($border-size * 4);
-          }
-        }
-      }
-
-      .dotsRight {
-        justify-content: flex-end;
-
-        /* stylelint-disable-next-line */
-        .dot {
-          margin-left: px2rem($border-size);
-          &:last-child {
-            width: px2rem($border-size * 4);
-          }
-        }
-      }
-    }
+  .logo {
+    position: relative;
+    top: - px2rem(22);
+    margin: 0 auto;
+    padding: 0;
+    text-align: center;
+    font-size: px2rem(38);
+    font-weight: 400;
   }
 
-  .center {
+  .left, .right {
+    position: absolute;
+    top: px2rem(44);
+    width: px2rem(48);
+  }
+
+  .left {
+    left: px2rem(28);
+  }
+
+  .right {
+    right: px2rem(28);
+  }
+
+  .dotWrapper {
     position: relative;
-    z-index: 99;
+    top: - px2rem(44);
+    z-index: 100;
     margin: 0 auto;
-    padding: px2rem(48);
     width: px2rem(564);
-    border: px2rem($border-size) solid $border-color;
-    border-top: none;
-    border-radius: 0 0 px2rem(10) px2rem(10);
 
+    .dotsLeft, .dotsRight {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      display: flex;
 
-    .screenWrapper {
-      width: 100%;
-      border: px2rem(5) solid;
-      border-color: #987f0f #fae36c #fae36c #987f0f;
-      background-color: $color-screen;
+      .dot {
+        display: inline-block;
+        width: px2rem($border-size);
+        height: px2rem($border-size);
+        background-color: $border-color;
+      }
+    }
 
-      .screen {
-        padding: px2rem(10);
-        width: 100%;
-        border: px2rem(2) solid #453e36;
-        display: flex;
+    .dotsLeft {
+      .dot {
+        margin-right: px2rem($border-size);
 
-        .mainPanel {
-          padding: px2rem(2) px2rem(4) ;
-          width: px2rem(260);
-          border: px2rem(4) solid #000000;
-          font-size: 0;
+        &:first-child {
+          width: px2rem($border-size * 4);
         }
+      }
+    }
 
-        .statusPanel {
-          width: px2rem(160);
-          background: red;
+    .dotsRight {
+      justify-content: flex-end;
+
+      /* stylelint-disable-next-line */
+      .dot {
+        margin-left: px2rem($border-size);
+        &:last-child {
+          width: px2rem($border-size * 4);
         }
       }
     }
   }
 }
 
+.center {
+  position: relative;
+  z-index: 99;
+  margin: 0 auto;
+  padding: px2rem(48);
+  width: px2rem(564);
+  border: px2rem($border-size) solid $border-color;
+  border-top: none;
+  border-radius: 0 0 px2rem(10) px2rem(10);
 
+  .screenWrapper {
+    width: 100%;
+    border: px2rem(5) solid;
+    border-color: #987f0f #fae36c #fae36c #987f0f;
+    background-color: $color-screen;
+
+    .screen {
+      padding: px2rem(10);
+      width: 100%;
+      border: px2rem(2) solid #453e36;
+      display: flex;
+
+      .mainPanel {
+        padding: px2rem(2) px2rem(4) ;
+        width: px2rem(260);
+        border: px2rem(4) solid #000000;
+        font-size: 0;
+      }
+    }
+  }
+}
+
+.statusPanel {
+  position: relative;
+
+  .sound {
+    position: absolute;
+    bottom: px2rem(10);
+    left: px2rem(10);
+    width: px2rem(25);
+    height: px2rem(21);
+    background-image: url(../../assets/images/icon.png);
+    background-position: (- px2rem(175)) (- px2rem(75));
+    background-size: px2rem(400) px2rem(186);
+  }
+
+  .soundActive {
+    background-position: (- px2rem(150)) (- px2rem(75));
+  }
+
+  .pause {
+    position: absolute;
+    bottom: px2rem(12);
+    left: px2rem(42);
+    width: px2rem(20);
+    height: px2rem(18);
+    background-image: url(../../assets/images/icon.png);
+    background-position: (- px2rem(100)) (- px2rem(75));
+    background-size: px2rem(400) px2rem(186);
+  }
+
+  .pauseActive {
+    background-position: (- px2rem(75)) (- px2rem(75));
+  }
+
+}

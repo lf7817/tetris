@@ -2,7 +2,7 @@
  * @Author: lifan
  * @Date: 2018-12-21 10:13:15
  * @Last Modified by: lifan
- * @Last Modified time: 2019-01-09 14:43:47
+ * @Last Modified time: 2019-01-09 21:31:57
  */
 import React, { PureComponent } from 'react';
 import { Dispatch } from 'redux';
@@ -15,8 +15,7 @@ import * as action from '../store/actions';
 import { getUrlParam } from '../utils';
 import Screen from '../components/Screen';
 import Keyboard from '../components/Keyboard';
-
-import style from './style.module.scss';
+import styles from './style.module.scss';
 
 interface AppProps {
   locales: GameLocales;
@@ -25,6 +24,7 @@ interface AppProps {
   updateLocales: (locales: GameLocales) => void;
   updateMatrix: (matrix: number[][]) => void;
   dispatch: Dispatch;
+  sound: boolean;
 }
 
 interface AppState {
@@ -107,13 +107,18 @@ class App extends PureComponent<AppProps, AppState> {
     const { matrix, keyboard } = this.props;
 
     if (!initLocales) {
-      return <ReactLoading type={'spinningBubbles'} className={style.loading} />;
+      return <ReactLoading type={'spinningBubbles'} className={styles.loading} />;
     }
 
     return (
-      <div className={style.app}>
-        <Screen matrix={matrix} />
-        <Keyboard keyboard={keyboard} keyboardHandler={this.keyboardHandler} />
+      <div className={styles.app}>
+        <Screen
+          matrix={matrix}
+        />
+        <Keyboard
+          keyboard={keyboard}
+          keyboardHandler={this.keyboardHandler}
+        />
       </div>
     );
   }
@@ -122,13 +127,12 @@ class App extends PureComponent<AppProps, AppState> {
 const mapState = (state: State) => ({
   locales: state.locales,
   matrix: state.matrix,
-  window_width: state.window_width,
-  keyboard: state.keybord
+  keyboard: state.keybord,
+  sound: state.sound,
 });
 
 const mapDispatch = (dispatch: Dispatch) => ({
   updateLocales: (locales: GameLocales) => dispatch(action.updateLocales(locales)),
-  updateWindowWidth: (num: number) => dispatch(action.windowResize(num)),
   updateMatrix: (matrix: number[][]) => dispatch(action.updateMatrix(matrix)),
   dispatch
 });

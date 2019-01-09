@@ -2,7 +2,7 @@
  * @Author: lifan
  * @Date: 2018-12-12 14:50:48
  * @Last Modified by: lifan
- * @Last Modified time: 2019-01-08 13:44:22
+ * @Last Modified time: 2019-01-09 20:54:39
  */
 import Types from '../types';
 
@@ -41,14 +41,6 @@ export const updateMatrix = (matrix: number[][]) => ({
   type: <Types.UPDATE_MATRIX>Types.UPDATE_MATRIX,
   payload: {
     matrix
-  }
-});
-
-export type WindowResize = ReturnType<typeof windowResize>;
-export const windowResize = (width: number) => ({
-  type: <Types.WINDOW_RESIZE>Types.WINDOW_RESIZE,
-  payload: {
-    width
   }
 });
 
@@ -100,13 +92,24 @@ export const keyDown = (value: boolean) => ({
   payload: value
 });
 
+export type SetSound = ReturnType<typeof setSound>;
+export const setSound = (value: boolean) => ({
+  type: <Types.SET_SOUND>Types.SET_SOUND,
+  payload: value
+});
+
+export type SetPause = ReturnType<typeof setPause>;
+export const setPause = (value: boolean) => ({
+  type: <Types.SET_PAUSE>Types.SET_PAUSE,
+  payload: value
+});
+
 export type Action =
   | AddCount
   | AddCountAsync
   | ReduceCount
   | UpdateLocales
   | UpdateMatrix
-  | WindowResize
   | KeyPause
   | KeyDown
   | KeyRight
@@ -114,4 +117,6 @@ export type Action =
   | KeyRotate
   | KeyDrop
   | KeyReset
-  | KeySound;
+  | KeySound
+  | SetSound
+  | SetPause;

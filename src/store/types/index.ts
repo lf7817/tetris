@@ -2,7 +2,7 @@
  * @Author: lifan
  * @Date: 2018-12-12 13:31:05
  * @Last Modified by: lifan
- * @Last Modified time: 2019-01-08 13:33:55
+ * @Last Modified time: 2019-01-09 20:50:33
  */
 
 /* eslint-disable no-unused-vars */
@@ -13,7 +13,8 @@ enum Types {
   WINDOW_RESIZE = 'WINDOW_RESIZE',
   UPDATE_LOCALES = 'UPDATE_LOCALES',
   GAME_OVER = 'GAME_OVER', // 游戏结束
-  PAUSE = 'PAUSE', // 暂停
+  SET_PAUSE = 'SET_PAUSE', // 暂停
+  SET_SOUND = 'SET_SOUND', // 音效
   START = 'START', // 开始
   RESTART = 'RESTART', // 重新开始
   RORATE = 'RORATE', // 旋转
