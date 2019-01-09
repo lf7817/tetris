@@ -2,7 +2,7 @@
  * @Author: lifan
  * @Date: 2018-12-21 22:32:13
  * @Last Modified by: lifan
- * @Last Modified time: 2019-01-09 15:26:57
+ * @Last Modified time: 2019-01-09 16:07:15
  */
 import React, { Component } from 'react';
 import MyButton from './MyButton';
@@ -59,6 +59,7 @@ class Keyboard extends Component<KeyboardProps> {
     let lastKey: null | string = null;
 
     window.addEventListener('keydown', (event) => {
+      event.preventDefault();
       let opera = null;
 
       switch (event.keyCode) {
@@ -80,6 +81,7 @@ class Keyboard extends Component<KeyboardProps> {
     }, true);
 
     window.addEventListener('keyup', (event) => {
+      event.preventDefault();
       let opera = null;
 
       switch (event.keyCode) {
