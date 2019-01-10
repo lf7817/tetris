@@ -11,21 +11,18 @@ import styles from './style.module.scss';
 interface CharacterProps {
   value?: string;
   className?: string;
-  flash?: boolean;
 }
 
 class Character extends Component<CharacterProps> {
   static defaultProps = {
     value: '',
     className: '',
-    flash: false,
   }
 
   shouldComponentUpdate(nextProp: CharacterProps) {
-    const { value, className, flash } = this.props;
+    const { value, className } = this.props;
 
-    if (nextProp.value !== value || nextProp.className !== className ||
-      nextProp.flash !== flash) {
+    if (nextProp.value !== value || nextProp.className !== className) {
       return true;
     }
 
