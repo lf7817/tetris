@@ -2,7 +2,7 @@
  * @Author: lifan
  * @Date: 2018-12-21 22:52:04
  * @Last Modified by: lifan
- * @Last Modified time: 2019-01-09 14:42:49
+ * @Last Modified time: 2019-01-10 14:02:21
  */
 /* eslint-disable no-undefined */
 import React, { Component } from 'react';
@@ -36,7 +36,7 @@ class Button extends Component<MyButtonProps> {
 
   render() {
     const { classNames, title, textDirection, active, touchStartHandler, touchEndtHandler, isMobile } = this.props;
-
+    console.log('my button render');
     return (
       <div className={cn(styles.myButton, classNames)} style={{ flexDirection: textDirection }}>
         {

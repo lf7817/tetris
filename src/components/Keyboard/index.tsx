@@ -2,7 +2,7 @@
  * @Author: lifan
  * @Date: 2018-12-21 22:32:13
  * @Last Modified by: lifan
- * @Last Modified time: 2019-01-09 16:07:15
+ * @Last Modified time: 2019-01-10 14:01:27
  */
 import React, { Component } from 'react';
 import MyButton from './MyButton';
@@ -18,7 +18,8 @@ const keyCode = {
   down: 40,
   pause: 80,
   reset: 82,
-  sound: 83
+  sound: 83,
+  f12: 123
 };
 
 interface KeyboardProps {
@@ -59,7 +60,10 @@ class Keyboard extends Component<KeyboardProps> {
     let lastKey: null | string = null;
 
     window.addEventListener('keydown', (event) => {
-      event.preventDefault();
+      if (event.keyCode !== keyCode.f12) {
+        event.preventDefault();
+      }
+
       let opera = null;
 
       switch (event.keyCode) {

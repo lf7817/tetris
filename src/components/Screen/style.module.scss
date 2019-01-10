@@ -2,7 +2,7 @@
  * @Author: lifan
  * @Date: 2018-12-19 21:10:55
  * @Last Modified by: lifan
- * @Last Modified time: 2019-01-09 22:37:02
+ * @Last Modified time: 2019-01-10 16:51:17
  */
 @import "../../assets/scss/variable.scss";
 @import "../../assets/scss/func.scss";
@@ -130,30 +130,11 @@ $border-color: #111;
     position: absolute;
     bottom: px2rem(10);
     left: px2rem(10);
-    width: px2rem(25);
-    height: px2rem(21);
-    background-image: url(../../assets/images/icon.png);
-    background-position: (- px2rem(175)) (- px2rem(75));
-    background-size: px2rem(400) px2rem(186);
-  }
-
-  .soundActive {
-    background-position: (- px2rem(150)) (- px2rem(75));
   }
 
   .pause {
     position: absolute;
-    bottom: px2rem(12);
+    bottom: px2rem(10);
     left: px2rem(42);
-    width: px2rem(20);
-    height: px2rem(18);
-    background-image: url(../../assets/images/icon.png);
-    background-position: (- px2rem(100)) (- px2rem(75));
-    background-size: px2rem(400) px2rem(186);
   }
-
-  .pauseActive {
-    background-position: (- px2rem(75)) (- px2rem(75));
-  }
-
 }

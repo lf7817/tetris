@@ -1,0 +1,112 @@
+/*
+ * @Author: lifan
+ * @Date: 2019-01-10 13:48:41
+ * @Last Modified by: lifan
+ * @Last Modified time: 2019-01-10 17:06:36
+ */
+ @import "../../assets/scss/func.scss";
+
+.character {
+  position: relative;
+  display: inline-block;
+  width: px2rem(14);
+  height: px2rem(24);
+  background-image: url(../../assets/images/icon.png);
+  background-repeat: no-repeat;
+  background-size: px2rem(400) px2rem(186);
+  background-position: (- px2rem(215)) (- px2rem(25));
+}
+
+.character_0 {
+  background-position: (- px2rem(75)) (- px2rem(25));
+}
+.character_1 {
+  background-position: (- px2rem(89)) (- px2rem(25));
+}
+.character_2 {
+  background-position: (- px2rem(103)) (- px2rem(25));
+}
+.character_3 {
+  background-position: (- px2rem(117)) (- px2rem(25));
+}
+.character_4 {
+  background-position: (- px2rem(131)) (- px2rem(25));
+}
+.character_5 {
+  background-position: (- px2rem(145)) (- px2rem(25));
+}
+.character_6 {
+  background-position: (- px2rem(159)) (- px2rem(25));
+}
+.character_7 {
+  background-position: (- px2rem(173)) (- px2rem(25));
+}
+.character_8 {
+  background-position: (- px2rem(187)) (- px2rem(25));
+}
+.character_9 {
+  background-position: (- px2rem(201)) (- px2rem(25));
+}
+.character_ {
+  background-position: (- px2rem(215)) (- px2rem(25));
+}
+.character_colon_off  {
+  background-position: (- px2rem(243)) (- px2rem(25));
+}
+.character_colon_on  {
+  background-position: (- px2rem(229)) (- px2rem(25));
+  animation: colonflash 2000ms infinite;
+}
+.character_sound_off  {
+  width: px2rem(25);
+  height: px2rem(21);
+  background-position: (- px2rem(150)) (- px2rem(75));
+}
+.character_sound_on  {
+  width: px2rem(25);
+  height: px2rem(21);
+  background-position: (- px2rem(175)) (- px2rem(75));
+}
+.character_pause_on  {
+  width: px2rem(25);
+  height: px2rem(21);
+  background-position: (- px2rem(75)) (- px2rem(75));
+  animation: pauseflash 500ms infinite;
+}
+.character_pause_off {
+  width: px2rem(25);
+  height: px2rem(21);
+  background-position: (- px2rem(100)) (- px2rem(75));
+}
+
+@keyframes pauseflash
+{
+  0% {
+    background-position: (- px2rem(75)) (- px2rem(75));
+  }
+  50% {
+    background-position: (- px2rem(75)) (- px2rem(75));
+  }
+  51% {
+    background-position: (- px2rem(100)) (- px2rem(75));
+  }
+  100% {
+    background-position: (- px2rem(100)) (- px2rem(75));
+  }
+}
+@keyframes colonflash
+{
+  0% {
+    background-position: (- px2rem(229)) (- px2rem(25));
+  }
+  50% {
+    background-position: (- px2rem(229)) (- px2rem(25));
+  }
+  51% {
+    background-position: (- px2rem(243)) (- px2rem(25));
+  }
+  100% {
+    background-position: (- px2rem(243)) (- px2rem(25));
+  }
+}
+
