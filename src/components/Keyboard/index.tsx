@@ -5,7 +5,7 @@
  * @Last Modified time: 2019-01-10 14:01:27
  */
 import React, { Component } from 'react';
-import MyButton from './MyButton';
+import MyButton from '../MyButton/index';
 import intl from 'react-intl-universal';
 import { isMobile } from '../../utils';
 import styles from './style.module.scss';

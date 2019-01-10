@@ -19,7 +19,7 @@ interface MyButtonProps {
   touchEndtHandler: ((event: GameEvent) => void) | undefined;
 }
 
-class Button extends Component<MyButtonProps> {
+class MyButton extends Component<MyButtonProps> {
   static defaultProps = {
     textDirection: 'column',
     active: false,
@@ -62,4 +62,4 @@ class Button extends Component<MyButtonProps> {
   }
 }
 
-export default Button;
+export default MyButton;

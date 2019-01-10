@@ -2,14 +2,18 @@
  * @Author: lifan
  * @Date: 2019-01-10 13:48:44
  * @Last Modified by: lifan
- * @Last Modified time: 2019-01-10 16:53:21
+ * @Last Modified time: 2019-01-10 20:31:31
  */
 import React, { Component } from 'react';
 import cn from 'classnames';
 import styles from './style.module.scss';
 
+type CharacterValue = '' | '1' | '2' | '3' | '4' | '5' | '6'
+  | '7' | '8' | '9' | '0' | 'colon_on' | 'colon_off' | 'sound_off'
+  | 'sound_on' | 'pause_on' | 'pause_off';
+
 interface CharacterProps {
-  value?: string;
+  value?: CharacterValue;
   className?: string;
 }
 

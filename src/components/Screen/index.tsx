@@ -2,13 +2,14 @@
  * @Author: lifan
  * @Date: 2018-12-19 21:05:34
  * @Last Modified by: lifan
- * @Last Modified time: 2019-01-10 17:07:48
+ * @Last Modified time: 2019-01-10 22:47:47
  */
 import React, { Component } from 'react';
 import Matrix from '../Matrix';
-import Decorate from './Decorate';
-import styles from './style.module.scss';
+import Decorate from '../Decorate';
 import Character from '../Character';
+import Time from '../Time';
+import styles from './style.module.scss';
 
 interface ScreenProps {
   matrix: number[][];
@@ -65,6 +66,7 @@ class Screen extends Component<ScreenProps, ScreenState> {
                 <Character value={'sound_off'} className={styles.sound} />
                 <Character value={'pause_on'} className={styles.pause} />
                 <Character />
+                <Time />
               </div>
             </div>
           </div>

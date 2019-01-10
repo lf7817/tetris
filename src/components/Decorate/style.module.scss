@@ -1,0 +1,87 @@
+/*
+ * @Author: lifan
+ * @Date: 2018-12-19 21:10:55
+ * @Last Modified by: lifan
+ * @Last Modified time: 2019-01-10 16:51:17
+ */
+@import "../../assets/scss/variable.scss";
+@import "../../assets/scss/func.scss";
+
+$border-size: 12;
+$border-color: #111;
+
+.decorate {
+  position: absolute;
+  top: 0;
+  z-index: 100;
+  width: 100%;
+
+  .logo {
+    position: relative;
+    top: - px2rem(22);
+    margin: 0 auto;
+    padding: 0;
+    text-align: center;
+    font-size: px2rem(38);
+    font-weight: 400;
+  }
+
+  .left, .right {
+    position: absolute;
+    top: px2rem(44);
+    width: px2rem(48);
+  }
+
+  .left {
+    left: px2rem(28);
+  }
+
+  .right {
+    right: px2rem(28);
+  }
+
+  .dotWrapper {
+    position: relative;
+    top: - px2rem(44);
+    z-index: 100;
+    margin: 0 auto;
+    width: px2rem(564);
+
+    .dotsLeft, .dotsRight {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      display: flex;
+
+      .dot {
+        display: inline-block;
+        width: px2rem($border-size);
+        height: px2rem($border-size);
+        background-color: $border-color;
+      }
+    }
+
+    .dotsLeft {
+      .dot {
+        margin-right: px2rem($border-size);
+
+        &:first-child {
+          width: px2rem($border-size * 4);
+        }
+      }
+    }
+
+    .dotsRight {
+      justify-content: flex-end;
+
+      /* stylelint-disable-next-line */
+      .dot {
+        margin-left: px2rem($border-size);
+        &:last-child {
+          width: px2rem($border-size * 4);
+        }
+      }
+    }
+  }
+}
