@@ -2,7 +2,7 @@
  * @Author: lifan
  * @Date: 2019-01-10 13:48:41
  * @Last Modified by: lifan
- * @Last Modified time: 2019-01-10 17:06:36
+ * @Last Modified time: 2019-01-11 11:25:45
  */
  @import "../../assets/scss/func.scss";
 
@@ -50,10 +50,7 @@
 .character_ {
   background-position: (- px2rem(215)) (- px2rem(25));
 }
-.character_colon_off  {
-  background-position: (- px2rem(243)) (- px2rem(25));
-}
-.character_colon_on  {
+.character_colon  {
   background-position: (- px2rem(229)) (- px2rem(25));
   animation: colonflash 2000ms infinite;
 }

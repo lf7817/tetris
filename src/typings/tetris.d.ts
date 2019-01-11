@@ -2,7 +2,7 @@
  * @Author: lifan
  * @Date: 2019-01-08 14:13:17
  * @Last Modified by: lifan
- * @Last Modified time: 2019-01-08 14:15:00
+ * @Last Modified time: 2019-01-11 11:28:35
  */
 interface Tetris {
   version: string;
@@ -27,4 +27,4 @@ type GameLocales = 'en-US' | 'zh-CN';
 // 事件
 type GameMouseEvent = React.MouseEvent<HTMLSpanElement, MouseEvent>;
 type GameTouchEvent = React.TouchEvent<HTMLSpanElement>;
-type GameEvent = GameMouseEvent | GameTouchEvent;
+type GameEvent = GameMouseEvent | GameTouchEvent | MouseEvent;

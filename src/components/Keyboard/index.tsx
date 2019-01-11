@@ -2,7 +2,7 @@
  * @Author: lifan
  * @Date: 2018-12-21 22:32:13
  * @Last Modified by: lifan
- * @Last Modified time: 2019-01-11 11:23:39
+ * @Last Modified time: 2019-01-11 11:30:22
  */
 import React, { Component } from 'react';
 import MyButton from '../MyButton/index';
@@ -128,6 +128,9 @@ class Keyboard extends Component<KeyboardProps> {
     }, 20);
 
     window.addEventListener('resize', this.calcWrapperPosition);
+    window.addEventListener('mouseup', event => {
+      this.lastKey !== '' && this.touchEndtHandler(event, '');
+    });
   }
 
   componentWillUnmount() {
@@ -153,7 +156,7 @@ class Keyboard extends Component<KeyboardProps> {
     const { keyboard } = this.props;
 
     return (
-      <div className={styles.keyboard} ref={this.$ref_keyboard} onMouseUp={(event) => this.touchEndtHandler(event, '')}>
+      <div className={styles.keyboard} ref={this.$ref_keyboard}>
         <div className={styles.content}>
           {
             Object.keys(keyboard).map(key => (
