@@ -2,7 +2,7 @@
  * @Author: lifan
  * @Date: 2018-12-21 10:13:15
  * @Last Modified by: lifan
- * @Last Modified time: 2019-01-11 15:53:54
+ * @Last Modified time: 2019-01-11 22:21:30
  */
 import React, { PureComponent } from 'react';
 import { Dispatch } from 'redux';
@@ -25,6 +25,11 @@ interface AppProps {
   updateMatrix: (matrix: number[][]) => void;
   dispatch: Dispatch;
   sound: boolean;
+  score: number;
+  max: number;
+  speed: number;
+  startLines: number;
+  clearLines: number;
 }
 
 interface AppState {
@@ -104,7 +109,9 @@ class App extends PureComponent<AppProps, AppState> {
 
   render() {
     const { initLocales } = this.state;
-    const { matrix, keyboard } = this.props;
+    const { matrix, keyboard, score, max, speed, startLines, clearLines } = this.props;
+
+    console.log('root render');
 
     if (!initLocales) {
       return <ReactLoading type={'spinningBubbles'} className={styles.loading} />;
@@ -114,6 +121,11 @@ class App extends PureComponent<AppProps, AppState> {
       <div className={styles.app}>
         <Screen
           matrix={matrix}
+          max={max}
+          score={score}
+          speed={speed}
+          startLines={startLines}
+          clearLines={clearLines}
         />
         <Keyboard
           keyboard={keyboard}
@@ -129,6 +141,11 @@ const mapState = (state: State) => ({
   matrix: state.matrix,
   keyboard: state.keybord,
   sound: state.sound,
+  score: state.score,
+  max: state.max,
+  speed: state.speed,
+  startLines: state.startLines,
+  clearLines: state.clearLines
 });
 
 const mapDispatch = (dispatch: Dispatch) => ({

@@ -4,7 +4,11 @@ import matrix from './matrix';
 import keybord from './keybord';
 import pause from './pause';
 import sound from './sound';
-
+import speed from './speed';
+import score from './score';
+import max from './max';
+import startLines from './startLines';
+import clearLines from './clearLines';
 
 export interface State {
   locales: GameLocales;
@@ -12,6 +16,11 @@ export interface State {
   keybord: GameKeyboard;
   pause: boolean;
   sound: boolean;
+  score: number;
+  max: number;
+  startLines: number;
+  clearLines: number;
+  speed: number;
 }
 
 export default combineReducers<State>({
@@ -19,5 +28,10 @@ export default combineReducers<State>({
   matrix,
   keybord,
   sound,
-  pause
+  pause,
+  score,
+  max,
+  startLines,
+  clearLines,
+  speed
 });

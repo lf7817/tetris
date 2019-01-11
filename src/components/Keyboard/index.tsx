@@ -155,6 +155,7 @@ class Keyboard extends Component<KeyboardProps> {
   render() {
     const { keyboard } = this.props;
 
+    console.log('keyboard render');
     return (
       <div className={styles.keyboard} ref={this.$ref_keyboard}>
         <div className={styles.content}>

@@ -24,9 +24,17 @@ class Number extends Component<NumberProps, NumberState> {
     className: ''
   };
 
+  state = {
+    list: []
+  }
+
   static getDerivedStateFromProps(nextProps: NumberProps, prevState: NumberState) {
+    const { length, value } = nextProps;
+    const data = value.toString().split('');
+    const nullData = new Array(length - data.length).fill('');
+
     return {
-      list: ['1']
+      list: nullData.concat(data)
     };
   }
 
@@ -34,20 +42,28 @@ class Number extends Component<NumberProps, NumberState> {
     console.log(this.state);
   }
 
-  componentDidUpdate() {
-    // this.calcList();
+  shouldComponentUpdate(nextProps: NumberProps) {
+    const { className, title, value, length } = this.props;
+    if (nextProps.className !== className || nextProps.length !== length ||
+      nextProps.title !== title || nextProps.value !== value) {
+      return true;
+    }
+
+    return false;
   }
 
   render() {
     const { title } = this.props;
     const { list } = this.state;
+
+    console.log('number render');
     return (
       <div className={styles.number}>
         <p>{title}</p>
         <div>
           {
             list.map((item, index) => (
-              <Character key={index} value={item as CharacterValue} />
+              <Character key={index} value={item} />
             ))
           }
         </div>

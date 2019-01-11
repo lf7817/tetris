@@ -2,7 +2,7 @@
  * @Author: lifan
  * @Date: 2019-01-08 14:13:17
  * @Last Modified by: lifan
- * @Last Modified time: 2019-01-11 12:46:04
+ * @Last Modified time: 2019-01-11 21:40:23
  */
 interface Tetris {
   version: string;

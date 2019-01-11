@@ -19,7 +19,10 @@ enum Types {
   RESTART = 'RESTART', // 重新开始
   RORATE = 'RORATE', // 旋转
   SET_SPEED = 'SET_SPEED', // 设置速度
-  SET_DEFAULT_LINES = 'SET_DEFAULT_LINES', // 设置初始行数
+  SET_START_LINES = 'SET_START_LINES', // 设置初始行数
+  CLEAR_LINES = 'CLEAR_LINES', // 清除行数
+  SET_SCORE = 'SET_SCORE', // 设置分数
+  SET_MAX = 'SET_MAX', // 设置最大分数
   UPDATE_MATRIX = 'UPDATE_MATRIX', // 更新矩阵
   KEY_PAUSE = 'KEY_PAUSE', // 暂停
   KEY_SOUND = 'KEY_SOUND', // 音效

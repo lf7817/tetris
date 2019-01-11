@@ -2,46 +2,21 @@
  * @Author: lifan
  * @Date: 2018-12-12 14:50:48
  * @Last Modified by: lifan
- * @Last Modified time: 2019-01-09 20:54:39
+ * @Last Modified time: 2019-01-11 21:55:07
  */
 import Types from '../types';
 
 /* eslint-disable no-use-before-define */
-export type AddCount = ReturnType<typeof addCount>;
-export const addCount = (num: number) => ({
-  type: <Types.ADD_COUNT>Types.ADD_COUNT,
-  payload: {
-    num
-  }
-});
-
-export type AddCountAsync = ReturnType<typeof addCountAsync>;
-export const addCountAsync = () => ({
-  type: <Types.ADD_COUNT_ASYNC>Types.ADD_COUNT_ASYNC,
-});
-
-export type ReduceCount = ReturnType<typeof reduceCount>;
-export const reduceCount = (num: number) => ({
-  type: <Types.REDUCE_COUNT>Types.REDUCE_COUNT,
-  payload: {
-    num
-  }
-});
-
 export type UpdateLocales = ReturnType<typeof updateLocales>;
 export const updateLocales = (locales: GameLocales) => ({
   type: <Types.UPDATE_LOCALES>Types.UPDATE_LOCALES,
-  payload: {
-    locales
-  }
+  payload: locales
 });
 
 export type UpdateMatrix = ReturnType<typeof updateMatrix>;
 export const updateMatrix = (matrix: number[][]) => ({
   type: <Types.UPDATE_MATRIX>Types.UPDATE_MATRIX,
-  payload: {
-    matrix
-  }
+  payload: matrix
 });
 
 export type KeyPause = ReturnType<typeof keyPause>;
@@ -104,10 +79,37 @@ export const setPause = (value: boolean) => ({
   payload: value
 });
 
+export type SetMax = ReturnType<typeof setMax>;
+export const setMax = (value: number) => ({
+  type: <Types.SET_MAX>Types.SET_MAX,
+  payload: value
+});
+
+export type SetScore = ReturnType<typeof setScore>;
+export const setScore = (value: number) => ({
+  type: <Types.SET_SCORE>Types.SET_SCORE,
+  payload: value
+});
+
+export type SetSpeed = ReturnType<typeof setSpeed>;
+export const setSpeed = (value: number) => ({
+  type: <Types.SET_SPEED>Types.SET_SPEED,
+  payload: value
+});
+
+export type SetStartLines = ReturnType<typeof setStartLines>;
+export const setStartLines = (value: number) => ({
+  type: <Types.SET_START_LINES>Types.SET_START_LINES,
+  payload: value
+});
+
+export type SetClearLines = ReturnType<typeof setClearLines>;
+export const setClearLines = (value: number) => ({
+  type: <Types.CLEAR_LINES>Types.CLEAR_LINES,
+  payload: value
+});
+
 export type Action =
-  | AddCount
-  | AddCountAsync
-  | ReduceCount
   | UpdateLocales
   | UpdateMatrix
   | KeyPause
@@ -119,4 +121,9 @@ export type Action =
   | KeyReset
   | KeySound
   | SetSound
-  | SetPause;
+  | SetPause
+  | SetMax
+  | SetScore
+  | SetSpeed
+  | SetStartLines
+  | SetClearLines;

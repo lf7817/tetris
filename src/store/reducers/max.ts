@@ -1,16 +1,15 @@
 /*
  * @Author: lifan
- * @Date: 2018-12-13 13:56:58
+ * @Date: 2019-01-11 20:57:21
  * @Last Modified by: lifan
- * @Last Modified time: 2019-01-11 21:56:05
+ * @Last Modified time: 2019-01-11 21:41:43
  */
-
 import Types from '../types';
 import { Action } from '../actions';
 
-export default (state: GameLocales = 'en-US', action: Action) => {
+export default (state: number = 0, action: Action) => {
   switch (action.type) {
-    case Types.UPDATE_LOCALES:
+    case Types.SET_MAX:
       return action.payload;
     default: return state;
   }

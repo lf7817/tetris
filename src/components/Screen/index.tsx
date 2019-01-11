@@ -2,7 +2,7 @@
  * @Author: lifan
  * @Date: 2018-12-19 21:05:34
  * @Last Modified by: lifan
- * @Last Modified time: 2019-01-11 16:07:40
+ * @Last Modified time: 2019-01-11 22:40:41
  */
 import React, { Component } from 'react';
 import intl from 'react-intl-universal';
@@ -15,6 +15,11 @@ import styles from './style.module.scss';
 
 interface ScreenProps {
   matrix: number[][];
+  score: number;
+  max: number;
+  speed: number;
+  startLines: number;
+  clearLines: number;
 }
 
 interface ScreenState {
@@ -50,8 +55,10 @@ class Screen extends Component<ScreenProps, ScreenState> {
   }
 
   render() {
-    const { matrix } = this.props;
+    const { matrix, max, score, speed, startLines, clearLines } = this.props;
     const { w } = this.state;
+
+    console.log('screen render');
 
     return (
       <div className={styles.wrapper}>
@@ -65,12 +72,12 @@ class Screen extends Component<ScreenProps, ScreenState> {
                 </div>
               </div>
               <div className={styles.statusPanel}>
-                <Number title={intl.get('max')} length={6} value={280} />
-                <Number title={intl.get('lastRound')} length={6} value={280} />
-                <Number title={intl.get('score')} length={6} value={280} />
-                <Number title={intl.get('startLine')} length={6} value={0} />
-                <Number title={intl.get('cleans')} length={6} value={0} />
-                <Number title={intl.get('speed')} length={1} value={1} />
+                <Number title={intl.get('max')} length={6} value={max} />
+                <Number title={intl.get('lastRound')} length={6} value={score} />
+                <Number title={intl.get('score')} length={6} value={score} />
+                <Number title={intl.get('startLine')} length={6} value={startLines} />
+                <Number title={intl.get('cleans')} length={6} value={clearLines} />
+                {/* <Number title={intl.get('speed')} length={1} value={speed} /> */}
                 <Character value={'sound_off'} className={styles.sound} />
                 <Character value={'pause_on'} className={styles.pause} />
                 <Time className={styles.time} />

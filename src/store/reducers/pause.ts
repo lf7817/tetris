@@ -2,9 +2,8 @@
  * @Author: lifan
  * @Date: 2018-12-13 13:56:58
  * @Last Modified by: lifan
- * @Last Modified time: 2019-01-09 20:52:36
+ * @Last Modified time: 2019-01-11 20:57:44
  */
-
 import Types from '../types';
 import { Action } from '../actions';
 
