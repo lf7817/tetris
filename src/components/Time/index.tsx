@@ -2,7 +2,7 @@
  * @Author: lifan
  * @Date: 2019-01-10 22:40:52
  * @Last Modified by: lifan
- * @Last Modified time: 2019-01-11 12:48:33
+ * @Last Modified time: 2019-01-11 13:32:23
  */
 import React, { Component } from 'react';
 import cn from 'classnames';
@@ -47,7 +47,7 @@ class Time extends Component<TimeProps, TimeState> {
 
   componentDidMount() {
     this.calcTime();
-    setInterval(this.calcTime, 60000);
+    setInterval(this.calcTime, 10000);
   }
 
   render() {
@@ -57,6 +57,7 @@ class Time extends Component<TimeProps, TimeState> {
     const h2 = (h % 10).toString() as CharacterValue;
     const m1 = Math.floor(m / 10).toString() as CharacterValue;
     const m2 = (m % 10).toString() as CharacterValue;
+
     return (
       <div className={cn(styles.time, className)}>
         <Character value={h1} />

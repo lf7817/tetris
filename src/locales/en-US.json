@@ -7,5 +7,11 @@
   "key.rotate": "Rotate",
   "key.left": "Left",
   "key.right": "Right",
-  "key.down": "Down"
+  "key.down": "Down",
+  "max": "Max",
+  "speed": "Speed",
+  "startLine": "Start Line",
+  "cleans": "Cleans",
+  "lastRound": "Last Round",
+  "score": "Score"
 }

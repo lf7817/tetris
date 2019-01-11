@@ -2,7 +2,7 @@
  * @Author: lifan
  * @Date: 2018-12-21 10:13:15
  * @Last Modified by: lifan
- * @Last Modified time: 2019-01-09 21:31:57
+ * @Last Modified time: 2019-01-11 15:53:54
  */
 import React, { PureComponent } from 'react';
 import { Dispatch } from 'redux';
@@ -68,12 +68,12 @@ class App extends PureComponent<AppProps, AppState> {
     }
   }
 
-  private switchLocales = (locales: GameLocales) => {
-    this.props.updateLocales(locales);
-    setTimeout(() => {
-      window.location.href = `${window.location.origin}${window.location.pathname}?lang=${locales}`;
-    }, 20);
-  }
+  // private switchLocales = (locales: GameLocales) => {
+  //   this.props.updateLocales(locales);
+  //   setTimeout(() => {
+  //     window.location.href = `${window.location.origin}${window.location.pathname}?lang=${locales}`;
+  //   }, 20);
+  // }
 
   keyboardHandler = (key: keyof GameKeyboard, value: boolean) => {
     let a = null;

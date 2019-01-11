@@ -7,5 +7,11 @@
   "key.rotate": "旋转",
   "key.left": "左移",
   "key.right": "右移",
-  "key.down": "下移"
+  "key.down": "下移",
+  "max": "最高分",
+  "speed": "速度",
+  "startLine": "起始行",
+  "cleans": "消除行",
+  "lastRound": "上轮得分",
+  "score": "得分"
 }

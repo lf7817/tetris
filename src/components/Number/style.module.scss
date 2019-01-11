@@ -1,0 +1,27 @@
+/*
+ * @Author: lifan
+ * @Date: 2019-01-11 13:58:00
+ * @Last Modified by: lifan
+ * @Last Modified time: 2019-01-11 16:00:56
+ */
+@import "../../assets/scss/variable.scss";
+@import "../../assets/scss/func.scss";
+
+.number {
+  width: 100%;
+  p {
+    margin: px2rem(10) 0 px2rem(6) 0;
+    padding: 0;
+    text-indent: px2rem(10);
+    font-size: px2rem(24);
+    transform: scale(0.9);
+  }
+  div {
+    text-align: right;
+    text-indent: px2rem(10);
+  }
+
+  .c {
+    margin-left: 1px;
+  }
+}

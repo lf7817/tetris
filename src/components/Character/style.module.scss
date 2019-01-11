@@ -2,19 +2,21 @@
  * @Author: lifan
  * @Date: 2019-01-10 13:48:41
  * @Last Modified by: lifan
- * @Last Modified time: 2019-01-11 11:25:45
+ * @Last Modified time: 2019-01-11 15:04:30
  */
  @import "../../assets/scss/func.scss";
 
 .character {
   position: relative;
   display: inline-block;
-  width: px2rem(14);
+  width: px2rem(13);
   height: px2rem(24);
+  margin-left: 1px;
   background-image: url(../../assets/images/icon.png);
   background-repeat: no-repeat;
   background-size: px2rem(400) px2rem(186);
   background-position: (- px2rem(215)) (- px2rem(25));
+  overflow: hidden;
 }
 
 .character_0 {
@@ -51,6 +53,7 @@
   background-position: (- px2rem(215)) (- px2rem(25));
 }
 .character_colon  {
+  width: px2rem(16);
   background-position: (- px2rem(229)) (- px2rem(25));
   animation: colonflash 2000ms infinite;
 }
