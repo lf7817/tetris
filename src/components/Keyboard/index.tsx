@@ -2,7 +2,7 @@
  * @Author: lifan
  * @Date: 2018-12-21 22:32:13
  * @Last Modified by: lifan
- * @Last Modified time: 2019-01-10 14:01:27
+ * @Last Modified time: 2019-01-11 11:23:39
  */
 import React, { Component } from 'react';
 import MyButton from '../MyButton/index';
@@ -35,6 +35,7 @@ class Keyboard extends Component<KeyboardProps> {
   state = {
     isMobile: isMobile()
   }
+  lastKey: string = '';
 
   calcWrapperPosition = () => {
     const dom = this.$ref_keyboard.current;
@@ -57,14 +58,14 @@ class Keyboard extends Component<KeyboardProps> {
   }
 
   registerPressEventHandler() {
-    let lastKey: null | string = null;
+    this.lastKey = '';
 
     window.addEventListener('keydown', (event) => {
       if (event.keyCode !== keyCode.f12) {
         event.preventDefault();
       }
 
-      let opera = null;
+      let opera = '';
 
       switch (event.keyCode) {
         case keyCode.down: opera = 'down'; break;
@@ -75,18 +76,18 @@ class Keyboard extends Component<KeyboardProps> {
         case keyCode.sound: opera = 'sound'; break;
         case keyCode.reset: opera = 'reset'; break;
         case keyCode.pause: opera = 'pause'; break;
-        default: opera = null;
+        default: opera = '';
       }
 
-      if (lastKey !== opera) {
-        opera && this.keyboardHandler(opera, true);
-        lastKey = opera;
+      if (this.lastKey !== opera && opera !== '') {
+        this.keyboardHandler(opera, true);
+        this.lastKey = opera;
       }
     }, true);
 
     window.addEventListener('keyup', (event) => {
       event.preventDefault();
-      let opera = null;
+      let opera = '';
 
       switch (event.keyCode) {
         case keyCode.down: opera = 'down'; break;
@@ -97,20 +98,27 @@ class Keyboard extends Component<KeyboardProps> {
         case keyCode.sound: opera = 'sound'; break;
         case keyCode.reset: opera = 'reset'; break;
         case keyCode.pause: opera = 'pause'; break;
-        default: opera = null; break;
+        default: opera = ''; break;
       }
 
-      opera && this.keyboardHandler(opera, false);
-      lastKey = null;
+      opera !== '' && this.keyboardHandler(opera, false);
+      this.lastKey = '';
     }, true);
   }
 
   touchStartHandler = (event: GameEvent, key: keyof GameKeyboard) => {
-    this.keyboardHandler(key, true);
+    this.lastKey = key as string;
+    this.keyboardHandler(this.lastKey, true);
+    console.log(this.lastKey);
   }
 
   touchEndtHandler = (event: GameEvent, key: keyof GameKeyboard) => {
-    this.keyboardHandler(key, false);
+    if (this.lastKey !== '') {
+      this.keyboardHandler(this.lastKey, false);
+      this.lastKey = '';
+    } else {
+      key !== '' && this.keyboardHandler(key, true);
+    }
   }
 
   componentDidMount() {
@@ -145,7 +153,7 @@ class Keyboard extends Component<KeyboardProps> {
     const { keyboard } = this.props;
 
     return (
-      <div className={styles.keyboard} ref={this.$ref_keyboard}>
+      <div className={styles.keyboard} ref={this.$ref_keyboard} onMouseUp={(event) => this.touchEndtHandler(event, '')}>
         <div className={styles.content}>
           {
             Object.keys(keyboard).map(key => (
