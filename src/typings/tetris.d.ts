@@ -2,7 +2,7 @@
  * @Author: lifan
  * @Date: 2019-01-08 14:13:17
  * @Last Modified by: lifan
- * @Last Modified time: 2019-01-11 11:28:35
+ * @Last Modified time: 2019-01-11 12:46:04
  */
 interface Tetris {
   version: string;
@@ -28,3 +28,8 @@ type GameLocales = 'en-US' | 'zh-CN';
 type GameMouseEvent = React.MouseEvent<HTMLSpanElement, MouseEvent>;
 type GameTouchEvent = React.TouchEvent<HTMLSpanElement>;
 type GameEvent = GameMouseEvent | GameTouchEvent | MouseEvent;
+
+// 字符
+type CharacterValue = '' | '1' | '2' | '3' | '4' | '5' | '6'
+  | '7' | '8' | '9' | '0' | 'colon' | 'sound_off'
+  | 'sound_on' | 'pause_on' | 'pause_off';

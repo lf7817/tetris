@@ -2,7 +2,7 @@
  * @Author: lifan
  * @Date: 2018-12-19 21:05:34
  * @Last Modified by: lifan
- * @Last Modified time: 2019-01-10 22:47:47
+ * @Last Modified time: 2019-01-11 12:30:41
  */
 import React, { Component } from 'react';
 import Matrix from '../Matrix';
@@ -66,7 +66,7 @@ class Screen extends Component<ScreenProps, ScreenState> {
                 <Character value={'sound_off'} className={styles.sound} />
                 <Character value={'pause_on'} className={styles.pause} />
                 <Character />
-                <Time />
+                <Time className={styles.time} />
               </div>
             </div>
           </div>

@@ -2,11 +2,13 @@
  * @Author: lifan
  * @Date: 2019-01-10 22:43:52
  * @Last Modified by: lifan
- * @Last Modified time: 2019-01-10 22:44:19
+ * @Last Modified time: 2019-01-11 12:26:47
  */
 @import "../../assets/scss/variable.scss";
 @import "../../assets/scss/func.scss";
 
 .time {
-  color: red;
+  display: flex;
+  flex-direction: row;
+  font-size: 0;
 }

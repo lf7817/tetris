@@ -2,7 +2,7 @@
  * @Author: lifan
  * @Date: 2018-12-19 21:10:55
  * @Last Modified by: lifan
- * @Last Modified time: 2019-01-10 16:51:17
+ * @Last Modified time: 2019-01-11 12:34:02
  */
 @import "../../assets/scss/variable.scss";
 @import "../../assets/scss/func.scss";
@@ -125,6 +125,7 @@ $border-color: #111;
 
 .statusPanel {
   position: relative;
+  width: px2rem(160);
 
   .sound {
     position: absolute;
@@ -135,6 +136,12 @@ $border-color: #111;
   .pause {
     position: absolute;
     bottom: px2rem(10);
-    left: px2rem(42);
+    left: px2rem(48);
+  }
+
+  .time {
+    position: absolute;
+    bottom: px2rem(10);
+    right: 0
   }
 }
