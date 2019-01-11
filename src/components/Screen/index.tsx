@@ -2,7 +2,7 @@
  * @Author: lifan
  * @Date: 2018-12-19 21:05:34
  * @Last Modified by: lifan
- * @Last Modified time: 2019-01-11 22:40:41
+ * @Last Modified time: 2019-01-11 22:41:38
  */
 import React, { Component } from 'react';
 import intl from 'react-intl-universal';
@@ -55,7 +55,7 @@ class Screen extends Component<ScreenProps, ScreenState> {
   }
 
   render() {
-    const { matrix, max, score, speed, startLines, clearLines } = this.props;
+    const { matrix, max, score, startLines, clearLines } = this.props;
     const { w } = this.state;
 
     console.log('screen render');
