@@ -2,7 +2,7 @@
  * @Author: lifan
  * @Date: 2018-12-21 22:32:13
  * @Last Modified by: lifan
- * @Last Modified time: 2019-01-12 22:08:36
+ * @Last Modified time: 2019-01-12 22:11:27
  */
 import React, { Component } from 'react';
 import MyButton from '../MyButton/index';
@@ -102,7 +102,7 @@ class Keyboard extends Component<KeyboardProps> {
     }
   }
 
-  touchEndtHandler = (event: GameEvent, key: keyof GameKeyboard) => {s
+  touchEndtHandler = (event: GameEvent, key: keyof GameKeyboard) => {
     for (let i = 0; i < this.lastKey.length; i++) {
       this.keyboardHandler(this.lastKey[i], false);
     }
