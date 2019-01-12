@@ -2,7 +2,7 @@
  * @Author: lifan
  * @Date: 2018-12-21 22:32:13
  * @Last Modified by: lifan
- * @Last Modified time: 2019-01-11 11:30:22
+ * @Last Modified time: 2019-01-12 22:08:36
  */
 import React, { Component } from 'react';
 import MyButton from '../MyButton/index';
@@ -35,7 +35,7 @@ class Keyboard extends Component<KeyboardProps> {
   state = {
     isMobile: isMobile()
   }
-  lastKey: string = '';
+  lastKey: string[] = [];
 
   calcWrapperPosition = () => {
     const dom = this.$ref_keyboard.current;
@@ -58,14 +58,14 @@ class Keyboard extends Component<KeyboardProps> {
   }
 
   registerPressEventHandler() {
-    this.lastKey = '';
+    this.lastKey = [];
 
     window.addEventListener('keydown', (event) => {
       if (event.keyCode !== keyCode.f12) {
         event.preventDefault();
       }
 
-      let opera = '';
+      let opera: keyof GameKeyboard;
 
       switch (event.keyCode) {
         case keyCode.down: opera = 'down'; break;
@@ -79,46 +79,34 @@ class Keyboard extends Component<KeyboardProps> {
         default: opera = '';
       }
 
-      if (this.lastKey !== opera && opera !== '') {
+      if (this.lastKey.indexOf(opera) === -1) {
         this.keyboardHandler(opera, true);
-        this.lastKey = opera;
+        this.lastKey.push(opera);
       }
     }, true);
 
     window.addEventListener('keyup', (event) => {
       event.preventDefault();
-      let opera = '';
-
-      switch (event.keyCode) {
-        case keyCode.down: opera = 'down'; break;
-        case keyCode.left: opera = 'left'; break;
-        case keyCode.right: opera = 'right'; break;
-        case keyCode.rotate: opera = 'rotate'; break;
-        case keyCode.drop: opera = 'drop'; break;
-        case keyCode.sound: opera = 'sound'; break;
-        case keyCode.reset: opera = 'reset'; break;
-        case keyCode.pause: opera = 'pause'; break;
-        default: opera = ''; break;
+      for (let i = 0; i < this.lastKey.length; i++) {
+        this.keyboardHandler(this.lastKey[i], false);
       }
 
-      opera !== '' && this.keyboardHandler(opera, false);
-      this.lastKey = '';
+      this.lastKey = [];
     }, true);
   }
 
   touchStartHandler = (event: GameEvent, key: keyof GameKeyboard) => {
-    this.lastKey = key as string;
-    this.keyboardHandler(this.lastKey, true);
-    console.log(this.lastKey);
+    if (this.lastKey.indexOf(key as string) === -1) {
+      this.lastKey.push(key as string);
+      this.keyboardHandler(key, true);
+    }
   }
 
-  touchEndtHandler = (event: GameEvent, key: keyof GameKeyboard) => {
-    if (this.lastKey !== '') {
-      this.keyboardHandler(this.lastKey, false);
-      this.lastKey = '';
-    } else {
-      key !== '' && this.keyboardHandler(key, true);
+  touchEndtHandler = (event: GameEvent, key: keyof GameKeyboard) => {s
+    for (let i = 0; i < this.lastKey.length; i++) {
+      this.keyboardHandler(this.lastKey[i], false);
     }
+    this.lastKey = [];
   }
 
   componentDidMount() {
@@ -129,7 +117,7 @@ class Keyboard extends Component<KeyboardProps> {
 
     window.addEventListener('resize', this.calcWrapperPosition);
     window.addEventListener('mouseup', event => {
-      this.lastKey !== '' && this.touchEndtHandler(event, '');
+      this.touchEndtHandler(event, '');
     });
   }
 
