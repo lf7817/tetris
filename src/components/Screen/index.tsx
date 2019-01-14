@@ -2,7 +2,7 @@
  * @Author: lifan
  * @Date: 2018-12-19 21:05:34
  * @Last Modified by: lifan
- * @Last Modified time: 2019-01-14 16:36:29
+ * @Last Modified time: 2019-01-14 22:08:36
  */
 import React, { Component, Fragment } from 'react';
 import intl from 'react-intl-universal';
@@ -11,6 +11,7 @@ import Decorate from '../Decorate';
 import Character from '../Character';
 import Time from '../Time';
 import Number from '../Number';
+import Next from '../Next';
 import styles from './style.module.scss';
 
 interface ScreenProps {
@@ -22,6 +23,7 @@ interface ScreenProps {
   clearLines: number;
   playing: boolean;
   pause: boolean;
+  sound: boolean;
 }
 
 interface ScreenState {
@@ -69,10 +71,10 @@ class Screen extends Component<ScreenProps, ScreenState> {
   }
 
   shouldComponentUpdate(nextProps: ScreenProps, nextState: ScreenState) {
-    const { matrix, score, max, speed, startLines, clearLines, pause, playing } = this.props;
+    const { matrix, score, max, speed, startLines, clearLines, pause, playing, sound } = this.props;
     const { w, scoreFlashflag } = this.state;
     if (nextProps.score !== score || nextProps.matrix !== matrix ||
-      nextProps.max !== max || nextProps.speed !== speed ||
+      nextProps.max !== max || nextProps.speed !== speed || nextProps.sound !== sound ||
       nextProps.startLines !== startLines || nextProps.clearLines !== clearLines ||
       nextProps.pause !== pause || nextProps.playing !== playing ||
       nextState.w !== w || nextState.scoreFlashflag !== scoreFlashflag) {
@@ -83,8 +85,9 @@ class Screen extends Component<ScreenProps, ScreenState> {
   }
 
   render() {
-    const { matrix, max, score, startLines, clearLines, pause, playing, speed } = this.props;
+    const { matrix, max, score, startLines, clearLines, pause, playing, speed, sound } = this.props;
     const { w, scoreFlashflag } = this.state;
+    const pixelWidth = w / matrix[0].length;
 
     console.log('screen render');
 
@@ -116,12 +119,8 @@ class Screen extends Component<ScreenProps, ScreenState> {
                       <Number title={intl.get('speed')} length={1} value={speed} />
                     </Fragment>
                 }
-                {/* <Number title={intl.get('max')} length={6} value={max} />
-                <Number title={intl.get('lastRound')} length={6} value={score} />
-                <Number title={intl.get('score')} length={6} value={score} />
-                <Number title={intl.get('startLines')} length={6} value={startLines} />
-                <Number title={intl.get('cleans')} length={6} value={clearLines} /> */}
-                <Character value={'sound_off'} className={styles.sound} />
+                <Next shap={'L'} width={pixelWidth * 4} />
+                <Character value={sound ? 'sound_on' : 'sound_off'} className={styles.sound} />
                 <Character value={pause ? 'pause_on' : 'pause_off'} className={styles.pause} />
                 <Time className={styles.time} />
               </div>

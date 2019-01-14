@@ -101,17 +101,17 @@ class App extends PureComponent<AppProps, AppState> {
 
   componentDidMount() {
     this.initLocales(this.props.locales);
-    setInterval(() => {
-      const newArr = this.props.matrix.map(item => {
-        return item.map(() => Math.round(Math.random()));
-      });
-      this.props.updateMatrix(newArr);
-    }, 800);
+    // setInterval(() => {
+    //   const newArr = this.props.matrix.map(item => {
+    //     return item.map(() => Math.round(Math.random()));
+    //   });
+    //   this.props.updateMatrix(newArr);
+    // }, 800);
   }
 
   render() {
     const { initLocales } = this.state;
-    const { matrix, keyboard, score, max, speed, startLines, clearLines, pause, playing } = this.props;
+    const { matrix, keyboard, score, max, speed, startLines, clearLines, pause, playing, sound } = this.props;
 
     console.log('root render');
 
@@ -130,6 +130,7 @@ class App extends PureComponent<AppProps, AppState> {
           clearLines={clearLines}
           pause={pause}
           playing={playing}
+          sound={sound}
         />
         <Keyboard
           keyboard={keyboard}

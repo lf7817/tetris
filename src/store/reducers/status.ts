@@ -11,7 +11,7 @@ import produce from 'immer';
 const initState: GameStatus = {
   max: 0,
   score: 0,
-  sound: false,
+  sound: true,
   speed: 1,
   clearLines: 0,
   startLines: 0,

@@ -8,6 +8,8 @@ interface Tetris {
   version: string;
 }
 
+type BlockShap = 'I' | 'L' | 'J' | 'Z' | 'S' | 'O' | 'T';
+
 interface GameStatus {
   max: number;
   score: number;

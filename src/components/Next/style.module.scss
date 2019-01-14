@@ -1,0 +1,24 @@
+/*
+ * @Author: lifan
+ * @Date: 2019-01-14 22:05:25
+ * @Last Modified by: lifan
+ * @Last Modified time: 2019-01-14 22:09:46
+ */
+@import "../../assets/scss/variable.scss";
+@import "../../assets/scss/func.scss";
+
+.next {
+  width: 100%;
+  p {
+    margin: px2rem(10) 0 px2rem(6) 0;
+    padding: 0;
+    text-indent: px2rem(10);
+    font-size: px2rem(24);
+    transform: scale(0.9);
+  }
+  div {
+    text-align: right;
+    margin-top: px2rem(20);
+    text-indent: px2rem(10);
+  }
+}
