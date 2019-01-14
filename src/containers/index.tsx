@@ -2,7 +2,7 @@
  * @Author: lifan
  * @Date: 2018-12-21 10:13:15
  * @Last Modified by: lifan
- * @Last Modified time: 2019-01-14 11:39:37
+ * @Last Modified time: 2019-01-14 16:13:01
  */
 import React, { PureComponent } from 'react';
 import { Dispatch } from 'redux';
@@ -101,12 +101,12 @@ class App extends PureComponent<AppProps, AppState> {
 
   componentDidMount() {
     this.initLocales(this.props.locales);
-    // setInterval(() => {
-    //   const newArr = this.props.matrix.map(item => {
-    //     return item.map(() => Math.round(Math.random()));
-    //   });
-    //   this.props.updateMatrix(newArr);
-    // }, 800);
+    setInterval(() => {
+      const newArr = this.props.matrix.map(item => {
+        return item.map(() => Math.round(Math.random()));
+      });
+      this.props.updateMatrix(newArr);
+    }, 800);
   }
 
   render() {

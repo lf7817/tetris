@@ -2,7 +2,7 @@
  * @Author: lifan
  * @Date: 2018-12-19 21:05:34
  * @Last Modified by: lifan
- * @Last Modified time: 2019-01-14 11:38:28
+ * @Last Modified time: 2019-01-14 16:36:29
  */
 import React, { Component, Fragment } from 'react';
 import intl from 'react-intl-universal';
