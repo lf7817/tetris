@@ -2,7 +2,7 @@
  * @Author: lifan
  * @Date: 2018-12-21 10:13:15
  * @Last Modified by: lifan
- * @Last Modified time: 2019-01-11 22:21:30
+ * @Last Modified time: 2019-01-14 11:39:37
  */
 import React, { PureComponent } from 'react';
 import { Dispatch } from 'redux';
@@ -137,15 +137,15 @@ class App extends PureComponent<AppProps, AppState> {
 }
 
 const mapState = (state: State) => ({
-  locales: state.locales,
+  locales: state.status.locales,
   matrix: state.matrix,
   keyboard: state.keybord,
-  sound: state.sound,
-  score: state.score,
-  max: state.max,
-  speed: state.speed,
-  startLines: state.startLines,
-  clearLines: state.clearLines
+  sound: state.status.sound,
+  score: state.status.score,
+  max: state.status.max,
+  speed: state.status.speed,
+  startLines: state.status.startLines,
+  clearLines: state.status.clearLines
 });
 
 const mapDispatch = (dispatch: Dispatch) => ({

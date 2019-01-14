@@ -9,7 +9,7 @@ import Types from '../types';
 /* eslint-disable no-use-before-define */
 export type UpdateLocales = ReturnType<typeof updateLocales>;
 export const updateLocales = (locales: GameLocales) => ({
-  type: <Types.UPDATE_LOCALES>Types.UPDATE_LOCALES,
+  type: <Types.SET_LOCALES>Types.SET_LOCALES,
   payload: locales
 });
 
@@ -105,7 +105,7 @@ export const setStartLines = (value: number) => ({
 
 export type SetClearLines = ReturnType<typeof setClearLines>;
 export const setClearLines = (value: number) => ({
-  type: <Types.CLEAR_LINES>Types.CLEAR_LINES,
+  type: <Types.SET_CLEAR_LINES>Types.SET_CLEAR_LINES,
   payload: value
 });
 

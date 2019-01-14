@@ -2,7 +2,7 @@
  * @Author: lifan
  * @Date: 2018-12-19 21:05:34
  * @Last Modified by: lifan
- * @Last Modified time: 2019-01-11 22:41:38
+ * @Last Modified time: 2019-01-14 11:38:28
  */
 import React, { Component } from 'react';
 import intl from 'react-intl-universal';
@@ -47,7 +47,11 @@ class Screen extends Component<ScreenProps, ScreenState> {
   }
 
   shouldComponentUpdate(nextProps: ScreenProps, nextState: ScreenState) {
-    if (nextProps.matrix !== this.props.matrix || nextState.w !== this.state.w) {
+    const { matrix, score, max, speed, startLines, clearLines } = this.props;
+    if (nextProps.score !== score || nextProps.matrix !== matrix ||
+      nextProps.max !== max || nextProps.speed !== speed ||
+      nextProps.startLines !== startLines || nextProps.clearLines !== clearLines ||
+      nextState.w !== this.state.w) {
       return true;
     }
 
