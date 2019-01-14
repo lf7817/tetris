@@ -8,6 +8,18 @@ interface Tetris {
   version: string;
 }
 
+interface GameStatus {
+  max: number;
+  score: number;
+  sound: boolean;
+  speed: number;
+  clearLines: number;
+  startLines: number;
+  locales: GameLocales;
+  pause: boolean;
+  playing: boolean;
+}
+
 // 键盘
 interface GameKeyboard {
   pause: boolean;

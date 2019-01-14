@@ -8,17 +8,6 @@ import Types from '../types';
 import { Action } from '../actions';
 import produce from 'immer';
 
-export interface GameStatus {
-  max: number;
-  score: number;
-  sound: boolean;
-  speed: number;
-  clearLines: number;
-  startLines: number;
-  locales: GameLocales;
-  pause: boolean;
-}
-
 const initState: GameStatus = {
   max: 0,
   score: 0,
@@ -27,7 +16,8 @@ const initState: GameStatus = {
   clearLines: 0,
   startLines: 0,
   locales: 'en-US',
-  pause: false
+  pause: false,
+  playing: false
 };
 
 export default (state = initState, action: Action) =>
@@ -41,6 +31,7 @@ export default (state = initState, action: Action) =>
       case Types.SET_START_LINES: draft.startLines = action.payload; break;
       case Types.SET_CLEAR_LINES: draft.clearLines = action.payload; break;
       case Types.SET_PAUSE: draft.pause = action.payload; break;
+      case Types.SET_PLAYING: draft.playing = action.payload; break;
       default: return state;
     }
   });

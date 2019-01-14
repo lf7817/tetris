@@ -30,6 +30,8 @@ interface AppProps {
   speed: number;
   startLines: number;
   clearLines: number;
+  pause: boolean;
+  playing: boolean;
 }
 
 interface AppState {
@@ -109,7 +111,7 @@ class App extends PureComponent<AppProps, AppState> {
 
   render() {
     const { initLocales } = this.state;
-    const { matrix, keyboard, score, max, speed, startLines, clearLines } = this.props;
+    const { matrix, keyboard, score, max, speed, startLines, clearLines, pause, playing } = this.props;
 
     console.log('root render');
 
@@ -126,6 +128,8 @@ class App extends PureComponent<AppProps, AppState> {
           speed={speed}
           startLines={startLines}
           clearLines={clearLines}
+          pause={pause}
+          playing={playing}
         />
         <Keyboard
           keyboard={keyboard}
@@ -145,7 +149,9 @@ const mapState = (state: State) => ({
   max: state.status.max,
   speed: state.status.speed,
   startLines: state.status.startLines,
-  clearLines: state.status.clearLines
+  clearLines: state.status.clearLines,
+  pause: state.status.pause,
+  playing: state.status.playing,
 });
 
 const mapDispatch = (dispatch: Dispatch) => ({

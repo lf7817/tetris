@@ -109,6 +109,12 @@ export const setClearLines = (value: number) => ({
   payload: value
 });
 
+export type SetPlaying = ReturnType<typeof setPlaying>;
+export const setPlaying = (value: boolean) => ({
+  type: <Types.SET_PLAYING>Types.SET_PLAYING,
+  payload: value
+});
+
 export type Action =
   | UpdateLocales
   | UpdateMatrix
@@ -122,6 +128,7 @@ export type Action =
   | KeySound
   | SetSound
   | SetPause
+  | SetPlaying
   | SetMax
   | SetScore
   | SetSpeed

@@ -4,7 +4,7 @@
  * @Last Modified by: lifan
  * @Last Modified time: 2019-01-14 11:38:28
  */
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import intl from 'react-intl-universal';
 import Matrix from '../Matrix';
 import Decorate from '../Decorate';
@@ -20,16 +20,20 @@ interface ScreenProps {
   speed: number;
   startLines: number;
   clearLines: number;
+  playing: boolean;
+  pause: boolean;
 }
 
 interface ScreenState {
   w: number;
+  scoreFlashflag: boolean;
 }
 
 class Screen extends Component<ScreenProps, ScreenState> {
   private readonly $ref_Panl: React.RefObject<HTMLDivElement> = React.createRef();
   public state = {
-    w: 0
+    w: 0,
+    scoreFlashflag: false
   }
 
   calcWidth = () => {
@@ -40,18 +44,38 @@ class Screen extends Component<ScreenProps, ScreenState> {
     }
   }
 
+  scoreFlash() {
+    setInterval(() => {
+      if (this.props.playing) {
+        return;
+      }
+
+      if (this.props.score === 0) {
+        this.setState({
+          scoreFlashflag: false
+        });
+      } else {
+        this.setState({
+          scoreFlashflag: !this.state.scoreFlashflag
+        });
+      }
+    }, 3000);
+  }
+
   componentDidMount() {
     this.calcWidth();
-
+    this.scoreFlash();
     window.addEventListener('resize', this.calcWidth);
   }
 
   shouldComponentUpdate(nextProps: ScreenProps, nextState: ScreenState) {
-    const { matrix, score, max, speed, startLines, clearLines } = this.props;
+    const { matrix, score, max, speed, startLines, clearLines, pause, playing } = this.props;
+    const { w, scoreFlashflag } = this.state;
     if (nextProps.score !== score || nextProps.matrix !== matrix ||
       nextProps.max !== max || nextProps.speed !== speed ||
       nextProps.startLines !== startLines || nextProps.clearLines !== clearLines ||
-      nextState.w !== this.state.w) {
+      nextProps.pause !== pause || nextProps.playing !== playing ||
+      nextState.w !== w || nextState.scoreFlashflag !== scoreFlashflag) {
       return true;
     }
 
@@ -59,8 +83,8 @@ class Screen extends Component<ScreenProps, ScreenState> {
   }
 
   render() {
-    const { matrix, max, score, startLines, clearLines } = this.props;
-    const { w } = this.state;
+    const { matrix, max, score, startLines, clearLines, pause, playing, speed } = this.props;
+    const { w, scoreFlashflag } = this.state;
 
     console.log('screen render');
 
@@ -76,14 +100,29 @@ class Screen extends Component<ScreenProps, ScreenState> {
                 </div>
               </div>
               <div className={styles.statusPanel}>
-                <Number title={intl.get('max')} length={6} value={max} />
+                {
+                  playing ?
+                    <Fragment>
+                      <Number title={intl.get('score')} length={6} value={score} />
+                      <Number title={intl.get('cleans')} length={6} value={clearLines} />
+                      <Number title={intl.get('speed')} length={1} value={speed} />
+                    </Fragment> :
+                    <Fragment>
+                      {
+                        !scoreFlashflag ? <Number title={intl.get('max')} length={6} value={max} /> :
+                          <Number title={intl.get('lastRound')} length={6} value={score} />
+                      }
+                      <Number title={intl.get('startLines')} length={6} value={startLines} />
+                      <Number title={intl.get('speed')} length={1} value={speed} />
+                    </Fragment>
+                }
+                {/* <Number title={intl.get('max')} length={6} value={max} />
                 <Number title={intl.get('lastRound')} length={6} value={score} />
                 <Number title={intl.get('score')} length={6} value={score} />
-                <Number title={intl.get('startLine')} length={6} value={startLines} />
-                <Number title={intl.get('cleans')} length={6} value={clearLines} />
-                {/* <Number title={intl.get('speed')} length={1} value={speed} /> */}
+                <Number title={intl.get('startLines')} length={6} value={startLines} />
+                <Number title={intl.get('cleans')} length={6} value={clearLines} /> */}
                 <Character value={'sound_off'} className={styles.sound} />
-                <Character value={'pause_on'} className={styles.pause} />
+                <Character value={pause ? 'pause_on' : 'pause_off'} className={styles.pause} />
                 <Time className={styles.time} />
               </div>
             </div>

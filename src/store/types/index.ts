@@ -24,6 +24,7 @@ enum Types {
   SET_SCORE = 'SET_SCORE', // 设置分数
   SET_MAX = 'SET_MAX', // 设置最大分数
   UPDATE_MATRIX = 'UPDATE_MATRIX', // 更新矩阵
+  SET_PLAYING = 'SET_PLAYING',
   KEY_PAUSE = 'KEY_PAUSE', // 暂停
   KEY_SOUND = 'KEY_SOUND', // 音效
   KEY_RESET = 'KEY_RESET', // 重玩

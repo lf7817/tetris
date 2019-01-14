@@ -1,7 +1,7 @@
 import { combineReducers } from 'redux';
 import matrix from './matrix';
 import keybord from './keybord';
-import status, { GameStatus } from './status';
+import status from './status';
 
 export interface State {
   matrix: number[][];
