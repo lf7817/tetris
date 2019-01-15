@@ -2,7 +2,7 @@
  * @Author: lifan
  * @Date: 2018-12-12 13:31:05
  * @Last Modified by: lifan
- * @Last Modified time: 2019-01-15 10:48:42
+ * @Last Modified time: 2019-01-15 17:08:07
  */
 
 /* eslint-disable no-unused-vars */
@@ -26,6 +26,7 @@ enum Types {
   SET_MATRIX = 'SET_MATRIX', // 更新矩阵
   SET_NEXT = 'SET_NEXT', // 下一个方块
   SET_PLAYING = 'SET_PLAYING',
+  SET_FOCUS = 'SET_FOCUS',
   KEY_PAUSE = 'KEY_PAUSE', // 暂停
   KEY_SOUND = 'KEY_SOUND', // 音效
   KEY_RESET = 'KEY_RESET', // 重玩

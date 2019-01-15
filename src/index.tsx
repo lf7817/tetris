@@ -2,17 +2,16 @@
  * @Author: lifan
  * @Date: 2018-12-09 21:11:01
  * @Last Modified by: lifan
- * @Last Modified time: 2018-12-19 14:16:49
+ * @Last Modified time: 2019-01-15 17:05:14
  */
 import '@babel/polyfill';
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
-import { PersistGate } from 'redux-persist/integration/react';
+import { PersistGate } from 'redux-persist/integration/react'; // eslint-disable-line
 import App from './containers';
 import * as serviceWorker from './utils/serviceWorker';
 import configureStore from './store';
-
 import 'normalize.css';
 import './assets/scss/index.scss';
 
@@ -20,9 +19,9 @@ const configStore = configureStore();
 
 ReactDOM.render(
   <Provider store={configStore.store}>
-    <PersistGate persistor={configStore.persistor}>
-      <App />
-    </PersistGate>
+    {/* <PersistGate persistor={configStore.persistor}> */}
+    <App />
+    {/* </PersistGate> */}
   </Provider>,
   document.getElementById('root')
 );

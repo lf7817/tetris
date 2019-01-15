@@ -21,8 +21,6 @@ interface AppProps {
   locales: GameLocales;
   matrix: number[][];
   keyboard: GameKeyboard;
-  updateLocales: (locales: GameLocales) => void;
-  updateMatrix: (matrix: number[][]) => void;
   dispatch: Dispatch;
   sound: boolean;
   score: number;
@@ -33,6 +31,8 @@ interface AppProps {
   pause: boolean;
   playing: boolean;
   next: BlockShap;
+  updateLocales: (locales: GameLocales) => void;
+  updateMatrix: (matrix: number[][]) => void;
 }
 
 interface AppState {

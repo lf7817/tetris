@@ -2,7 +2,7 @@
  * @Author: lifan
  * @Date: 2019-01-14 08:55:05
  * @Last Modified by: lifan
- * @Last Modified time: 2019-01-14 11:31:00
+ * @Last Modified time: 2019-01-15 17:08:32
  */
 import Types from '../types';
 import { Action } from '../actions';
@@ -17,7 +17,8 @@ const initState: GameStatus = {
   startLines: 0,
   locales: 'en-US',
   pause: false,
-  playing: false
+  playing: false,
+  focus: true
 };
 
 export default (state = initState, action: Action) =>
@@ -32,6 +33,7 @@ export default (state = initState, action: Action) =>
       case Types.SET_CLEAR_LINES: draft.clearLines = action.payload; break;
       case Types.SET_PAUSE: draft.pause = action.payload; break;
       case Types.SET_PLAYING: draft.playing = action.payload; break;
+      case Types.SET_FOCUS: draft.focus = action.payload; break;
       default: return state;
     }
   });

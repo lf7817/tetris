@@ -2,7 +2,7 @@
  * @Author: lifan
  * @Date: 2019-01-08 14:13:17
  * @Last Modified by: lifan
- * @Last Modified time: 2019-01-11 21:40:23
+ * @Last Modified time: 2019-01-15 17:07:21
  */
 interface Tetris {
   version: string;
@@ -20,6 +20,7 @@ interface GameStatus {
   locales: GameLocales;
   pause: boolean;
   playing: boolean;
+  focus: boolean;
 }
 
 // 键盘

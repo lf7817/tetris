@@ -2,7 +2,7 @@
  * @Author: lifan
  * @Date: 2018-12-12 14:50:48
  * @Last Modified by: lifan
- * @Last Modified time: 2019-01-15 11:03:35
+ * @Last Modified time: 2019-01-15 17:09:43
  */
 import Types from '../types';
 
@@ -120,6 +120,12 @@ export const setNext = () => ({
   type: <Types.SET_NEXT>Types.SET_NEXT
 });
 
+export type SetFocus = ReturnType<typeof setFocus>;
+export const setFocus = (value: boolean) => ({
+  type: <Types.SET_FOCUS>Types.SET_FOCUS,
+  payload: value
+});
+
 export type Action =
   | UpdateLocales
   | UpdateMatrix
@@ -139,4 +145,5 @@ export type Action =
   | SetSpeed
   | SetStartLines
   | SetClearLines
-  | SetNext;
+  | SetNext
+  | SetFocus;

@@ -2,7 +2,7 @@
  * @Author: lifan
  * @Date: 2018-12-13 13:36:59
  * @Last Modified by: lifan
- * @Last Modified time: 2018-12-21 12:51:50
+ * @Last Modified time: 2019-01-15 17:35:55
  */
 
 /**
@@ -42,3 +42,16 @@ export const compareMatrix = (prevMatrix: number[][], matrix: number[][]) => {
 
   return true;
 };
+
+const hiddenProperty = [
+  'hidden', 'webkitHidden', 'mozHidden', 'msHidden'
+].filter(e => e in document);
+
+export const isFocus = () => {
+  if (hiddenProperty.length === 0) {
+    return true;
+  }
+
+  return !(<any>document)[hiddenProperty[0]];
+};
+

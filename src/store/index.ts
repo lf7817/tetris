@@ -6,7 +6,7 @@
  */
 import { createStore, compose, applyMiddleware, Store } from 'redux';
 import createSagaMiddleware from 'redux-saga';
-import { persistReducer, persistStore, PersistConfig } from 'redux-persist';
+import { persistReducer, persistStore, PersistConfig } from 'redux-persist'; // eslint-disable-line
 import storage from 'redux-persist/lib/storage';
 import rootReducer from './reducers';
 import rootSaga from './sagas';
@@ -42,13 +42,13 @@ export default () => {
     )
   );
 
-  const persistor = persistStore(store);
+  // const persistor = persistStore(store);
   // persistor.pause();
 
   sagaMiddleware.run(rootSaga);
 
   return {
     store,
-    persistor
+    // persistor
   };
 };
