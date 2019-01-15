@@ -2,7 +2,7 @@
  * @Author: lifan
  * @Date: 2018-12-09 21:20:51
  * @Last Modified by: lifan
- * @Last Modified time: 2018-12-21 12:34:15
+ * @Last Modified time: 2019-01-15 14:45:56
  */
 @import 'variable';
 
@@ -13,14 +13,14 @@
 
 html {
   font-family: "HanHei SC","PingHei","PingFang SC","STHeitiSC-Light","Helvetica Neue","Helvetica","Arial",sans-serif;
-  font-size: ($font-size-root / ($design-width / $design-dpi)) * 100vw;
+  font-size: ($font-size-root / $design-width) * 100vw;
   // 同时，通过Media Queries 限制根元素最大最小值
   @media screen and (max-width: 320px) {
-    font-size: 64px;
+    font-size: 32px;
   }
 
   @media screen and (min-width: 540px) {
-    font-size: 108px;
+    font-size: 54px;
   }
 }
 
