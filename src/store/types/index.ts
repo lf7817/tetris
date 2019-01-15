@@ -2,7 +2,7 @@
  * @Author: lifan
  * @Date: 2018-12-12 13:31:05
  * @Last Modified by: lifan
- * @Last Modified time: 2019-01-09 20:50:33
+ * @Last Modified time: 2019-01-15 10:48:42
  */
 
 /* eslint-disable no-unused-vars */
@@ -23,7 +23,8 @@ enum Types {
   SET_CLEAR_LINES = 'SET_CLEAR_LINES', // 清除行数
   SET_SCORE = 'SET_SCORE', // 设置分数
   SET_MAX = 'SET_MAX', // 设置最大分数
-  UPDATE_MATRIX = 'UPDATE_MATRIX', // 更新矩阵
+  SET_MATRIX = 'SET_MATRIX', // 更新矩阵
+  SET_NEXT = 'SET_NEXT', // 下一个方块
   SET_PLAYING = 'SET_PLAYING',
   KEY_PAUSE = 'KEY_PAUSE', // 暂停
   KEY_SOUND = 'KEY_SOUND', // 音效

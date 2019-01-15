@@ -2,7 +2,7 @@
  * @Author: lifan
  * @Date: 2018-12-12 14:50:48
  * @Last Modified by: lifan
- * @Last Modified time: 2019-01-11 21:55:07
+ * @Last Modified time: 2019-01-15 11:03:35
  */
 import Types from '../types';
 
@@ -15,7 +15,7 @@ export const updateLocales = (locales: GameLocales) => ({
 
 export type UpdateMatrix = ReturnType<typeof updateMatrix>;
 export const updateMatrix = (matrix: number[][]) => ({
-  type: <Types.UPDATE_MATRIX>Types.UPDATE_MATRIX,
+  type: <Types.SET_MATRIX>Types.SET_MATRIX,
   payload: matrix
 });
 
@@ -115,6 +115,11 @@ export const setPlaying = (value: boolean) => ({
   payload: value
 });
 
+export type SetNext = ReturnType<typeof setNext>;
+export const setNext = () => ({
+  type: <Types.SET_NEXT>Types.SET_NEXT
+});
+
 export type Action =
   | UpdateLocales
   | UpdateMatrix
@@ -133,4 +138,5 @@ export type Action =
   | SetScore
   | SetSpeed
   | SetStartLines
-  | SetClearLines;
+  | SetClearLines
+  | SetNext;

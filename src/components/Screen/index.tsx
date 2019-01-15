@@ -2,7 +2,7 @@
  * @Author: lifan
  * @Date: 2018-12-19 21:05:34
  * @Last Modified by: lifan
- * @Last Modified time: 2019-01-14 22:08:36
+ * @Last Modified time: 2019-01-15 11:09:03
  */
 import React, { Component, Fragment } from 'react';
 import intl from 'react-intl-universal';
@@ -24,6 +24,7 @@ interface ScreenProps {
   playing: boolean;
   pause: boolean;
   sound: boolean;
+  next: BlockShap;
 }
 
 interface ScreenState {
@@ -71,9 +72,9 @@ class Screen extends Component<ScreenProps, ScreenState> {
   }
 
   shouldComponentUpdate(nextProps: ScreenProps, nextState: ScreenState) {
-    const { matrix, score, max, speed, startLines, clearLines, pause, playing, sound } = this.props;
+    const { matrix, score, max, speed, startLines, clearLines, pause, playing, sound, next } = this.props;
     const { w, scoreFlashflag } = this.state;
-    if (nextProps.score !== score || nextProps.matrix !== matrix ||
+    if (nextProps.score !== score || nextProps.matrix !== matrix || nextProps.next !== next ||
       nextProps.max !== max || nextProps.speed !== speed || nextProps.sound !== sound ||
       nextProps.startLines !== startLines || nextProps.clearLines !== clearLines ||
       nextProps.pause !== pause || nextProps.playing !== playing ||
@@ -85,7 +86,7 @@ class Screen extends Component<ScreenProps, ScreenState> {
   }
 
   render() {
-    const { matrix, max, score, startLines, clearLines, pause, playing, speed, sound } = this.props;
+    const { matrix, max, score, startLines, clearLines, pause, playing, speed, sound, next } = this.props;
     const { w, scoreFlashflag } = this.state;
     const pixelWidth = w / matrix[0].length;
 
@@ -119,7 +120,7 @@ class Screen extends Component<ScreenProps, ScreenState> {
                       <Number title={intl.get('speed')} length={1} value={speed} />
                     </Fragment>
                 }
-                <Next shap={'L'} width={pixelWidth * 4} />
+                <Next shap={next} width={pixelWidth * 4} />
                 <Character value={sound ? 'sound_on' : 'sound_off'} className={styles.sound} />
                 <Character value={pause ? 'pause_on' : 'pause_off'} className={styles.pause} />
                 <Time className={styles.time} />

@@ -2,7 +2,7 @@
  * @Author: lifan
  * @Date: 2018-12-21 10:13:15
  * @Last Modified by: lifan
- * @Last Modified time: 2019-01-14 16:13:01
+ * @Last Modified time: 2019-01-15 11:11:37
  */
 import React, { PureComponent } from 'react';
 import { Dispatch } from 'redux';
@@ -32,6 +32,7 @@ interface AppProps {
   clearLines: number;
   pause: boolean;
   playing: boolean;
+  next: BlockShap;
 }
 
 interface AppState {
@@ -107,11 +108,15 @@ class App extends PureComponent<AppProps, AppState> {
     //   });
     //   this.props.updateMatrix(newArr);
     // }, 800);
+
+    // setInterval(() => {
+    //   this.props.dispatch(action.setNext());
+    // }, 1000);
   }
 
   render() {
     const { initLocales } = this.state;
-    const { matrix, keyboard, score, max, speed, startLines, clearLines, pause, playing, sound } = this.props;
+    const { matrix, keyboard, score, max, speed, startLines, clearLines, pause, playing, sound, next } = this.props;
 
     console.log('root render');
 
@@ -131,6 +136,7 @@ class App extends PureComponent<AppProps, AppState> {
           pause={pause}
           playing={playing}
           sound={sound}
+          next={next}
         />
         <Keyboard
           keyboard={keyboard}
@@ -153,6 +159,7 @@ const mapState = (state: State) => ({
   clearLines: state.status.clearLines,
   pause: state.status.pause,
   playing: state.status.playing,
+  next: state.block.next
 });
 
 const mapDispatch = (dispatch: Dispatch) => ({
