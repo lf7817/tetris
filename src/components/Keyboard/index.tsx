@@ -2,7 +2,7 @@
  * @Author: lifan
  * @Date: 2018-12-21 22:32:13
  * @Last Modified by: lifan
- * @Last Modified time: 2019-01-14 10:21:49
+ * @Last Modified time: 2019-01-16 14:06:31
  */
 import React, { Component } from 'react';
 import MyButton from '../MyButton/index';
@@ -49,8 +49,6 @@ class Keyboard extends Component<KeyboardProps> {
     this.setState({
       isMobile: isMobile()
     });
-
-    console.log(isMobile());
   }
 
   keyboardHandler(key: keyof GameKeyboard, value: boolean) {
@@ -143,7 +141,6 @@ class Keyboard extends Component<KeyboardProps> {
   render() {
     const { keyboard } = this.props;
 
-    console.log('keyboard render');
     return (
       <div className={styles.keyboard} ref={this.$ref_keyboard}>
         <div className={styles.content}>

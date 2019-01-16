@@ -2,7 +2,7 @@
  * @Author: lifan
  * @Date: 2018-12-21 10:13:15
  * @Last Modified by: lifan
- * @Last Modified time: 2019-01-15 11:11:37
+ * @Last Modified time: 2019-01-16 14:07:14
  */
 import React, { PureComponent } from 'react';
 import { Dispatch } from 'redux';
@@ -12,10 +12,11 @@ import ReactLoading from 'react-loading';
 import intl from 'react-intl-universal';
 import { LOCALES } from '../locales';
 import * as action from '../store/actions';
-import { getUrlParam } from '../utils';
+import { getUrlParam, isFocus, visibilityChangeEvent } from '../utils';
 import Screen from '../components/Screen';
 import Keyboard from '../components/Keyboard';
 import styles from './style.module.scss';
+
 
 interface AppProps {
   locales: GameLocales;
@@ -31,8 +32,6 @@ interface AppProps {
   pause: boolean;
   playing: boolean;
   next: BlockShap;
-  updateLocales: (locales: GameLocales) => void;
-  updateMatrix: (matrix: number[][]) => void;
 }
 
 interface AppState {
@@ -69,7 +68,7 @@ class App extends PureComponent<AppProps, AppState> {
     const lang = getUrlParam('lang') as GameLocales;
 
     if (lang && LOCALES.hasOwnProperty(lang)) {
-      this.props.updateLocales(lang);
+      this.props.dispatch(action.updateLocales(lang));
       this.loadLocales(lang);
     } else {
       this.loadLocales(locales);
@@ -77,7 +76,6 @@ class App extends PureComponent<AppProps, AppState> {
   }
 
   // private switchLocales = (locales: GameLocales) => {
-  //   this.props.updateLocales(locales);
   //   setTimeout(() => {
   //     window.location.href = `${window.location.origin}${window.location.pathname}?lang=${locales}`;
   //   }, 20);
@@ -100,13 +98,20 @@ class App extends PureComponent<AppProps, AppState> {
     a && this.props.dispatch(a(value));
   }
 
+  visibilityChangeHandler = () => {
+    visibilityChangeEvent && window.addEventListener(visibilityChangeEvent, () => {
+      this.props.dispatch(action.setFocus(isFocus()));
+    });
+  }
+
   componentDidMount() {
     this.initLocales(this.props.locales);
+    this.visibilityChangeHandler();
     // setInterval(() => {
     //   const newArr = this.props.matrix.map(item => {
     //     return item.map(() => Math.round(Math.random()));
     //   });
-    //   this.props.updateMatrix(newArr);
+    //   this.props.dispatch(action.updateMatrix(newArr));
     // }, 800);
 
     // setInterval(() => {
@@ -117,8 +122,6 @@ class App extends PureComponent<AppProps, AppState> {
   render() {
     const { initLocales } = this.state;
     const { matrix, keyboard, score, max, speed, startLines, clearLines, pause, playing, sound, next } = this.props;
-
-    console.log('root render');
 
     if (!initLocales) {
       return <ReactLoading type={'spinningBubbles'} className={styles.loading} />;
@@ -159,12 +162,11 @@ const mapState = (state: State) => ({
   clearLines: state.status.clearLines,
   pause: state.status.pause,
   playing: state.status.playing,
-  next: state.block.next
+  next: state.block.next,
+  focus: state.status.focus
 });
 
 const mapDispatch = (dispatch: Dispatch) => ({
-  updateLocales: (locales: GameLocales) => dispatch(action.updateLocales(locales)),
-  updateMatrix: (matrix: number[][]) => dispatch(action.updateMatrix(matrix)),
   dispatch
 });
 

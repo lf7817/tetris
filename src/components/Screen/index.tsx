@@ -2,7 +2,7 @@
  * @Author: lifan
  * @Date: 2018-12-19 21:05:34
  * @Last Modified by: lifan
- * @Last Modified time: 2019-01-15 11:09:03
+ * @Last Modified time: 2019-01-16 14:07:09
  */
 import React, { Component, Fragment } from 'react';
 import intl from 'react-intl-universal';
@@ -89,8 +89,6 @@ class Screen extends Component<ScreenProps, ScreenState> {
     const { matrix, max, score, startLines, clearLines, pause, playing, speed, sound, next } = this.props;
     const { w, scoreFlashflag } = this.state;
     const pixelWidth = w / matrix[0].length;
-
-    console.log('screen render');
 
     return (
       <div className={styles.wrapper}>

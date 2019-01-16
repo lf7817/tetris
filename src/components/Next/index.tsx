@@ -2,7 +2,7 @@
  * @Author: lifan
  * @Date: 2019-01-14 22:03:47
  * @Last Modified by: lifan
- * @Last Modified time: 2019-01-15 11:12:04
+ * @Last Modified time: 2019-01-16 14:06:50
  */
 import React, { Component } from 'react';
 import intl from 'react-intl-universal';
@@ -73,8 +73,6 @@ class Next extends Component<NextProps, NextState> {
   render() {
     const { width } = this.props;
     const { matrix } = this.state;
-
-    console.log('next render');
 
     return (
       <div className={styles.next}>

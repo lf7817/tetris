@@ -2,7 +2,7 @@
  * @Author: lifan
  * @Date: 2018-12-21 10:29:52
  * @Last Modified by: lifan
- * @Last Modified time: 2018-12-21 14:08:30
+ * @Last Modified time: 2019-01-16 14:06:40
  */
 import React, { Component } from 'react';
 import Pixel from './Pixel';
@@ -31,8 +31,6 @@ class Matrix extends Component<MatrixProps> {
     const { matrix, width, hideBlankPixel } = this.props;
     const pixelWidth = width / matrix[0].length || 10;
     const height = matrix.length * pixelWidth;
-
-    console.log('matrix rerender');
 
     return (
       <svg width={width} height={height}>

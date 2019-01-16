@@ -47,6 +47,9 @@ const hiddenProperty = [
   'hidden', 'webkitHidden', 'mozHidden', 'msHidden'
 ].filter(e => e in document);
 
+/**
+ * 是否聚焦，不支持的话默认聚焦
+ */
 export const isFocus = () => {
   if (hiddenProperty.length === 0) {
     return true;
@@ -55,3 +58,12 @@ export const isFocus = () => {
   return !(<any>document)[hiddenProperty[0]];
 };
 
+/**
+ * 聚焦事件
+ */
+export const visibilityChangeEvent: string = (() => {
+  if (hiddenProperty.length === 0) {
+    return '';
+  }
+  return hiddenProperty[0].replace(/hidden/i, 'visibilitychange'); // 如果属性有前缀, 相应的事件也有前缀
+})();

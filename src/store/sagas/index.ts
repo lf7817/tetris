@@ -1,4 +1,11 @@
-import { call, put, takeEvery, fork, delay } from 'redux-saga/effects';
+/*
+ * @Author: lifan
+ * @Date: 2019-01-16 14:04:19
+ * @Last Modified by:   lifan
+ * @Last Modified time: 2019-01-16 14:04:19
+ */
+/* eslint-disable */
+import { call, put, takeEvery, fork, delay, take, select } from 'redux-saga/effects';
 import Types from '../types';
 import { Action } from '../actions';
 
@@ -54,7 +61,15 @@ export function* demo() {
 
 // single entry point to start all Sagas at once
 export default function* rootSaga() {
-  yield fork(fetchData);
-  yield fork(watchIncrementAsync);
-  yield fork(demo);
+  // yield fork(fetchData);
+  // yield fork(watchIncrementAsync);
+  // yield fork(demo);
+
+  while (true) {
+    const action = yield take('*');
+    const state = yield select();
+
+    console.log('action', action);
+    console.log('state after', state);
+  }
 }
