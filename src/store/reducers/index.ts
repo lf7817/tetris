@@ -1,19 +1,19 @@
 import { combineReducers } from 'redux';
-import matrix from './matrix';
+import block, { IBlock } from './block';
 import keybord from './keybord';
+import matrix from './matrix';
 import status from './status';
-import block, { Block } from './block';
 
-export interface State {
+export interface IState {
   matrix: number[][];
   keybord: GameKeyboard;
   status: GameStatus;
-  block: Block;
+  block: IBlock;
 }
 
-export default combineReducers<State>({
+export default combineReducers<IState>({
   matrix,
   keybord,
   status,
-  block
+  block,
 });

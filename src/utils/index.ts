@@ -44,8 +44,8 @@ export const compareMatrix = (prevMatrix: number[][], matrix: number[][]) => {
 };
 
 const hiddenProperty = [
-  'hidden', 'webkitHidden', 'mozHidden', 'msHidden'
-].filter(e => e in document);
+  'hidden', 'webkitHidden', 'mozHidden', 'msHidden',
+].filter((e) => e in document);
 
 /**
  * 是否聚焦，不支持的话默认聚焦
@@ -55,7 +55,7 @@ export const isFocus = () => {
     return true;
   }
 
-  return !(<any>document)[hiddenProperty[0]];
+  return !(document as any)[hiddenProperty[0]];
 };
 
 /**

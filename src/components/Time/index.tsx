@@ -4,31 +4,31 @@
  * @Last Modified by: lifan
  * @Last Modified time: 2019-01-11 13:32:23
  */
-import React, { Component } from 'react';
 import cn from 'classnames';
+import React, { Component } from 'react';
 import Character from '../Character';
 import styles from './style.module.scss';
 
-interface TimeProps {
+interface ITimeProps {
   className?: string;
 }
 
-interface TimeState {
+interface ITimeState {
   h: number;
   m: number;
 }
 
-class Time extends Component<TimeProps, TimeState> {
-  static defaultProps = {
-    className: ''
+class Time extends Component<ITimeProps, ITimeState> {
+  public static defaultProps = {
+    className: '',
   };
 
-  state = {
+  public state = {
     h: 0,
-    m: 0
-  }
+    m: 0,
+  };
 
-  shouldComponentUpdate(nextProps: TimeProps, nextState: TimeState) {
+  public shouldComponentUpdate(nextProps: ITimeProps, nextState: ITimeState) {
     if (nextProps.className !== this.props.className || nextState.h !== this.state.h ||
       nextState.m !== this.state.m) {
       return true;
@@ -37,20 +37,20 @@ class Time extends Component<TimeProps, TimeState> {
     return false;
   }
 
-  calcTime = () => {
+  public calcTime = () => {
     const date = new Date();
     this.setState({
       h: date.getHours(),
-      m: date.getMinutes()
+      m: date.getMinutes(),
     });
   }
 
-  componentDidMount() {
+  public componentDidMount() {
     this.calcTime();
     setInterval(this.calcTime, 10000);
   }
 
-  render() {
+  public render() {
     const { className } = this.props;
     const { h, m } = this.state;
     const h1 = Math.floor(h / 10).toString() as CharacterValue;

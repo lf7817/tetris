@@ -6,10 +6,9 @@
  */
 import React, { Component } from 'react';
 import intl from 'react-intl-universal';
-import Matrix from '../Matrix';
 import { BLOCK_SHAPE } from '../../constants/block';
+import Matrix from '../Matrix';
 import styles from './style.module.scss';
-
 
 const xy = { // 方块在下一个中的坐标
   I: [1, 0],
@@ -21,29 +20,22 @@ const xy = { // 方块在下一个中的坐标
   T: [0, 0],
 };
 
-
-interface NextProps {
+interface INextProps {
   shap: BlockShap;
   width: number;
 }
 
-interface NextState {
+interface INextState {
   matrix: number[][];
 }
 
-class Next extends Component<NextProps, NextState> {
-  state = {
-    matrix: [
-      [0, 0, 0, 0],
-      [0, 0, 0, 0]
-    ]
-  }
+class Next extends Component<INextProps, INextState> {
 
-  static getDerivedStateFromProps(nextProps: NextProps, prevState: NextState) {
+  public static getDerivedStateFromProps(nextProps: INextProps, prevState: INextState) {
     const shap = BLOCK_SHAPE[nextProps.shap];
     const empty = [
       [0, 0, 0, 0],
-      [0, 0, 0, 0]
+      [0, 0, 0, 0],
     ];
 
     for (let i = 0; i < shap.length; i++) {
@@ -57,11 +49,17 @@ class Next extends Component<NextProps, NextState> {
     }
 
     return {
-      matrix: empty
+      matrix: empty,
     };
   }
+  public state = {
+    matrix: [
+      [0, 0, 0, 0],
+      [0, 0, 0, 0],
+    ],
+  };
 
-  shouldComponentUpdate(nextProps: NextProps, nextState: NextState) {
+  public shouldComponentUpdate(nextProps: INextProps, nextState: INextState) {
     if (this.props.shap !== nextProps.shap || this.props.width !== nextProps.width ||
       this.state.matrix !== nextState.matrix) {
       return true;
@@ -70,7 +68,7 @@ class Next extends Component<NextProps, NextState> {
     return false;
   }
 
-  render() {
+  public render() {
     const { width } = this.props;
     const { matrix } = this.state;
 

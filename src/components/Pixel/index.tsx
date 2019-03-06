@@ -8,7 +8,7 @@ import React, { Component, Fragment } from 'react';
 import MediaQuery from 'react-responsive';
 import style from './style.module.scss';
 
-interface PixelProps {
+interface IPixelProps {
   x: number;
   y: number;
   width: number;
@@ -16,14 +16,14 @@ interface PixelProps {
   hide?: boolean;
 }
 
-class Pixel extends Component<PixelProps> {
+class Pixel extends Component<IPixelProps> {
 
-  static defaultProps = {
+  public static defaultProps = {
     highlight: false,
     hide: false,
   };
 
-  shouldComponentUpdate(nextProps: PixelProps) {
+  public shouldComponentUpdate(nextProps: IPixelProps) {
     const { highlight, x, y, width, hide } = this.props;
     if (nextProps.highlight !== highlight || nextProps.x !== x ||
       nextProps.y !== y || nextProps.width !== width || nextProps.hide !== hide) {
@@ -33,7 +33,7 @@ class Pixel extends Component<PixelProps> {
     return false;
   }
 
-  render() {
+  public render() {
     const { highlight, x, y, width, hide } = this.props;
     const fillColor = highlight ? style.fillHighlight : style.fillDefault;
     const strokeColor = highlight ? style.strokeHighlight : style.strokeDefault;

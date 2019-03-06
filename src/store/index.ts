@@ -4,13 +4,12 @@
  * @Last Modified by: lifan
  * @Last Modified time: 2018-12-20 15:34:50
  */
-import { createStore, compose, applyMiddleware, Store } from 'redux';
-import createSagaMiddleware from 'redux-saga';
-import { persistReducer, persistStore, PersistConfig } from 'redux-persist'; // eslint-disable-line
+import { applyMiddleware, compose, createStore, Store } from 'redux';
+import { PersistConfig, persistReducer, persistStore } from 'redux-persist'; // eslint-disable-line
 import storage from 'redux-persist/lib/storage';
+import createSagaMiddleware from 'redux-saga';
 import rootReducer from './reducers';
 import rootSaga from './sagas';
-
 
 const composeEnhancers = (window as any).__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 // const migrations = {
@@ -33,13 +32,13 @@ const persistedReducer = persistReducer(persistConfig, rootReducer);
 const sagaMiddleware  = createSagaMiddleware();
 
 export default () => {
-  let store: Store = createStore(
+  const store: Store = createStore(
     persistedReducer,
     composeEnhancers(
       applyMiddleware(
         sagaMiddleware,
-      )
-    )
+      ),
+    ),
   );
 
   // const persistor = persistStore(store);

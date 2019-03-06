@@ -6,15 +6,15 @@
  */
 import React, { Component, Fragment } from 'react';
 import intl from 'react-intl-universal';
-import Matrix from '../Matrix';
-import Decorate from '../Decorate';
 import Character from '../Character';
-import Time from '../Time';
-import Number from '../Number';
+import Decorate from '../Decorate';
+import Matrix from '../Matrix';
 import Next from '../Next';
+import Number from '../Number';
+import Time from '../Time';
 import styles from './style.module.scss';
 
-interface ScreenProps {
+interface IScreenProps {
   matrix: number[][];
   score: number;
   max: number;
@@ -27,27 +27,27 @@ interface ScreenProps {
   next: BlockShap;
 }
 
-interface ScreenState {
+interface IScreenState {
   w: number;
   scoreFlashflag: boolean;
 }
 
-class Screen extends Component<ScreenProps, ScreenState> {
-  private readonly $ref_Panl: React.RefObject<HTMLDivElement> = React.createRef();
+class Screen extends Component<IScreenProps, IScreenState> {
   public state = {
     w: 0,
-    scoreFlashflag: false
-  }
+    scoreFlashflag: false,
+  };
+  private readonly $refPanl: React.RefObject<HTMLDivElement> = React.createRef();
 
-  calcWidth = () => {
-    if (this.$ref_Panl.current) {
+  public calcWidth = () => {
+    if (this.$refPanl.current) {
       this.setState({
-        w: this.$ref_Panl.current.clientWidth
+        w: this.$refPanl.current.clientWidth,
       });
     }
   }
 
-  scoreFlash() {
+  public scoreFlash() {
     setInterval(() => {
       if (this.props.playing) {
         return;
@@ -55,23 +55,23 @@ class Screen extends Component<ScreenProps, ScreenState> {
 
       if (this.props.score === 0) {
         this.setState({
-          scoreFlashflag: false
+          scoreFlashflag: false,
         });
       } else {
         this.setState({
-          scoreFlashflag: !this.state.scoreFlashflag
+          scoreFlashflag: !this.state.scoreFlashflag,
         });
       }
     }, 3000);
   }
 
-  componentDidMount() {
+  public componentDidMount() {
     this.calcWidth();
     this.scoreFlash();
     window.addEventListener('resize', this.calcWidth);
   }
 
-  shouldComponentUpdate(nextProps: ScreenProps, nextState: ScreenState) {
+  public shouldComponentUpdate(nextProps: IScreenProps, nextState: IScreenState) {
     const { matrix, score, max, speed, startLines, clearLines, pause, playing, sound, next } = this.props;
     const { w, scoreFlashflag } = this.state;
     if (nextProps.score !== score || nextProps.matrix !== matrix || nextProps.next !== next ||
@@ -85,7 +85,7 @@ class Screen extends Component<ScreenProps, ScreenState> {
     return false;
   }
 
-  render() {
+  public render() {
     const { matrix, max, score, startLines, clearLines, pause, playing, speed, sound, next } = this.props;
     const { w, scoreFlashflag } = this.state;
     const pixelWidth = w / matrix[0].length;
@@ -97,7 +97,7 @@ class Screen extends Component<ScreenProps, ScreenState> {
           <div className={styles.screenWrapper}>
             <div className={styles.screen}>
               <div className={styles.mainPanel}>
-                <div ref={this.$ref_Panl}>
+                <div ref={this.$refPanl}>
                   <Matrix matrix={matrix} width={w} />
                 </div>
               </div>
@@ -112,8 +112,7 @@ class Screen extends Component<ScreenProps, ScreenState> {
                     <Fragment>
                       {
                         !scoreFlashflag ? <Number title={intl.get('max')} length={6} value={max} /> :
-                          <Number title={intl.get('lastRound')} length={6} value={score} />
-                      }
+                          <Number title={intl.get('lastRound')} length={6} value={score} />}
                       <Number title={intl.get('startLines')} length={6} value={startLines} />
                       <Number title={intl.get('speed')} length={1} value={speed} />
                     </Fragment>

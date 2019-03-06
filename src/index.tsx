@@ -2,18 +2,18 @@
  * @Author: lifan
  * @Date: 2018-12-09 21:11:01
  * @Last Modified by: lifan
- * @Last Modified time: 2019-01-15 17:05:14
+ * @Last Modified time: 2019-03-06 22:17:36
  */
 import '@babel/polyfill';
+import 'normalize.css';
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import { PersistGate } from 'redux-persist/integration/react'; // eslint-disable-line
-import App from './containers';
-import * as serviceWorker from './utils/serviceWorker';
-import configureStore from './store';
-import 'normalize.css';
 import './assets/scss/index.scss';
+import App from './containers';
+import configureStore from './store';
+import * as serviceWorker from './utils/serviceWorker';
 
 const configStore = configureStore();
 
@@ -23,7 +23,7 @@ ReactDOM.render(
     <App />
     {/* </PersistGate> */}
   </Provider>,
-  document.getElementById('root')
+  document.getElementById('root'),
 );
 
 // If you want your app to work offline and load faster, you can change
@@ -31,15 +31,15 @@ ReactDOM.render(
 // Learn more about service workers: http://bit.ly/CRA-PWA
 serviceWorker.register({
   onUpdate: (registration: ServiceWorkerRegistration) => {
-    if (confirm('监测到更新，点击更新')) {
+    if (window.confirm('监测到更新，点击更新') && registration.waiting) {
       try {
-        registration.waiting && registration.waiting.postMessage('skipWaiting');
+        registration.waiting.postMessage('skipWaiting');
       } catch (e) {
         window.location.reload();
       }
     }
   },
   onSuccess: () => {
-    console.log('success');
-  }
+    // console.log('success');
+  },
 });

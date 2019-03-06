@@ -7,18 +7,18 @@
 import React, { Component } from 'react';
 import Pixel from './Pixel';
 
-interface MatrixProps {
+interface IMatrixProps {
   matrix: number[][];
   width: number;
   hideBlankPixel?: boolean;
 }
 
-class Matrix extends Component<MatrixProps> {
-  static defaultProps = {
-    hideBlankPixel: false
-  }
+class Matrix extends Component<IMatrixProps> {
+  public static defaultProps = {
+    hideBlankPixel: false,
+  };
 
-  shouldComponentUpdate(nextProps: MatrixProps) {
+  public shouldComponentUpdate(nextProps: IMatrixProps) {
     const { matrix, width, hideBlankPixel } = this.props;
     if (nextProps.matrix !== matrix || nextProps.width !== width ||
         nextProps.hideBlankPixel !== hideBlankPixel) {
@@ -27,7 +27,7 @@ class Matrix extends Component<MatrixProps> {
     return false;
   }
 
-  render() {
+  public render() {
     const { matrix, width, hideBlankPixel } = this.props;
     const pixelWidth = width / matrix[0].length || 10;
     const height = matrix.length * pixelWidth;

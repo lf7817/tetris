@@ -4,9 +4,9 @@
  * @Last Modified by: lifan
  * @Last Modified time: 2019-01-15 17:08:32
  */
-import Types from '../types';
-import { Action } from '../actions';
 import produce from 'immer';
+import { Action } from '../actions';
+import Types from '../types';
 
 const initState: GameStatus = {
   max: 0,
@@ -18,11 +18,11 @@ const initState: GameStatus = {
   locales: 'en-US',
   pause: false,
   playing: false,
-  focus: true
+  focus: true,
 };
 
 export default (state = initState, action: Action) =>
-  produce(state, draft => {
+  produce(state, (draft) => {
     switch (action.type) {
       case Types.SET_MAX: draft.max = action.payload; break;
       case Types.SET_SCORE: draft.score = action.payload; break;

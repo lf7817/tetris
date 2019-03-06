@@ -4,8 +4,8 @@
  * @Last Modified by: lifan
  * @Last Modified time: 2019-01-10 13:26:27
  */
-import { Action } from '../actions';
 import produce from 'immer';
+import { Action } from '../actions';
 import types from '../types';
 
 const initState = {
@@ -16,11 +16,11 @@ const initState = {
   rotate: false,
   left: false,
   right: false,
-  down: false
+  down: false,
 };
 
 export default (state: GameKeyboard = initState, action: Action) =>
-  produce(state, draft => {
+  produce(state, (draft) => {
     switch (action.type) {
       case types.KEY_DOWN: draft.down = action.payload; break;
       case types.KEY_LEFT: draft.left = action.payload; break;

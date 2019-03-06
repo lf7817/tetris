@@ -5,11 +5,11 @@
  * @Last Modified time: 2019-01-16 14:06:45
  */
 /* eslint-disable no-undefined */
-import React, { Component } from 'react';
 import cn from 'classnames';
+import React, { Component } from 'react';
 import styles from './style.module.scss';
 
-interface MyButtonProps {
+interface IMyButtonProps {
   title: string;
   classNames: string;
   textDirection?: 'column' | 'row';
@@ -19,14 +19,14 @@ interface MyButtonProps {
   touchEndtHandler: ((event: GameEvent) => void) | undefined;
 }
 
-class MyButton extends Component<MyButtonProps> {
-  static defaultProps = {
+class MyButton extends Component<IMyButtonProps> {
+  public static defaultProps = {
     textDirection: 'column',
     active: false,
     isMobile: false,
   };
 
-  shouldComponentUpdate(nextProps: MyButtonProps) {
+  public shouldComponentUpdate(nextProps: IMyButtonProps) {
     if (nextProps.active !== this.props.active || nextProps.isMobile !== this.props.isMobile) {
       return true;
     }
@@ -34,7 +34,7 @@ class MyButton extends Component<MyButtonProps> {
     return false;
   }
 
-  render() {
+  public render() {
     const { classNames, title, textDirection, active, touchStartHandler, touchEndtHandler, isMobile } = this.props;
 
     return (
@@ -54,7 +54,8 @@ class MyButton extends Component<MyButtonProps> {
         }
         <span
           className={styles.title}
-          style={{ textAlign: textDirection === 'row' ? 'left' : 'center' }}>
+          style={{ textAlign: textDirection === 'row' ? 'left' : 'center' }}
+        >
           {title}
         </span>
       </div>

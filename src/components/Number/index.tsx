@@ -8,37 +8,37 @@ import React, { Component } from 'react';
 import Character from '../Character';
 import styles from './style.module.scss';
 
-interface NumberProps {
+interface INumberProps {
   className?: string;
   value: number;
   length: number;
   title: string;
 }
 
-interface NumberState {
+interface INumberState {
   list: CharacterValue[];
 }
 
-class Number extends Component<NumberProps, NumberState> {
-  static defaultProps = {
-    className: ''
+class Number extends Component<INumberProps, INumberState> {
+  public static defaultProps = {
+    className: '',
   };
 
-  state = {
-    list: []
-  }
-
-  static getDerivedStateFromProps(nextProps: NumberProps, prevState: NumberState) {
+  public static getDerivedStateFromProps(nextProps: INumberProps, prevState: INumberState) {
     const { length, value } = nextProps;
     const data = value.toString().split('');
     const nullData = new Array(length - data.length).fill('');
 
     return {
-      list: nullData.concat(data)
+      list: nullData.concat(data),
     };
   }
 
-  shouldComponentUpdate(nextProps: NumberProps) {
+  public state = {
+    list: [],
+  };
+
+  public shouldComponentUpdate(nextProps: INumberProps) {
     const { className, title, value, length } = this.props;
     if (nextProps.className !== className || nextProps.length !== length ||
       nextProps.title !== title || nextProps.value !== value) {
@@ -48,7 +48,7 @@ class Number extends Component<NumberProps, NumberState> {
     return false;
   }
 
-  render() {
+  public render() {
     const { title } = this.props;
     const { list } = this.state;
 

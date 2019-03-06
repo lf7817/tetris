@@ -2,23 +2,22 @@
  * @Author: lifan
  * @Date: 2018-12-21 10:13:15
  * @Last Modified by: lifan
- * @Last Modified time: 2019-01-16 14:07:14
+ * @Last Modified time: 2019-03-06 22:16:26
  */
 import React, { PureComponent } from 'react';
-import { Dispatch } from 'redux';
-import { State } from '../store/reducers';
-import { connect } from 'react-redux';
-import ReactLoading from 'react-loading';
 import intl from 'react-intl-universal';
+import ReactLoading from 'react-loading';
+import { connect } from 'react-redux';
+import { Dispatch } from 'redux';
+import Keyboard from '../components/Keyboard';
+import Screen from '../components/Screen';
 import { LOCALES } from '../locales';
 import * as action from '../store/actions';
+import { IState } from '../store/reducers';
 import { getUrlParam, isFocus, visibilityChangeEvent } from '../utils';
-import Screen from '../components/Screen';
-import Keyboard from '../components/Keyboard';
 import styles from './style.module.scss';
 
-
-interface AppProps {
+interface IAppProps {
   locales: GameLocales;
   matrix: number[][];
   keyboard: GameKeyboard;
@@ -34,46 +33,14 @@ interface AppProps {
   next: BlockShap;
 }
 
-interface AppState {
+interface IAppState {
   initLocales: boolean;
 }
 
-class App extends PureComponent<AppProps, AppState> {
+class App extends PureComponent<IAppProps, IAppState> {
   public state = {
-    initLocales: false
+    initLocales: false,
   };
-
-  private async loadLocales(str: GameLocales) {
-    try {
-      await intl.init({
-        currentLocale: str,
-        locales: LOCALES,
-      });
-    } finally {
-      if (process.env.NODE_ENV === 'development') {
-        this.setState({
-          initLocales: true
-        });
-      } else {
-        setTimeout(() => {
-          this.setState({
-            initLocales: true
-          });
-        }, 2000);
-      }
-    }
-  }
-
-  private initLocales(locales: GameLocales) {
-    const lang = getUrlParam('lang') as GameLocales;
-
-    if (lang && LOCALES.hasOwnProperty(lang)) {
-      this.props.dispatch(action.updateLocales(lang));
-      this.loadLocales(lang);
-    } else {
-      this.loadLocales(locales);
-    }
-  }
 
   // private switchLocales = (locales: GameLocales) => {
   //   setTimeout(() => {
@@ -81,7 +48,7 @@ class App extends PureComponent<AppProps, AppState> {
   //   }, 20);
   // }
 
-  keyboardHandler = (key: keyof GameKeyboard, value: boolean) => {
+  public keyboardHandler = (key: keyof GameKeyboard, value: boolean) => {
     let a = null;
 
     switch (key) {
@@ -95,16 +62,20 @@ class App extends PureComponent<AppProps, AppState> {
       case 'pause': a = action.keyPause; break;
     }
 
-    a && this.props.dispatch(a(value));
+    if (a) {
+      this.props.dispatch(a(value));
+    }
   }
 
-  visibilityChangeHandler = () => {
-    visibilityChangeEvent && window.addEventListener(visibilityChangeEvent, () => {
-      this.props.dispatch(action.setFocus(isFocus()));
-    });
+  public visibilityChangeHandler = () => {
+    if (visibilityChangeEvent) {
+      window.addEventListener(visibilityChangeEvent, () => {
+        this.props.dispatch(action.setFocus(isFocus()));
+      });
+    }
   }
 
-  componentDidMount() {
+  public componentDidMount() {
     this.initLocales(this.props.locales);
     this.visibilityChangeHandler();
     // setInterval(() => {
@@ -119,7 +90,7 @@ class App extends PureComponent<AppProps, AppState> {
     // }, 1000);
   }
 
-  render() {
+  public render() {
     const { initLocales } = this.state;
     const { matrix, keyboard, score, max, speed, startLines, clearLines, pause, playing, sound, next } = this.props;
 
@@ -148,9 +119,41 @@ class App extends PureComponent<AppProps, AppState> {
       </div>
     );
   }
+
+  private async loadLocales(str: GameLocales) {
+    try {
+      await intl.init({
+        currentLocale: str,
+        locales: LOCALES,
+      });
+    } finally {
+      if (process.env.NODE_ENV === 'development') {
+        this.setState({
+          initLocales: true,
+        });
+      } else {
+        setTimeout(() => {
+          this.setState({
+            initLocales: true,
+          });
+        }, 2000);
+      }
+    }
+  }
+
+  private initLocales(locales: GameLocales) {
+    const lang = getUrlParam('lang') as GameLocales;
+
+    if (lang && LOCALES.hasOwnProperty(lang)) {
+      this.props.dispatch(action.updateLocales(lang));
+      this.loadLocales(lang);
+    } else {
+      this.loadLocales(locales);
+    }
+  }
 }
 
-const mapState = (state: State) => ({
+const mapState = (state: IState) => ({
   locales: state.status.locales,
   matrix: state.matrix,
   keyboard: state.keybord,
@@ -163,14 +166,14 @@ const mapState = (state: State) => ({
   pause: state.status.pause,
   playing: state.status.playing,
   next: state.block.next,
-  focus: state.status.focus
+  focus: state.status.focus,
 });
 
 const mapDispatch = (dispatch: Dispatch) => ({
-  dispatch
+  dispatch,
 });
 
 export default connect(
   mapState,
-  mapDispatch
+  mapDispatch,
 )(App);

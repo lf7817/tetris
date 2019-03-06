@@ -4,21 +4,21 @@
  * @Last Modified by: lifan
  * @Last Modified time: 2019-01-15 11:04:35
  */
-import { Action } from '../actions';
 import produce from 'immer';
-import types from '../types';
 import { getRandomBlockShap } from '../../utils/block';
+import { Action } from '../actions';
+import types from '../types';
 
-export interface Block {
+export interface IBlock {
   next: BlockShap;
 }
 
 const initState = {
-  next: getRandomBlockShap()
+  next: getRandomBlockShap(),
 };
 
-export default (state: Block = initState, action: Action) =>
-  produce(state, draft => {
+export default (state: IBlock = initState, action: Action) =>
+  produce(state, (draft) => {
     switch (action.type) {
       case types.SET_NEXT: draft.next = getRandomBlockShap(); break;
       default: break;

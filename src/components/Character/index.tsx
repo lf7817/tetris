@@ -4,22 +4,22 @@
  * @Last Modified by: lifan
  * @Last Modified time: 2019-01-11 12:45:48
  */
-import React, { Component } from 'react';
 import cn from 'classnames';
+import React, { Component } from 'react';
 import styles from './style.module.scss';
 
-interface CharacterProps {
+interface ICharacterProps {
   value?: CharacterValue;
   className?: string;
 }
 
-class Character extends Component<CharacterProps> {
-  static defaultProps = {
+class Character extends Component<ICharacterProps> {
+  public static defaultProps = {
     value: '',
     className: '',
-  }
+  };
 
-  shouldComponentUpdate(nextProp: CharacterProps) {
+  public shouldComponentUpdate(nextProp: ICharacterProps) {
     const { value, className } = this.props;
 
     if (nextProp.value !== value || nextProp.className !== className) {
@@ -29,7 +29,7 @@ class Character extends Component<CharacterProps> {
     return false;
   }
 
-  render() {
+  public render() {
     const { value, className } = this.props;
     return (
       <span className={cn(styles.character, className, styles[`character_${value}`])} />

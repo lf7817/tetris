@@ -6,38 +6,34 @@
  */
 import React, { Component } from 'react';
 import intl from 'react-intl-universal';
-import Matrix from '../Matrix';
 import { BLOCK_DECORATE, BLOCK_DECORATE_REVERSE } from '../../constants/block';
+import Matrix from '../Matrix';
 import styles from './style.module.scss';
 
-interface DecorateProps {
-
-}
-
-interface DecorateState {
+interface IDecorateState {
   w: number;
 }
 
-export default class Decorate extends Component<DecorateProps, DecorateState> {
-  private readonly $ref_Left: React.RefObject<HTMLDivElement> = React.createRef();
+export default class Decorate extends Component<any, IDecorateState> {
   public state = {
     w: 0,
-  }
+  };
+  private readonly $refLeft: React.RefObject<HTMLDivElement> = React.createRef();
 
-  calcWidth = () => {
-    if (this.$ref_Left.current) {
+  public calcWidth = () => {
+    if (this.$refLeft.current) {
       this.setState({
-        w: this.$ref_Left.current.clientWidth
+        w: this.$refLeft.current.clientWidth,
       });
     }
   }
 
-  componentDidMount() {
+  public componentDidMount() {
     this.calcWidth();
     window.addEventListener('resize', this.calcWidth);
   }
 
-  shouldComponentUpdate(nextProps: DecorateProps, nextState: DecorateState) {
+  public shouldComponentUpdate(nextProps: any, nextState: IDecorateState) {
     if (nextState.w !== this.state.w) {
       return true;
     }
@@ -45,7 +41,7 @@ export default class Decorate extends Component<DecorateProps, DecorateState> {
     return false;
   }
 
-  render() {
+  public render() {
     const { w } = this.state;
     return (
       <div className={styles.decorate}>
@@ -54,26 +50,26 @@ export default class Decorate extends Component<DecorateProps, DecorateState> {
             intl.get('gameName')
           }
         </h1>
-        <div className={styles.left} ref={this.$ref_Left}>
-          <Matrix matrix={BLOCK_DECORATE} width={w} hideBlankPixel />
+        <div className={styles.left} ref={this.$refLeft}>
+          <Matrix matrix={BLOCK_DECORATE} width={w} hideBlankPixel={true} />
         </div>
         <div className={styles.right}>
-          <Matrix matrix={BLOCK_DECORATE_REVERSE} width={w} hideBlankPixel />
+          <Matrix matrix={BLOCK_DECORATE_REVERSE} width={w} hideBlankPixel={true} />
         </div>
         <div className={styles.dotWrapper}>
           <div className={styles.dotsLeft}>
-            <span className={styles.dot}></span>
-            <span className={styles.dot}></span>
-            <span className={styles.dot}></span>
-            <span className={styles.dot}></span>
-            <span className={styles.dot}></span>
+            <span className={styles.dot} />
+            <span className={styles.dot} />
+            <span className={styles.dot} />
+            <span className={styles.dot} />
+            <span className={styles.dot} />
           </div>
           <div className={styles.dotsRight}>
-            <span className={styles.dot}></span>
-            <span className={styles.dot}></span>
-            <span className={styles.dot}></span>
-            <span className={styles.dot}></span>
-            <span className={styles.dot}></span>
+            <span className={styles.dot} />
+            <span className={styles.dot} />
+            <span className={styles.dot} />
+            <span className={styles.dot} />
+            <span className={styles.dot} />
           </div>
         </div>
       </div>

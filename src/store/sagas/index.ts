@@ -1,13 +1,13 @@
 /*
  * @Author: lifan
  * @Date: 2019-01-16 14:04:19
- * @Last Modified by:   lifan
- * @Last Modified time: 2019-01-16 14:04:19
+ * @Last Modified by: lifan
+ * @Last Modified time: 2019-03-06 22:18:32
  */
 /* eslint-disable */
-import { call, put, takeEvery, fork, delay, take, select } from 'redux-saga/effects';
-import Types from '../types';
+import { call, delay, fork, put, select, take, takeEvery } from 'redux-saga/effects';
 import { Action } from '../actions';
+import Types from '../types';
 
 export function* incrementAsync() {
   yield delay(1000);
@@ -15,7 +15,7 @@ export function* incrementAsync() {
     type: Types.ADD_COUNT,
     payload: {
       num: 1,
-    }
+    },
   });
 }
 
@@ -31,7 +31,7 @@ function fn() {
 function* fetchData() {
   // 等待 2 秒后，打印欢迎语（阻塞）
   const greeting = yield call(fn);
-  console.log('greeting: ', greeting);
+  // console.log('greeting: ', greeting);
 
   // 立即打印 task 对象（非阻塞）
   const task = yield fork(fn);

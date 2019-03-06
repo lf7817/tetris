@@ -5,9 +5,9 @@
  * @Last Modified time: 2019-01-16 14:06:31
  */
 import React, { Component } from 'react';
-import MyButton from '../MyButton/index';
 import intl from 'react-intl-universal';
 import { isMobile } from '../../utils';
+import MyButton from '../MyButton/index';
 import styles from './style.module.scss';
 
 const keyCode = {
@@ -19,26 +19,26 @@ const keyCode = {
   pause: 80,
   reset: 82,
   sound: 83,
-  f12: 123
+  f12: 123,
 };
 
-interface KeyboardProps {
+interface IKeyboardProps {
   keyboard: GameKeyboard;
   keyboardHandler: (key: keyof GameKeyboard, value: boolean) => void;
 }
-interface KeyboardState {
+interface IKeyboardState {
   isMobile: boolean;
 }
 
-class Keyboard extends Component<KeyboardProps> {
-  private readonly $ref_keyboard: React.RefObject<HTMLDivElement> = React.createRef();
-  state = {
-    isMobile: isMobile()
-  }
-  lastKey: string[] = [];
+class Keyboard extends Component<IKeyboardProps> {
+  public state = {
+    isMobile: isMobile(),
+  };
+  public lastKey: string[] = [];
+  private readonly $refKeyboard: React.RefObject<HTMLDivElement> = React.createRef();
 
-  calcWrapperPosition = () => {
-    const dom = this.$ref_keyboard.current;
+  public calcWrapperPosition = () => {
+    const dom = this.$refKeyboard.current;
 
     if (dom) {
       const top = dom.getBoundingClientRect().top;
@@ -47,15 +47,15 @@ class Keyboard extends Component<KeyboardProps> {
     }
 
     this.setState({
-      isMobile: isMobile()
+      isMobile: isMobile(),
     });
   }
 
-  keyboardHandler(key: keyof GameKeyboard, value: boolean) {
+  public keyboardHandler(key: keyof GameKeyboard, value: boolean) {
     this.props.keyboardHandler(key, value);
   }
 
-  registerPressEventHandler() {
+  public registerPressEventHandler() {
     this.lastKey = [];
 
     window.addEventListener('keydown', (event) => {
@@ -85,45 +85,45 @@ class Keyboard extends Component<KeyboardProps> {
 
     window.addEventListener('keyup', (event) => {
       event.preventDefault();
-      for (let i = 0; i < this.lastKey.length; i++) {
-        this.keyboardHandler(this.lastKey[i], false);
+      for (const k of this.lastKey) {
+        this.keyboardHandler(k, false);
       }
 
       this.lastKey = [];
     }, true);
   }
 
-  touchStartHandler = (event: GameEvent, key: keyof GameKeyboard) => {
+  public touchStartHandler = (event: GameEvent, key: keyof GameKeyboard) => {
     if (this.lastKey.indexOf(key as string) === -1) {
       this.lastKey.push(key as string);
       this.keyboardHandler(key, true);
     }
   }
 
-  touchEndtHandler = (event: GameEvent, key: keyof GameKeyboard) => {
-    for (let i = 0; i < this.lastKey.length; i++) {
-      this.keyboardHandler(this.lastKey[i], false);
+  public touchEndtHandler = (event: GameEvent, key: keyof GameKeyboard) => {
+    for (const k of this.lastKey) {
+      this.keyboardHandler(k, false);
     }
     this.lastKey = [];
   }
 
-  componentDidMount() {
+  public componentDidMount() {
     setTimeout(() => {
       this.calcWrapperPosition();
       this.registerPressEventHandler();
     }, 20);
 
     window.addEventListener('resize', this.calcWrapperPosition);
-    window.addEventListener('mouseup', event => {
+    window.addEventListener('mouseup', (event) => {
       this.touchEndtHandler(event, '');
     });
   }
 
-  componentWillUnmount() {
+  public componentWillUnmount() {
     window.removeEventListener('resize', this.calcWrapperPosition);
   }
 
-  shouldComponentUpdate(nextProps: KeyboardProps, nextState: KeyboardState) {
+  public shouldComponentUpdate(nextProps: IKeyboardProps, nextState: IKeyboardState) {
     const keyboard = this.props.keyboard;
     const nKeyboard = nextProps.keyboard;
 
@@ -138,14 +138,14 @@ class Keyboard extends Component<KeyboardProps> {
     return false;
   }
 
-  render() {
+  public render() {
     const { keyboard } = this.props;
 
     return (
-      <div className={styles.keyboard} ref={this.$ref_keyboard}>
+      <div className={styles.keyboard} ref={this.$refKeyboard}>
         <div className={styles.content}>
           {
-            Object.keys(keyboard).map(key => (
+            Object.keys(keyboard).map((key) => (
               <MyButton
                 key={key}
                 title={intl.get(`key.${key}`)}
@@ -159,12 +159,12 @@ class Keyboard extends Component<KeyboardProps> {
             ))
           }
           <div className={styles.keyDecorate}>
-            <span className={styles.keyDecorateItem}></span>
+            <span className={styles.keyDecorateItem} />
             <div className={styles.keyDecorateCenter}>
-              <span className={styles.keyDecorateItem} style={{ transform: 'rotate(270deg)' }}></span>
-              <span className={styles.keyDecorateItem} style={{ transform: 'rotate(90deg)' }}></span>
+              <span className={styles.keyDecorateItem} style={{ transform: 'rotate(270deg)' }} />
+              <span className={styles.keyDecorateItem} style={{ transform: 'rotate(90deg)' }} />
             </div>
-            <span className={styles.keyDecorateItem} style={{ transform: 'rotate(180deg)' }}></span>
+            <span className={styles.keyDecorateItem} style={{ transform: 'rotate(180deg)' }} />
           </div>
         </div>
       </div>

@@ -9,10 +9,10 @@
  */
 export const isSupportWebAudioAPI = (): boolean => {
   return !!(
-    (<any>window).AudioContext ||
-    (<any>window).webkitAudioContext ||
-    (<any>window).mozAudioContext ||
-    (<any>window).oAudioContext ||
-    (<any>window).msAudioContext
+    (window as any).AudioContext ||
+    (window as any).webkitAudioContext ||
+    (window as any).mozAudioContext ||
+    (window as any).oAudioContext ||
+    (window as any).msAudioContext
   ) && location.protocol.indexOf('http') !== -1;
 };
