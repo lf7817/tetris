@@ -31,4 +31,13 @@ const Matrix: FunctionComponent<IMatrixProps> = (props) => {
   );
 };
 
-export default memo(Matrix);
+function areEqual(prevProps: IMatrixProps, nextProps: IMatrixProps) {
+  const { matrix, width, hideBlankPixel } = prevProps;
+  if (nextProps.matrix !== matrix || nextProps.width !== width ||
+      nextProps.hideBlankPixel !== hideBlankPixel) {
+    return false;
+  }
+  return true;
+}
+
+export default memo(Matrix, areEqual);

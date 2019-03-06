@@ -83,11 +83,11 @@ class App extends PureComponent<IAppProps, IAppState> {
     //     return item.map(() => Math.round(Math.random()));
     //   });
     //   this.props.dispatch(action.updateMatrix(newArr));
-    // }, 800);
+    // }, 10);
 
     // setInterval(() => {
     //   this.props.dispatch(action.setNext());
-    // }, 1000);
+    // }, 500);
   }
 
   public render() {
