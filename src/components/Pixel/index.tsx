@@ -16,7 +16,7 @@ interface IPixelProps {
   hide?: boolean;
 }
 
-const Pixel: FunctionComponent<IPixelProps> = (props) => {
+const Pixel: FunctionComponent<IPixelProps> = memo((props) => {
   const { highlight = false, x, y, width, hide = false } = props;
   const fillColor = highlight ? style.fillHighlight : style.fillDefault;
   const strokeColor = highlight ? style.strokeHighlight : style.strokeDefault;
@@ -91,6 +91,6 @@ const Pixel: FunctionComponent<IPixelProps> = (props) => {
       </MediaQuery>
     </Fragment>
   );
-};
+});
 
-export default memo(Pixel);
+export default Pixel;

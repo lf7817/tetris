@@ -6,7 +6,7 @@
  */
 /* eslint-disable no-undefined */
 import cn from 'classnames';
-import React, { Component } from 'react';
+import React, { FunctionComponent, memo } from 'react';
 import styles from './style.module.scss';
 
 interface IMyButtonProps {
@@ -19,48 +19,35 @@ interface IMyButtonProps {
   touchEndtHandler: ((event: GameEvent) => void) | undefined;
 }
 
-class MyButton extends Component<IMyButtonProps> {
-  public static defaultProps = {
-    textDirection: 'column',
-    active: false,
-    isMobile: false,
-  };
+const MyButton: FunctionComponent<IMyButtonProps> = memo((props) => {
+  const {
+    classNames, title, textDirection = 'column', active = false,
+    touchStartHandler, touchEndtHandler, isMobile = false,
+  } = props;
 
-  public shouldComponentUpdate(nextProps: IMyButtonProps) {
-    if (nextProps.active !== this.props.active || nextProps.isMobile !== this.props.isMobile) {
-      return true;
-    }
-
-    return false;
-  }
-
-  public render() {
-    const { classNames, title, textDirection, active, touchStartHandler, touchEndtHandler, isMobile } = this.props;
-
-    return (
-      <div className={cn(styles.myButton, classNames)} style={{ flexDirection: textDirection }}>
-        {
-          isMobile ?
-            <span
-              className={cn(styles.button, { [styles.active]: active })}
-              onTouchStart={touchStartHandler}
-              onTouchEnd={touchEndtHandler}
-            /> :
-            <span
-              className={cn(styles.button, { [styles.active]: active })}
-              onMouseDown={touchStartHandler}
-              onMouseUp={touchEndtHandler}
-            />
-        }
-        <span
-          className={styles.title}
-          style={{ textAlign: textDirection === 'row' ? 'left' : 'center' }}
-        >
-          {title}
-        </span>
-      </div>
-    );
-  }
-}
+  return (
+    <div className={cn(styles.myButton, classNames)} style={{ flexDirection: textDirection }}>
+      {
+        isMobile ?
+          <span
+            className={cn(styles.button, { [styles.active]: active })}
+            onTouchStart={touchStartHandler}
+            onTouchEnd={touchEndtHandler}
+          /> :
+          <span
+            className={cn(styles.button, { [styles.active]: active })}
+            onMouseDown={touchStartHandler}
+            onMouseUp={touchEndtHandler}
+          />
+      }
+      <span
+        className={styles.title}
+        style={{ textAlign: textDirection === 'row' ? 'left' : 'center' }}
+      >
+        {title}
+      </span>
+    </div>
+  );
+});
 
 export default MyButton;
