@@ -5,7 +5,7 @@
  * @Last Modified time: 2019-01-11 13:32:23
  */
 import cn from 'classnames';
-import React, { Component } from 'react';
+import React, { FunctionComponent, memo, useEffect, useState } from 'react';
 import Character from '../Character';
 import styles from './style.module.scss';
 
@@ -14,60 +14,53 @@ interface ITimeProps {
 }
 
 interface ITimeState {
-  h: number;
-  m: number;
+  h1: CharacterValue;
+  m1: CharacterValue;
+  h2: CharacterValue;
+  m2: CharacterValue;
 }
 
-class Time extends Component<ITimeProps, ITimeState> {
-  public static defaultProps = {
-    className: '',
-  };
+const Time: FunctionComponent<ITimeProps> = memo((props) => {
+  const [state, setState] = useState<ITimeState>({
+    h1: '0' as CharacterValue,
+    m1: '0' as CharacterValue,
+    h2: '0' as CharacterValue,
+    m2: '0' as CharacterValue,
+  });
 
-  public state = {
-    h: 0,
-    m: 0,
-  };
-
-  public shouldComponentUpdate(nextProps: ITimeProps, nextState: ITimeState) {
-    if (nextProps.className !== this.props.className || nextState.h !== this.state.h ||
-      nextState.m !== this.state.m) {
-      return true;
-    }
-
-    return false;
-  }
-
-  public calcTime = () => {
+  function calcTime() {
     const date = new Date();
-    this.setState({
-      h: date.getHours(),
-      m: date.getMinutes(),
+    const h = date.getHours();
+    const m = date.getMinutes();
+
+    setState({
+      h1: Math.floor(h / 10).toString() as CharacterValue,
+      h2: (h % 10).toString() as CharacterValue,
+      m1: Math.floor(m / 10).toString() as CharacterValue,
+      m2: (m % 10).toString() as CharacterValue,
     });
   }
 
-  public componentDidMount() {
-    this.calcTime();
-    setInterval(this.calcTime, 10000);
-  }
+  useEffect(() => {
+    const timer = setInterval(calcTime, 30000);
+    calcTime();
 
-  public render() {
-    const { className } = this.props;
-    const { h, m } = this.state;
-    const h1 = Math.floor(h / 10).toString() as CharacterValue;
-    const h2 = (h % 10).toString() as CharacterValue;
-    const m1 = Math.floor(m / 10).toString() as CharacterValue;
-    const m2 = (m % 10).toString() as CharacterValue;
+    return () => {
+      if (timer) {
+        clearInterval(timer);
+      }
+    };
+  }, []);
 
-    return (
-      <div className={cn(styles.time, className)}>
-        <Character value={h1} />
-        <Character value={h2} />
-        <Character value="colon" />
-        <Character value={m1} />
-        <Character value={m2} />
-      </div>
-    );
-  }
-}
+  return (
+    <div className={cn(styles.time, props.className)}>
+      <Character value={state.h1} />
+      <Character value={state.h2} />
+      <Character value="colon" />
+      <Character value={state.m1} />
+      <Character value={state.m2} />
+    </div>
+  );
+});
 
 export default Time;
