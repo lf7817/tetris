@@ -6,7 +6,7 @@
  */
 import React, { FunctionComponent, memo, useMemo } from 'react';
 import intl from 'react-intl-universal';
-import { BLOCK_SHAPE } from '../../constants/block';
+import { BLOCK_SHAPE, BlockShap } from '../../constants/block';
 import Matrix from '../Matrix';
 import styles from './style.module.scss';
 

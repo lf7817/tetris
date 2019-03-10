@@ -1,13 +1,13 @@
 import { combineReducers } from 'redux';
 import block, { IBlock } from './block';
-import keybord from './keybord';
+import keybord, { IGameKeyboard } from './keyboard';
 import matrix from './matrix';
-import status from './status';
+import status, { IGameStatus } from './status';
 
 export interface IState {
   matrix: number[][];
-  keybord: GameKeyboard;
-  status: GameStatus;
+  keybord: IGameKeyboard;
+  status: IGameStatus;
   block: IBlock;
 }
 

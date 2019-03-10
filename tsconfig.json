@@ -17,11 +17,7 @@
       "dom", "scripthost", "es5", "es2015.promise",
       "es2015.core", "es2015.iterable", "es2015.generator"
     ],
-    "experimentalDecorators": true,
-    "typeRoots": [
-      "./node_modules/@types",
-      "./src/typings"
-    ]
+    "experimentalDecorators": true
   },
   "include": [
     "src"

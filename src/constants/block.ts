@@ -5,6 +5,7 @@
  * @Last Modified time: 2018-12-21 16:29:35
  */
 // 方块类型
+export type BlockShap = 'I' | 'L' | 'J' | 'Z' | 'S' | 'O' | 'T';
 export const BLOCK_SHAPE = {
   I: [
     [1, 1, 1, 1],

@@ -6,7 +6,7 @@
  */
 import cn from 'classnames';
 import React, { FunctionComponent, memo, useEffect, useState } from 'react';
-import Character from '../Character';
+import Character, { ICharacterValue } from '../Character';
 import styles from './style.module.scss';
 
 interface ITimeProps {
@@ -14,18 +14,18 @@ interface ITimeProps {
 }
 
 interface ITimeState {
-  h1: CharacterValue;
-  m1: CharacterValue;
-  h2: CharacterValue;
-  m2: CharacterValue;
+  h1: ICharacterValue;
+  m1: ICharacterValue;
+  h2: ICharacterValue;
+  m2: ICharacterValue;
 }
 
 const Time: FunctionComponent<ITimeProps> = memo((props) => {
   const [state, setState] = useState<ITimeState>({
-    h1: '0' as CharacterValue,
-    m1: '0' as CharacterValue,
-    h2: '0' as CharacterValue,
-    m2: '0' as CharacterValue,
+    h1: '0' as ICharacterValue,
+    m1: '0' as ICharacterValue,
+    h2: '0' as ICharacterValue,
+    m2: '0' as ICharacterValue,
   });
 
   function calcTime() {
@@ -34,10 +34,10 @@ const Time: FunctionComponent<ITimeProps> = memo((props) => {
     const m = date.getMinutes();
 
     setState({
-      h1: Math.floor(h / 10).toString() as CharacterValue,
-      h2: (h % 10).toString() as CharacterValue,
-      m1: Math.floor(m / 10).toString() as CharacterValue,
-      m2: (m % 10).toString() as CharacterValue,
+      h1: Math.floor(h / 10).toString() as ICharacterValue,
+      h2: (h % 10).toString() as ICharacterValue,
+      m1: Math.floor(m / 10).toString() as ICharacterValue,
+      m2: (m % 10).toString() as ICharacterValue,
     });
   }
 

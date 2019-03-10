@@ -5,10 +5,24 @@
  * @Last Modified time: 2019-01-15 17:08:32
  */
 import produce from 'immer';
+import { GameLocales } from '../../locales';
 import { Action } from '../actions';
 import Types from '../types';
 
-const initState: GameStatus = {
+export interface IGameStatus {
+  max: number;
+  score: number;
+  sound: boolean;
+  speed: number;
+  clearLines: number;
+  startLines: number;
+  locales: GameLocales;
+  pause: boolean;
+  playing: boolean;
+  focus: boolean;
+}
+
+const initState: IGameStatus = {
   max: 0,
   score: 0,
   sound: true,

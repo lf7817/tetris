@@ -6,6 +6,7 @@
  */
 import React, { Component, Fragment } from 'react';
 import intl from 'react-intl-universal';
+import { BlockShap } from '../../constants/block';
 import Character from '../Character';
 import Decorate from '../Decorate';
 import Matrix from '../Matrix';

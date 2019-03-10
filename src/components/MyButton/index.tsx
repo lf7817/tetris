@@ -8,6 +8,11 @@ import cn from 'classnames';
 import React, { FunctionComponent, memo } from 'react';
 import styles from './style.module.scss';
 
+// 事件
+type GameMouseEvent = React.MouseEvent<HTMLSpanElement, MouseEvent>;
+type GameTouchEvent = React.TouchEvent<HTMLSpanElement>;
+type GameEvent = GameMouseEvent | GameTouchEvent | MouseEvent;
+
 interface IMyButtonProps {
   title: string;
   classNames: string;

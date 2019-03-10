@@ -6,6 +6,7 @@
  */
 import React, { Component } from 'react';
 import intl from 'react-intl-universal';
+import { IGameKeyboard } from '../../store/reducers/keyboard';
 import { isMobile } from '../../utils';
 import MyButton from '../MyButton/index';
 import styles from './style.module.scss';
@@ -22,9 +23,14 @@ const keyCode = {
   f12: 123,
 };
 
+// 事件
+type GameMouseEvent = React.MouseEvent<HTMLSpanElement, MouseEvent>;
+type GameTouchEvent = React.TouchEvent<HTMLSpanElement>;
+type GameEvent = GameMouseEvent | GameTouchEvent | MouseEvent;
+
 interface IKeyboardProps {
-  keyboard: GameKeyboard;
-  keyboardHandler: (key: keyof GameKeyboard, value: boolean) => void;
+  keyboard: IGameKeyboard;
+  keyboardHandler: (key: keyof IGameKeyboard, value: boolean) => void;
 }
 interface IKeyboardState {
   isMobile: boolean;
@@ -51,7 +57,7 @@ class Keyboard extends Component<IKeyboardProps> {
     });
   }
 
-  public keyboardHandler(key: keyof GameKeyboard, value: boolean) {
+  public keyboardHandler(key: keyof IGameKeyboard, value: boolean) {
     this.props.keyboardHandler(key, value);
   }
 
@@ -63,7 +69,7 @@ class Keyboard extends Component<IKeyboardProps> {
         event.preventDefault();
       }
 
-      let opera: keyof GameKeyboard;
+      let opera: keyof IGameKeyboard;
 
       switch (event.keyCode) {
         case keyCode.down: opera = 'down'; break;
@@ -93,14 +99,14 @@ class Keyboard extends Component<IKeyboardProps> {
     }, true);
   }
 
-  public touchStartHandler = (event: GameEvent, key: keyof GameKeyboard) => {
+  public touchStartHandler = (event: GameEvent, key: keyof IGameKeyboard) => {
     if (this.lastKey.indexOf(key as string) === -1) {
       this.lastKey.push(key as string);
       this.keyboardHandler(key, true);
     }
   }
 
-  public touchEndtHandler = (event: GameEvent, key: keyof GameKeyboard) => {
+  public touchEndtHandler = (event: GameEvent, key: keyof IGameKeyboard) => {
     for (const k of this.lastKey) {
       this.keyboardHandler(k, false);
     }

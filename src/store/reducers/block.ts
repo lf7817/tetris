@@ -5,6 +5,7 @@
  * @Last Modified time: 2019-01-15 11:04:35
  */
 import produce from 'immer';
+import { BlockShap } from '../../constants/block';
 import { getRandomBlockShap } from '../../utils/block';
 import { Action } from '../actions';
 import types from '../types';

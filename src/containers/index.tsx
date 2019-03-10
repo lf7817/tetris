@@ -11,16 +11,18 @@ import { connect } from 'react-redux';
 import { Dispatch } from 'redux';
 import Keyboard from '../components/Keyboard';
 import Screen from '../components/Screen';
-import { LOCALES } from '../locales';
+import { BlockShap } from '../constants/block';
+import { GameLocales, LOCALES } from '../locales';
 import * as action from '../store/actions';
 import { IState } from '../store/reducers';
+import { IGameKeyboard } from '../store/reducers/keyboard';
 import { getUrlParam, isFocus, visibilityChangeEvent } from '../utils';
 import styles from './style.module.scss';
 
 interface IAppProps {
   locales: GameLocales;
   matrix: number[][];
-  keyboard: GameKeyboard;
+  keyboard: IGameKeyboard;
   dispatch: Dispatch;
   sound: boolean;
   score: number;
@@ -48,7 +50,7 @@ class App extends PureComponent<IAppProps, IAppState> {
   //   }, 20);
   // }
 
-  public keyboardHandler = (key: keyof GameKeyboard, value: boolean) => {
+  public keyboardHandler = (key: keyof IGameKeyboard, value: boolean) => {
     let a = null;
 
     switch (key) {

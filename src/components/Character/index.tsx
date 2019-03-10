@@ -8,8 +8,13 @@ import cn from 'classnames';
 import React, { FunctionComponent, memo } from 'react';
 import styles from './style.module.scss';
 
+// 字符
+export type ICharacterValue = '' | '1' | '2' | '3' | '4' | '5' | '6'
+  | '7' | '8' | '9' | '0' | 'colon' | 'sound_off'
+  | 'sound_on' | 'pause_on' | 'pause_off';
+
 interface ICharacterProps {
-  value?: CharacterValue;
+  value?: ICharacterValue;
   className?: string;
 }
 

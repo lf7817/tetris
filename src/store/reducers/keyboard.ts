@@ -8,6 +8,18 @@ import produce from 'immer';
 import { Action } from '../actions';
 import types from '../types';
 
+export interface IGameKeyboard {
+  pause: boolean;
+  sound: boolean;
+  reset: boolean;
+  drop: boolean;
+  rotate: boolean;
+  left: boolean;
+  right: boolean;
+  down: boolean;
+  [key: string]: boolean;
+}
+
 const initState = {
   pause: false,
   sound: false,
@@ -19,7 +31,7 @@ const initState = {
   down: false,
 };
 
-export default (state: GameKeyboard = initState, action: Action) =>
+export default (state: IGameKeyboard = initState, action: Action) =>
   produce(state, (draft) => {
     switch (action.type) {
       case types.KEY_DOWN: draft.down = action.payload; break;
