@@ -4,7 +4,7 @@
  * @Last Modified by: lifan
  * @Last Modified time: 2019-01-16 14:06:31
  */
-import React, { Component } from 'react';
+import React, { FunctionComponent, memo, useEffect, useRef, useState } from 'react';
 import intl from 'react-intl-universal';
 import { IGameKeyboard } from '../../store/reducers/keyboard';
 import { isMobile } from '../../utils';
@@ -23,46 +23,34 @@ const keyCode = {
   f12: 123,
 };
 
-// 事件
-type GameMouseEvent = React.MouseEvent<HTMLSpanElement, MouseEvent>;
-type GameTouchEvent = React.TouchEvent<HTMLSpanElement>;
-type GameEvent = GameMouseEvent | GameTouchEvent | MouseEvent;
-
 interface IKeyboardProps {
   keyboard: IGameKeyboard;
   keyboardHandler: (key: keyof IGameKeyboard, value: boolean) => void;
 }
-interface IKeyboardState {
-  isMobile: boolean;
-}
 
-class Keyboard extends Component<IKeyboardProps> {
-  public state = {
-    isMobile: isMobile(),
-  };
-  public lastKey: string[] = [];
-  private readonly $refKeyboard: React.RefObject<HTMLDivElement> = React.createRef();
+// 上次按下键
+let lastKey: string[] = [];
 
-  public calcWrapperPosition = () => {
-    const dom = this.$refKeyboard.current;
+const Keyboard: FunctionComponent<IKeyboardProps> = memo(({ keyboard, keyboardHandler }) => {
+  const $refKeyboard: React.RefObject<HTMLDivElement> = useRef(null);
+  const [mobile, setMobile] = useState<boolean>(isMobile());
 
-    if (dom) {
-      const top = dom.getBoundingClientRect().top;
-      const winHeight = document.documentElement && document.documentElement.clientHeight;
-      dom.style.minHeight = winHeight ? `${winHeight - top}px` : '10px';
+  function touchStartHandler(key: keyof IGameKeyboard) {
+    if (lastKey.indexOf(key as string) === -1) {
+      lastKey.push(key as string);
+      keyboardHandler(key, true);
     }
-
-    this.setState({
-      isMobile: isMobile(),
-    });
   }
 
-  public keyboardHandler(key: keyof IGameKeyboard, value: boolean) {
-    this.props.keyboardHandler(key, value);
+  function touchEndtHandler() {
+    for (const k of lastKey) {
+      keyboardHandler(k, false);
+    }
+    lastKey = [];
   }
 
-  public registerPressEventHandler() {
-    this.lastKey = [];
+  function registerPressEventHandler() {
+    lastKey = [];
 
     window.addEventListener('keydown', (event) => {
       if (event.keyCode !== keyCode.f12) {
@@ -83,99 +71,76 @@ class Keyboard extends Component<IKeyboardProps> {
         default: opera = '';
       }
 
-      if (this.lastKey.indexOf(opera) === -1) {
-        this.keyboardHandler(opera, true);
-        this.lastKey.push(opera);
+      if (lastKey.indexOf(opera) === -1) {
+        keyboardHandler(opera, true);
+        lastKey.push(opera);
       }
     }, true);
 
     window.addEventListener('keyup', (event) => {
       event.preventDefault();
-      for (const k of this.lastKey) {
-        this.keyboardHandler(k, false);
+      for (const k of lastKey) {
+        keyboardHandler(k, false);
       }
 
-      this.lastKey = [];
+      lastKey = [];
     }, true);
   }
 
-  public touchStartHandler = (event: GameEvent, key: keyof IGameKeyboard) => {
-    if (this.lastKey.indexOf(key as string) === -1) {
-      this.lastKey.push(key as string);
-      this.keyboardHandler(key, true);
-    }
-  }
+  function resizeHandler() {
+    const dom = $refKeyboard.current;
 
-  public touchEndtHandler = (event: GameEvent, key: keyof IGameKeyboard) => {
-    for (const k of this.lastKey) {
-      this.keyboardHandler(k, false);
-    }
-    this.lastKey = [];
-  }
-
-  public componentDidMount() {
     setTimeout(() => {
-      this.calcWrapperPosition();
-      this.registerPressEventHandler();
-    }, 20);
+      if (dom) {
+        const top = dom.getBoundingClientRect().top;
+        const winHeight = document.documentElement && document.documentElement.clientHeight;
+        dom.style.minHeight = winHeight ? `${winHeight - top}px` : '10px';
+      }
+    }, 50);
 
-    window.addEventListener('resize', this.calcWrapperPosition);
-    window.addEventListener('mouseup', (event) => {
-      this.touchEndtHandler(event, '');
-    });
+    setMobile(isMobile());
   }
 
-  public componentWillUnmount() {
-    window.removeEventListener('resize', this.calcWrapperPosition);
-  }
+  useEffect(() => {
+    resizeHandler();
+    registerPressEventHandler();
+    window.addEventListener('resize', resizeHandler);
+    window.addEventListener('mouseup', touchEndtHandler);
 
-  public shouldComponentUpdate(nextProps: IKeyboardProps, nextState: IKeyboardState) {
-    const keyboard = this.props.keyboard;
-    const nKeyboard = nextProps.keyboard;
+    return () => {
+      window.removeEventListener('resize', resizeHandler);
+      window.removeEventListener('mouseup', touchEndtHandler);
+    };
+  }, []);
 
-    if (keyboard.down !== nKeyboard.down || keyboard.drop !== nKeyboard.drop ||
-        keyboard.left !== nKeyboard.left || keyboard.pause !== nKeyboard.pause ||
-        keyboard.reset !== nKeyboard.reset || keyboard.right !== nKeyboard.right ||
-        keyboard.rotate !== nKeyboard.rotate || keyboard.sound !== nKeyboard.sound ||
-        nextState.isMobile !== this.state.isMobile) {
-      return true;
-    }
-
-    return false;
-  }
-
-  public render() {
-    const { keyboard } = this.props;
-
-    return (
-      <div className={styles.keyboard} ref={this.$refKeyboard}>
-        <div className={styles.content}>
-          {
-            Object.keys(keyboard).map((key) => (
-              <MyButton
-                key={key}
-                title={intl.get(`key.${key}`)}
-                classNames={styles[`key${key.toLowerCase().replace(/( |^)[a-z]/g, (L) => L.toUpperCase())}`]}
-                active={keyboard[key]}
-                textDirection={key === 'rotate' ? 'row' : 'column'}
-                touchEndtHandler={(event) => this.touchEndtHandler(event, key)}
-                touchStartHandler={(event) => this.touchStartHandler(event, key)}
-                isMobile={this.state.isMobile}
-              />
-            ))
-          }
-          <div className={styles.keyDecorate}>
-            <span className={styles.keyDecorateItem} />
-            <div className={styles.keyDecorateCenter}>
-              <span className={styles.keyDecorateItem} style={{ transform: 'rotate(270deg)' }} />
-              <span className={styles.keyDecorateItem} style={{ transform: 'rotate(90deg)' }} />
-            </div>
-            <span className={styles.keyDecorateItem} style={{ transform: 'rotate(180deg)' }} />
+  return (
+    <div className={styles.keyboard} ref={$refKeyboard}>
+      <div className={styles.content}>
+        {
+          Object.keys(keyboard).map((key) => (
+            <MyButton
+              key={key}
+              title={intl.get(`key.${key}`)}
+              classNames={styles[`key${key.toLowerCase().replace(/( |^)[a-z]/g, (L) => L.toUpperCase())}`]}
+              active={keyboard[key]}
+              textDirection={key === 'rotate' ? 'row' : 'column'}
+              touchEndtHandler={() => touchEndtHandler()}
+              touchStartHandler={() => touchStartHandler(key)}
+              isMobile={mobile}
+            />
+          ))
+        }
+        <div className={styles.keyDecorate}>
+          <span className={styles.keyDecorateItem} />
+          <div className={styles.keyDecorateCenter}>
+            <span className={styles.keyDecorateItem} style={{ transform: 'rotate(270deg)' }} />
+            <span className={styles.keyDecorateItem} style={{ transform: 'rotate(90deg)' }} />
           </div>
+          <span className={styles.keyDecorateItem} style={{ transform: 'rotate(180deg)' }} />
         </div>
       </div>
-    );
-  }
-}
+    </div>
+  );
+});
 
 export default Keyboard;
