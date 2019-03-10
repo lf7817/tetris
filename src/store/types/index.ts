@@ -2,10 +2,8 @@
  * @Author: lifan
  * @Date: 2018-12-12 13:31:05
  * @Last Modified by: lifan
- * @Last Modified time: 2019-01-15 17:08:07
+ * @Last Modified time: 2019-03-10 16:01:34
  */
-
-/* eslint-disable no-unused-vars */
 enum Types {
   ADD_COUNT = 'ADD_COUNT',
   ADD_COUNT_ASYNC = 'ADD_COUNT_ASYNC',

@@ -2,11 +2,10 @@
  * @Author: lifan
  * @Date: 2018-12-12 14:50:48
  * @Last Modified by: lifan
- * @Last Modified time: 2019-01-15 17:09:43
+ * @Last Modified time: 2019-03-10 16:01:46
  */
 import Types from '../types';
 
-/* eslint-disable no-use-before-define */
 export type UpdateLocales = ReturnType<typeof updateLocales>;
 export const updateLocales = (locales: GameLocales) => ({
   type: Types.SET_LOCALES as Types.SET_LOCALES,

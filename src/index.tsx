@@ -2,14 +2,14 @@
  * @Author: lifan
  * @Date: 2018-12-09 21:11:01
  * @Last Modified by: lifan
- * @Last Modified time: 2019-03-06 22:17:36
+ * @Last Modified time: 2019-03-10 16:01:21
  */
 import '@babel/polyfill';
 import 'normalize.css';
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
-import { PersistGate } from 'redux-persist/integration/react'; // eslint-disable-line
+import { PersistGate } from 'redux-persist/integration/react';
 import './assets/scss/index.scss';
 import App from './containers';
 import configureStore from './store';

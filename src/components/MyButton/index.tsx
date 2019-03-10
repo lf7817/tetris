@@ -4,7 +4,6 @@
  * @Last Modified by: lifan
  * @Last Modified time: 2019-01-16 14:06:45
  */
-/* eslint-disable no-undefined */
 import cn from 'classnames';
 import React, { FunctionComponent, memo } from 'react';
 import styles from './style.module.scss';

@@ -2,10 +2,10 @@
  * @Author: lifan
  * @Date: 2018-12-12 09:46:29
  * @Last Modified by: lifan
- * @Last Modified time: 2018-12-20 15:34:50
+ * @Last Modified time: 2019-03-10 16:01:28
  */
 import { applyMiddleware, compose, createStore, Store } from 'redux';
-import { PersistConfig, persistReducer, persistStore } from 'redux-persist'; // eslint-disable-line
+import { PersistConfig, persistReducer, persistStore } from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
 import createSagaMiddleware from 'redux-saga';
 import rootReducer from './reducers';

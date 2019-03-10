@@ -2,9 +2,8 @@
  * @Author: lifan
  * @Date: 2019-01-16 14:04:19
  * @Last Modified by: lifan
- * @Last Modified time: 2019-03-06 22:18:32
+ * @Last Modified time: 2019-03-10 16:01:40
  */
-/* eslint-disable */
 import { call, delay, fork, put, select, take, takeEvery } from 'redux-saga/effects';
 import { Action } from '../actions';
 import Types from '../types';
