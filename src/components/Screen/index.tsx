@@ -4,7 +4,7 @@
  * @Last Modified by: lifan
  * @Last Modified time: 2019-01-16 14:07:09
  */
-import React, { Component, Fragment } from 'react';
+import React, { Component, Fragment, FunctionComponent, memo, useEffect, useRef, useState } from 'react';
 import intl from 'react-intl-universal';
 import { BlockShap } from '../../constants/block';
 import Character from '../Character';
@@ -33,102 +33,81 @@ interface IScreenState {
   scoreFlashflag: boolean;
 }
 
-class Screen extends Component<IScreenProps, IScreenState> {
-  public state = {
-    w: 0,
-    scoreFlashflag: false,
-  };
-  private readonly $refPanl: React.RefObject<HTMLDivElement> = React.createRef();
+const Screen: FunctionComponent<IScreenProps> = memo((props) => {
+  const $refPanl: React.RefObject<HTMLDivElement> = useRef(null);
+  const [w, setW] = useState<number>(0);
+  const [scoreFlashflag, setScoreFlashflag] = useState<boolean>(false);
 
-  public calcWidth = () => {
-    if (this.$refPanl.current) {
-      this.setState({
-        w: this.$refPanl.current.clientWidth,
-      });
+  function calcWidth() {
+    if ($refPanl.current) {
+      setW($refPanl.current.clientWidth);
     }
   }
 
-  public scoreFlash() {
+  function scoreFlash() {
     setInterval(() => {
-      if (this.props.playing) {
+      if (playing) {
         return;
       }
 
-      if (this.props.score === 0) {
-        this.setState({
-          scoreFlashflag: false,
-        });
+      if (score === 0) {
+        setScoreFlashflag(false);
       } else {
-        this.setState({
-          scoreFlashflag: !this.state.scoreFlashflag,
-        });
+        setScoreFlashflag(!scoreFlashflag);
       }
     }, 3000);
   }
 
-  public componentDidMount() {
-    this.calcWidth();
-    this.scoreFlash();
-    window.addEventListener('resize', this.calcWidth);
-  }
+  useEffect(() => {
+    calcWidth();
+    scoreFlash();
+    window.addEventListener('resize', calcWidth);
 
-  public shouldComponentUpdate(nextProps: IScreenProps, nextState: IScreenState) {
-    const { matrix, score, max, speed, startLines, clearLines, pause, playing, sound, next } = this.props;
-    const { w, scoreFlashflag } = this.state;
-    if (nextProps.score !== score || nextProps.matrix !== matrix || nextProps.next !== next ||
-      nextProps.max !== max || nextProps.speed !== speed || nextProps.sound !== sound ||
-      nextProps.startLines !== startLines || nextProps.clearLines !== clearLines ||
-      nextProps.pause !== pause || nextProps.playing !== playing ||
-      nextState.w !== w || nextState.scoreFlashflag !== scoreFlashflag) {
-      return true;
-    }
+    return () => {
+      window.removeEventListener('resize', calcWidth);
+    };
+  }, []);
 
-    return false;
-  }
+  const { matrix, max, score, startLines, clearLines, pause, playing, speed, sound, next } = props;
+  const pixelWidth = w / matrix[0].length;
 
-  public render() {
-    const { matrix, max, score, startLines, clearLines, pause, playing, speed, sound, next } = this.props;
-    const { w, scoreFlashflag } = this.state;
-    const pixelWidth = w / matrix[0].length;
-
-    return (
-      <div className={styles.wrapper}>
-        <Decorate />
-        <div className={styles.center}>
-          <div className={styles.screenWrapper}>
-            <div className={styles.screen}>
-              <div className={styles.mainPanel}>
-                <div ref={this.$refPanl}>
-                  <Matrix matrix={matrix} width={w} />
-                </div>
+  return (
+    <div className={styles.wrapper}>
+      <Decorate />
+      <div className={styles.center}>
+        <div className={styles.screenWrapper}>
+          <div className={styles.screen}>
+            <div className={styles.mainPanel}>
+              <div ref={$refPanl}>
+                <Matrix matrix={matrix} width={w} />
               </div>
-              <div className={styles.statusPanel}>
-                {
-                  playing ?
-                    <Fragment>
-                      <Number title={intl.get('score')} length={6} value={score} />
-                      <Number title={intl.get('cleans')} length={6} value={clearLines} />
-                      <Number title={intl.get('speed')} length={1} value={speed} />
-                    </Fragment> :
-                    <Fragment>
-                      {
-                        !scoreFlashflag ? <Number title={intl.get('max')} length={6} value={max} /> :
-                          <Number title={intl.get('lastRound')} length={6} value={score} />}
-                      <Number title={intl.get('startLines')} length={6} value={startLines} />
-                      <Number title={intl.get('speed')} length={1} value={speed} />
-                    </Fragment>
-                }
-                <Next shap={next} width={pixelWidth * 4} />
-                <Character value={sound ? 'sound_on' : 'sound_off'} className={styles.sound} />
-                <Character value={pause ? 'pause_on' : 'pause_off'} className={styles.pause} />
-                <Time className={styles.time} />
-              </div>
+            </div>
+            <div className={styles.statusPanel}>
+              {
+                playing ?
+                  <Fragment>
+                    <Number title={intl.get('score')} length={6} value={score} />
+                    <Number title={intl.get('cleans')} length={6} value={clearLines} />
+                    <Number title={intl.get('speed')} length={1} value={speed} />
+                  </Fragment> :
+                  <Fragment>
+                    {
+                      !scoreFlashflag ? <Number title={intl.get('max')} length={6} value={max} /> :
+                        <Number title={intl.get('lastRound')} length={6} value={score} />}
+                    <Number title={intl.get('startLines')} length={6} value={startLines} />
+                    <Number title={intl.get('speed')} length={1} value={speed} />
+                  </Fragment>
+              }
+              <Next shap={next} width={pixelWidth * 4} />
+              <Character value={sound ? 'sound_on' : 'sound_off'} className={styles.sound} />
+              <Character value={pause ? 'pause_on' : 'pause_off'} className={styles.pause} />
+              <Time className={styles.time} />
             </div>
           </div>
         </div>
       </div>
-    );
-  }
-}
+    </div>
+  );
+});
 
 export default Screen;

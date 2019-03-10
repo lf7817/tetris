@@ -80,16 +80,16 @@ class App extends PureComponent<IAppProps, IAppState> {
   public componentDidMount() {
     this.initLocales(this.props.locales);
     this.visibilityChangeHandler();
-    // setInterval(() => {
-    //   const newArr = this.props.matrix.map(item => {
-    //     return item.map(() => Math.round(Math.random()));
-    //   });
-    //   this.props.dispatch(action.updateMatrix(newArr));
-    // }, 10);
+    setInterval(() => {
+      const newArr = this.props.matrix.map((item) => {
+        return item.map(() => Math.round(Math.random()));
+      });
+      this.props.dispatch(action.updateMatrix(newArr));
+    }, 1000);
 
-    // setInterval(() => {
-    //   this.props.dispatch(action.setNext());
-    // }, 500);
+    setInterval(() => {
+      this.props.dispatch(action.setNext());
+    }, 1000);
   }
 
   public render() {
