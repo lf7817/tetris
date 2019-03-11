@@ -4,7 +4,7 @@
  * @Last Modified by: lifan
  * @Last Modified time: 2019-01-16 14:07:09
  */
-import React, { Component, Fragment, FunctionComponent, memo, useEffect, useRef, useState } from 'react';
+import React, { Fragment, FunctionComponent, memo, useEffect, useRef, useState } from 'react';
 import intl from 'react-intl-universal';
 import { BlockShap } from '../../constants/block';
 import Character from '../Character';
@@ -28,15 +28,13 @@ interface IScreenProps {
   next: BlockShap;
 }
 
-interface IScreenState {
-  w: number;
-  scoreFlashflag: boolean;
-}
-
 const Screen: FunctionComponent<IScreenProps> = memo((props) => {
-  const $refPanl: React.RefObject<HTMLDivElement> = useRef(null);
   const [w, setW] = useState<number>(0);
-  const [scoreFlashflag, setScoreFlashflag] = useState<boolean>(false);
+  const [scoreFlashflag, toggleScoreFlashflag] = useState<boolean>(false);
+  const $refPanl: React.RefObject<HTMLDivElement> = useRef(null);
+  const { matrix, max, score, startLines, clearLines, pause, playing, speed, sound, next } = props;
+  const pixelWidth = w / matrix[0].length;
+  let timer: any = null;
 
   function calcWidth() {
     if ($refPanl.current) {
@@ -44,23 +42,8 @@ const Screen: FunctionComponent<IScreenProps> = memo((props) => {
     }
   }
 
-  function scoreFlash() {
-    setInterval(() => {
-      if (playing) {
-        return;
-      }
-
-      if (score === 0) {
-        setScoreFlashflag(false);
-      } else {
-        setScoreFlashflag(!scoreFlashflag);
-      }
-    }, 3000);
-  }
-
   useEffect(() => {
     calcWidth();
-    scoreFlash();
     window.addEventListener('resize', calcWidth);
 
     return () => {
@@ -68,8 +51,21 @@ const Screen: FunctionComponent<IScreenProps> = memo((props) => {
     };
   }, []);
 
-  const { matrix, max, score, startLines, clearLines, pause, playing, speed, sound, next } = props;
-  const pixelWidth = w / matrix[0].length;
+  useEffect(() => {
+    if (timer) {
+      clearTimeout(timer);
+      timer = null;
+    }
+
+    timer = setTimeout(() => {
+      if (playing) {
+        return;
+      }
+
+      // tslint:disable-next-line: no-unused-expression
+      score !== 0 && toggleScoreFlashflag(!scoreFlashflag);
+    }, 3000);
+  }, [scoreFlashflag, playing, score]);
 
   return (
     <div className={styles.wrapper}>
