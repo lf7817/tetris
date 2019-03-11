@@ -34,7 +34,6 @@ const Screen: FunctionComponent<IScreenProps> = memo((props) => {
   const $refPanl: React.RefObject<HTMLDivElement> = useRef(null);
   const { matrix, max, score, startLines, clearLines, pause, playing, speed, sound, next } = props;
   const pixelWidth = w / matrix[0].length;
-  let timer: any = null;
 
   function calcWidth() {
     if ($refPanl.current) {
@@ -52,16 +51,11 @@ const Screen: FunctionComponent<IScreenProps> = memo((props) => {
   }, []);
 
   useEffect(() => {
-    if (timer) {
-      clearTimeout(timer);
-      timer = null;
+    if (playing) {
+      return;
     }
 
-    timer = setTimeout(() => {
-      if (playing) {
-        return;
-      }
-
+    setTimeout(() => {
       // tslint:disable-next-line: no-unused-expression
       score !== 0 && toggleScoreFlashflag(!scoreFlashflag);
     }, 3000);
