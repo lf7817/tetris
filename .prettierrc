@@ -2,7 +2,6 @@
   "trailingComma": "es5",
   "printWidth": 100,
   "singleQuote": false,
-  "endOfLine": "crlf",
   "semi": true,
   "overrides": [
     {
