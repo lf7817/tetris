@@ -2,4 +2,4 @@
 
 @function px2rem($px) {
   @return ($px / $font-size-root) * 1rem;
-}
+}
