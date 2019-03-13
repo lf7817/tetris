@@ -4,7 +4,7 @@
  * @Last Modified by: lifan
  * @Last Modified time: 2019-01-15 11:13:40
  */
-import { BLOCK_SHAPE, BlockShap } from '../constants/block';
+import { BLOCK_SHAPE, BlockShap } from "../constants/block";
 
 /**
  * 随机生成一个方块类型

@@ -4,11 +4,11 @@
  * @Last Modified by: lifan
  * @Last Modified time: 2019-03-10 17:24:18
  */
-import React, { FunctionComponent, memo, useEffect, useRef, useState } from 'react';
-import intl from 'react-intl-universal';
-import { BLOCK_DECORATE, BLOCK_DECORATE_REVERSE } from '../../constants/block';
-import Matrix from '../Matrix';
-import styles from './style.module.scss';
+import React, { FunctionComponent, memo, useEffect, useRef, useState } from "react";
+import intl from "react-intl-universal";
+import { BLOCK_DECORATE, BLOCK_DECORATE_REVERSE } from "../../constants/block";
+import Matrix from "../Matrix";
+import styles from "./style.module.scss";
 
 const Decorate: FunctionComponent<{}> = memo(() => {
   const [width, setWidth] = useState<number>(0);
@@ -21,20 +21,16 @@ const Decorate: FunctionComponent<{}> = memo(() => {
 
   useEffect(() => {
     calcWidth();
-    window.addEventListener('resize', calcWidth);
+    window.addEventListener("resize", calcWidth);
 
     return () => {
-      window.removeEventListener('resize', calcWidth);
+      window.removeEventListener("resize", calcWidth);
     };
   }, []);
 
   return (
     <div className={styles.decorate}>
-      <h1 className={styles.logo}>
-        {
-          intl.get('gameName')
-        }
-      </h1>
+      <h1 className={styles.logo}>{intl.get("gameName")}</h1>
       <div className={styles.left} ref={$refLeft}>
         <Matrix matrix={BLOCK_DECORATE} width={width} hideBlankPixel={true} />
       </div>

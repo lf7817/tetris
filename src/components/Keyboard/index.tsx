@@ -4,12 +4,12 @@
  * @Last Modified by: lifan
  * @Last Modified time: 2019-01-16 14:06:31
  */
-import React, { FunctionComponent, memo, useEffect, useRef, useState } from 'react';
-import intl from 'react-intl-universal';
-import { IGameKeyboard } from '../../store/reducers/keyboard';
-import { isMobile } from '../../utils';
-import MyButton from '../MyButton/index';
-import styles from './style.module.scss';
+import React, { FunctionComponent, memo, useEffect, useRef, useState } from "react";
+import intl from "react-intl-universal";
+import { IGameKeyboard } from "../../store/reducers/keyboard";
+import { isMobile } from "../../utils";
+import MyButton from "../MyButton/index";
+import styles from "./style.module.scss";
 
 const keyCode = {
   drop: 32,
@@ -52,39 +52,64 @@ const Keyboard: FunctionComponent<IKeyboardProps> = memo(({ keyboard, keyboardHa
   function registerPressEventHandler() {
     lastKey = [];
 
-    window.addEventListener('keydown', (event) => {
-      if (event.keyCode !== keyCode.f12) {
+    window.addEventListener(
+      "keydown",
+      event => {
+        if (event.keyCode !== keyCode.f12) {
+          event.preventDefault();
+        }
+
+        let opera: keyof IGameKeyboard;
+
+        switch (event.keyCode) {
+          case keyCode.down:
+            opera = "down";
+            break;
+          case keyCode.left:
+            opera = "left";
+            break;
+          case keyCode.right:
+            opera = "right";
+            break;
+          case keyCode.rotate:
+            opera = "rotate";
+            break;
+          case keyCode.drop:
+            opera = "drop";
+            break;
+          case keyCode.sound:
+            opera = "sound";
+            break;
+          case keyCode.reset:
+            opera = "reset";
+            break;
+          case keyCode.pause:
+            opera = "pause";
+            break;
+          default:
+            opera = "";
+        }
+
+        if (lastKey.indexOf(opera) === -1) {
+          keyboardHandler(opera, true);
+          lastKey.push(opera);
+        }
+      },
+      true
+    );
+
+    window.addEventListener(
+      "keyup",
+      event => {
         event.preventDefault();
-      }
+        for (const k of lastKey) {
+          keyboardHandler(k, false);
+        }
 
-      let opera: keyof IGameKeyboard;
-
-      switch (event.keyCode) {
-        case keyCode.down: opera = 'down'; break;
-        case keyCode.left: opera = 'left'; break;
-        case keyCode.right: opera = 'right'; break;
-        case keyCode.rotate: opera = 'rotate'; break;
-        case keyCode.drop: opera = 'drop'; break;
-        case keyCode.sound: opera = 'sound'; break;
-        case keyCode.reset: opera = 'reset'; break;
-        case keyCode.pause: opera = 'pause'; break;
-        default: opera = '';
-      }
-
-      if (lastKey.indexOf(opera) === -1) {
-        keyboardHandler(opera, true);
-        lastKey.push(opera);
-      }
-    }, true);
-
-    window.addEventListener('keyup', (event) => {
-      event.preventDefault();
-      for (const k of lastKey) {
-        keyboardHandler(k, false);
-      }
-
-      lastKey = [];
-    }, true);
+        lastKey = [];
+      },
+      true
+    );
   }
 
   function resizeHandler() {
@@ -94,7 +119,7 @@ const Keyboard: FunctionComponent<IKeyboardProps> = memo(({ keyboard, keyboardHa
       if (dom) {
         const top = dom.getBoundingClientRect().top;
         const winHeight = document.documentElement && document.documentElement.clientHeight;
-        dom.style.minHeight = winHeight ? `${winHeight - top}px` : '10px';
+        dom.style.minHeight = winHeight ? `${winHeight - top}px` : "10px";
       }
     }, 50);
 
@@ -104,39 +129,39 @@ const Keyboard: FunctionComponent<IKeyboardProps> = memo(({ keyboard, keyboardHa
   useEffect(() => {
     resizeHandler();
     registerPressEventHandler();
-    window.addEventListener('resize', resizeHandler);
-    window.addEventListener('mouseup', touchEndtHandler);
+    window.addEventListener("resize", resizeHandler);
+    window.addEventListener("mouseup", touchEndtHandler);
 
     return () => {
-      window.removeEventListener('resize', resizeHandler);
-      window.removeEventListener('mouseup', touchEndtHandler);
+      window.removeEventListener("resize", resizeHandler);
+      window.removeEventListener("mouseup", touchEndtHandler);
     };
   }, []);
 
   return (
     <div className={styles.keyboard} ref={$refKeyboard}>
       <div className={styles.content}>
-        {
-          Object.keys(keyboard).map((key) => (
-            <MyButton
-              key={key}
-              title={intl.get(`key.${key}`)}
-              classNames={styles[`key${key.toLowerCase().replace(/( |^)[a-z]/g, (L) => L.toUpperCase())}`]}
-              active={keyboard[key]}
-              textDirection={key === 'rotate' ? 'row' : 'column'}
-              touchEndtHandler={() => touchEndtHandler()}
-              touchStartHandler={() => touchStartHandler(key)}
-              isMobile={mobile}
-            />
-          ))
-        }
+        {Object.keys(keyboard).map(key => (
+          <MyButton
+            key={key}
+            title={intl.get(`key.${key}`)}
+            classNames={
+              styles[`key${key.toLowerCase().replace(/( |^)[a-z]/g, L => L.toUpperCase())}`]
+            }
+            active={keyboard[key]}
+            textDirection={key === "rotate" ? "row" : "column"}
+            touchEndtHandler={() => touchEndtHandler()}
+            touchStartHandler={() => touchStartHandler(key)}
+            isMobile={mobile}
+          />
+        ))}
         <div className={styles.keyDecorate}>
           <span className={styles.keyDecorateItem} />
           <div className={styles.keyDecorateCenter}>
-            <span className={styles.keyDecorateItem} style={{ transform: 'rotate(270deg)' }} />
-            <span className={styles.keyDecorateItem} style={{ transform: 'rotate(90deg)' }} />
+            <span className={styles.keyDecorateItem} style={{ transform: "rotate(270deg)" }} />
+            <span className={styles.keyDecorateItem} style={{ transform: "rotate(90deg)" }} />
           </div>
-          <span className={styles.keyDecorateItem} style={{ transform: 'rotate(180deg)' }} />
+          <span className={styles.keyDecorateItem} style={{ transform: "rotate(180deg)" }} />
         </div>
       </div>
     </div>

@@ -8,8 +8,7 @@
 /**
  * 判断是否为移动端
  */
-export const isMobile = (): boolean =>
-  /(iPhone|iPad|iPod|iOS|Android)/i.test(navigator.userAgent);
+export const isMobile = (): boolean => /(iPhone|iPad|iPod|iOS|Android)/i.test(navigator.userAgent);
 
 /**
  * 获取url参数
@@ -43,9 +42,9 @@ export const compareMatrix = (prevMatrix: number[][], matrix: number[][]) => {
   return true;
 };
 
-const hiddenProperty = [
-  'hidden', 'webkitHidden', 'mozHidden', 'msHidden',
-].filter((e) => e in document);
+const hiddenProperty = ["hidden", "webkitHidden", "mozHidden", "msHidden"].filter(
+  e => e in document
+);
 
 /**
  * 是否聚焦，不支持的话默认聚焦
@@ -63,7 +62,7 @@ export const isFocus = () => {
  */
 export const visibilityChangeEvent: string = (() => {
   if (hiddenProperty.length === 0) {
-    return '';
+    return "";
   }
-  return hiddenProperty[0].replace(/hidden/i, 'visibilitychange'); // 如果属性有前缀, 相应的事件也有前缀
+  return hiddenProperty[0].replace(/hidden/i, "visibilitychange"); // 如果属性有前缀, 相应的事件也有前缀
 })();

@@ -2,7 +2,8 @@
   "extends": [
     "tslint:latest",
     "tslint-react",
-    "tslint-eslint-rules"
+    "tslint-eslint-rules",
+    "tslint-config-prettier"
   ],
   "linterOptions": {
     "exclude": [
@@ -11,15 +12,17 @@
       "coverage/lcov-report/*.js"
     ]
   },
+  "rulesDirectory": [
+    "tslint-plugin-prettier"
+  ],
   "rules": {
-    "quotemark": [true, "single", "jsx-double"],
+    "prettier": true,
+    "interface-name": false,
     "jsx-no-lambda": false,
     "jsx-no-multiline-js": false,
     "object-literal-sort-keys": false,
     "no-submodule-imports": false,
     "max-line-length": false,
-    "no-implicit-dependencies": false,
-    "no-console": false
+    "no-implicit-dependencies": false
   }
-
 }

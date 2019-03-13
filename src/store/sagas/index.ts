@@ -4,9 +4,9 @@
  * @Last Modified by: lifan
  * @Last Modified time: 2019-03-10 16:01:40
  */
-import { call, delay, fork, put, select, take, takeEvery } from 'redux-saga/effects';
-import { Action } from '../actions';
-import Types from '../types';
+import { call, delay, fork, put, select, take, takeEvery } from "redux-saga/effects";
+import { Action } from "../actions";
+import Types from "../types";
 
 export function* incrementAsync() {
   yield delay(1000);
@@ -22,7 +22,7 @@ export function* incrementAsync() {
 function fn() {
   return new Promise((resolve, reject) => {
     setTimeout(() => {
-      resolve('hello saga');
+      resolve("hello saga");
     }, 2000);
   });
 }
@@ -34,7 +34,7 @@ function* fetchData() {
 
   // 立即打印 task 对象（非阻塞）
   const task = yield fork(fn);
-  console.log('task: ', task);
+  // console.log("task: ", task);
 }
 
 // function* watcher() {
@@ -51,7 +51,7 @@ export function* watchIncrementAsync() {
 
 export function* demo1(action: Action) {
   yield delay(1000);
-  console.log(action);
+  // console.log(action);
 }
 
 export function* demo() {
@@ -65,10 +65,10 @@ export default function* rootSaga() {
   // yield fork(demo);
 
   while (true) {
-    const action = yield take('*');
+    const action = yield take("*");
     const state = yield select();
 
-    console.log('action', action);
-    console.log('state after', state);
+    // console.log("action", action);
+    // console.log("state after", state);
   }
 }

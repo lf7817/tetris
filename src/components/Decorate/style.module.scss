@@ -18,15 +18,16 @@ $border-color: #111;
 
   .logo {
     position: relative;
-    top: - px2rem(22);
+    top: -px2rem(22);
     margin: 0 auto;
     padding: 0;
-    text-align: center;
-    font-size: px2rem(38);
     font-weight: 400;
+    font-size: px2rem(38);
+    text-align: center;
   }
 
-  .left, .right {
+  .left,
+  .right {
     position: absolute;
     top: px2rem(44);
     width: px2rem(48);
@@ -42,16 +43,17 @@ $border-color: #111;
 
   .dotWrapper {
     position: relative;
-    top: - px2rem(44);
+    top: -px2rem(44);
     z-index: 100;
-    margin: 0 auto;
     width: px2rem(564);
+    margin: 0 auto;
 
-    .dotsLeft, .dotsRight {
+    .dotsLeft,
+    .dotsRight {
       position: absolute;
       top: 0;
-      left: 0;
       right: 0;
+      left: 0;
       display: flex;
 
       .dot {
@@ -84,4 +86,4 @@ $border-color: #111;
       }
     }
   }
-}
+}

@@ -9,25 +9,25 @@
 
 .app {
   position: relative;
+  min-height: 100vh;
   margin: 0 auto;
   padding-top: px2rem(116);
-  min-height: 100vh;
   font-size: px2rem(32);
   background-color: $color-theme;
   animation: fadeIn 0.5s;
 
   @media screen and (min-width: 540px) {
-    border-radius: 20px;
     padding-top: px2rem(64);
+    border-radius: 20px;
   }
 }
 
 .loading {
-  margin: px2rem(116) auto;
   width: px2rem(200) !important;
   height: px2rem(200) !important;
-  fill: $color-theme !important;
+  margin: px2rem(116) auto;
   animation: fadeOut 0.5s;
+  fill: $color-theme !important;
 }
 
 @keyframes fadeIn {

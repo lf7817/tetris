@@ -4,11 +4,11 @@
  * @Last Modified by: lifan
  * @Last Modified time: 2019-01-15 11:04:35
  */
-import produce from 'immer';
-import { BlockShap } from '../../constants/block';
-import { getRandomBlockShap } from '../../utils/block';
-import { Action } from '../actions';
-import types from '../types';
+import produce from "immer";
+import { BlockShap } from "../../constants/block";
+import { getRandomBlockShap } from "../../utils/block";
+import { Action } from "../actions";
+import types from "../types";
 
 export interface IBlock {
   next: BlockShap;
@@ -19,9 +19,12 @@ const initState = {
 };
 
 export default (state: IBlock = initState, action: Action) =>
-  produce(state, (draft) => {
+  produce(state, draft => {
     switch (action.type) {
-      case types.SET_NEXT: draft.next = getRandomBlockShap(); break;
-      default: break;
+      case types.SET_NEXT:
+        draft.next = getRandomBlockShap();
+        break;
+      default:
+        break;
     }
   });

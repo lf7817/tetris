@@ -23,15 +23,16 @@ $border-color: #111;
 
   .logo {
     position: relative;
-    top: - px2rem(22);
+    top: -px2rem(22);
     margin: 0 auto;
     padding: 0;
-    text-align: center;
-    font-size: px2rem(38);
     font-weight: 400;
+    font-size: px2rem(38);
+    text-align: center;
   }
 
-  .left, .right {
+  .left,
+  .right {
     position: absolute;
     top: px2rem(44);
     width: px2rem(48);
@@ -47,16 +48,17 @@ $border-color: #111;
 
   .dotWrapper {
     position: relative;
-    top: - px2rem(44);
+    top: -px2rem(44);
     z-index: 100;
-    margin: 0 auto;
     width: px2rem(564);
+    margin: 0 auto;
 
-    .dotsLeft, .dotsRight {
+    .dotsLeft,
+    .dotsRight {
       position: absolute;
       top: 0;
-      left: 0;
       right: 0;
+      left: 0;
       display: flex;
 
       .dot {
@@ -94,30 +96,30 @@ $border-color: #111;
 .center {
   position: relative;
   z-index: 99;
+  width: px2rem(564);
   margin: 0 auto;
   padding: px2rem(48);
-  width: px2rem(564);
   border: px2rem($border-size) solid $border-color;
   border-top: none;
   border-radius: 0 0 px2rem(10) px2rem(10);
 
   .screenWrapper {
     width: 100%;
+    background-color: $color-screen;
     border: px2rem(5) solid;
     border-color: #987f0f #fae36c #fae36c #987f0f;
-    background-color: $color-screen;
 
     .screen {
-      padding: px2rem(10);
-      width: 100%;
-      border: px2rem(2) solid #453e36;
       display: flex;
+      width: 100%;
+      padding: px2rem(10);
+      border: px2rem(2) solid #453e36;
 
       .mainPanel {
-        padding: px2rem(2) px2rem(4) ;
         width: px2rem(260);
-        border: px2rem(4) solid #000000;
+        padding: px2rem(2) px2rem(4);
         font-size: 0;
+        border: px2rem(4) solid #000000;
       }
     }
   }
@@ -141,7 +143,7 @@ $border-color: #111;
 
   .time {
     position: absolute;
+    right: 0;
     bottom: px2rem(10);
-    right: 0
   }
-}
+}

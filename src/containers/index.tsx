@@ -4,20 +4,20 @@
  * @Last Modified by: lifan
  * @Last Modified time: 2019-03-06 22:16:26
  */
-import React, { PureComponent } from 'react';
-import intl from 'react-intl-universal';
-import ReactLoading from 'react-loading';
-import { connect } from 'react-redux';
-import { Dispatch } from 'redux';
-import Keyboard from '../components/Keyboard';
-import Screen from '../components/Screen';
-import { BlockShap } from '../constants/block';
-import { GameLocales, LOCALES } from '../locales';
-import * as action from '../store/actions';
-import { IState } from '../store/reducers';
-import { IGameKeyboard } from '../store/reducers/keyboard';
-import { getUrlParam, isFocus, visibilityChangeEvent } from '../utils';
-import styles from './style.module.scss';
+import React, { PureComponent } from "react";
+import intl from "react-intl-universal";
+import ReactLoading from "react-loading";
+import { connect } from "react-redux";
+import { Dispatch } from "redux";
+import Keyboard from "../components/Keyboard";
+import Screen from "../components/Screen";
+import { BlockShap } from "../constants/block";
+import { GameLocales, LOCALES } from "../locales";
+import * as action from "../store/actions";
+import { IState } from "../store/reducers";
+import { IGameKeyboard } from "../store/reducers/keyboard";
+import { getUrlParam, isFocus, visibilityChangeEvent } from "../utils";
+import styles from "./style.module.scss";
 
 interface IAppProps {
   locales: GameLocales;
@@ -54,20 +54,36 @@ class App extends PureComponent<IAppProps, IAppState> {
     let a = null;
 
     switch (key) {
-      case 'down': a = action.keyDown; break;
-      case 'left': a = action.keyLeft; break;
-      case 'right': a = action.keyRight; break;
-      case 'rotate': a = action.keyRotate; break;
-      case 'drop': a = action.keyDrop; break;
-      case 'reset': a = action.keyReset; break;
-      case 'sound': a = action.keySound; break;
-      case 'pause': a = action.keyPause; break;
+      case "down":
+        a = action.keyDown;
+        break;
+      case "left":
+        a = action.keyLeft;
+        break;
+      case "right":
+        a = action.keyRight;
+        break;
+      case "rotate":
+        a = action.keyRotate;
+        break;
+      case "drop":
+        a = action.keyDrop;
+        break;
+      case "reset":
+        a = action.keyReset;
+        break;
+      case "sound":
+        a = action.keySound;
+        break;
+      case "pause":
+        a = action.keyPause;
+        break;
     }
 
     if (a) {
       this.props.dispatch(a(value));
     }
-  }
+  };
 
   public visibilityChangeHandler = () => {
     if (visibilityChangeEvent) {
@@ -75,7 +91,7 @@ class App extends PureComponent<IAppProps, IAppState> {
         this.props.dispatch(action.setFocus(isFocus()));
       });
     }
-  }
+  };
 
   public componentDidMount() {
     this.initLocales(this.props.locales);
@@ -94,10 +110,22 @@ class App extends PureComponent<IAppProps, IAppState> {
 
   public render() {
     const { initLocales } = this.state;
-    const { matrix, keyboard, score, max, speed, startLines, clearLines, pause, playing, sound, next } = this.props;
+    const {
+      matrix,
+      keyboard,
+      score,
+      max,
+      speed,
+      startLines,
+      clearLines,
+      pause,
+      playing,
+      sound,
+      next,
+    } = this.props;
 
     if (!initLocales) {
-      return <ReactLoading type={'spinningBubbles'} className={styles.loading} />;
+      return <ReactLoading type={"spinningBubbles"} className={styles.loading} />;
     }
 
     return (
@@ -114,10 +142,7 @@ class App extends PureComponent<IAppProps, IAppState> {
           sound={sound}
           next={next}
         />
-        <Keyboard
-          keyboard={keyboard}
-          keyboardHandler={this.keyboardHandler}
-        />
+        <Keyboard keyboard={keyboard} keyboardHandler={this.keyboardHandler} />
       </div>
     );
   }
@@ -129,7 +154,7 @@ class App extends PureComponent<IAppProps, IAppState> {
         locales: LOCALES,
       });
     } finally {
-      if (process.env.NODE_ENV === 'development') {
+      if (process.env.NODE_ENV === "development") {
         this.setState({
           initLocales: true,
         });
@@ -144,7 +169,7 @@ class App extends PureComponent<IAppProps, IAppState> {
   }
 
   private initLocales(locales: GameLocales) {
-    const lang = getUrlParam('lang') as GameLocales;
+    const lang = getUrlParam("lang") as GameLocales;
 
     if (lang && LOCALES.hasOwnProperty(lang)) {
       this.props.dispatch(action.updateLocales(lang));
@@ -177,5 +202,5 @@ const mapDispatch = (dispatch: Dispatch) => ({
 
 export default connect(
   mapState,
-  mapDispatch,
+  mapDispatch
 )(App);

@@ -4,7 +4,7 @@
  * @Last Modified by: lifan
  * @Last Modified time: 2019-01-15 14:45:56
  */
-@import 'variable';
+@import "variable";
 
 * {
   box-sizing: border-box;
@@ -12,8 +12,9 @@
 }
 
 html {
-  font-family: "HanHei SC","PingHei","PingFang SC","STHeitiSC-Light","Helvetica Neue","Helvetica","Arial",sans-serif;
   font-size: ($font-size-root / $design-width) * 100vw;
+  font-family: "HanHei SC", "PingHei", "PingFang SC", "STHeitiSC-Light", "Helvetica Neue",
+    "Helvetica", "Arial", sans-serif;
   // 同时，通过Media Queries 限制根元素最大最小值
   @media screen and (max-width: 320px) {
     font-size: 32px;
@@ -25,9 +26,9 @@ html {
 }
 
 body {
+  min-width: 320px;
+  max-width: 540px;
   margin: 0 auto;
   padding: 0;
-  max-width: 540px;
-  min-width: 320px;
   background: $color-theme-background;
-}
+}

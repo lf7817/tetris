@@ -12,13 +12,13 @@
   p {
     margin: px2rem(10) 0 px2rem(6) 0;
     padding: 0;
-    text-indent: px2rem(10);
     font-size: px2rem(24);
+    text-indent: px2rem(10);
     transform: scale(0.9);
   }
   div {
-    text-align: right;
     margin-top: px2rem(20);
+    text-align: right;
     text-indent: px2rem(10);
   }
 }

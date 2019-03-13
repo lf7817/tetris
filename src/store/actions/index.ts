@@ -4,8 +4,8 @@
  * @Last Modified by: lifan
  * @Last Modified time: 2019-03-10 16:01:46
  */
-import { GameLocales } from '../../locales';
-import Types from '../types';
+import { GameLocales } from "../../locales";
+import Types from "../types";
 
 export type UpdateLocales = ReturnType<typeof updateLocales>;
 export const updateLocales = (locales: GameLocales) => ({

@@ -4,10 +4,10 @@
  * @Last Modified by: lifan
  * @Last Modified time: 2019-01-11 13:32:23
  */
-import cn from 'classnames';
-import React, { FunctionComponent, memo, useEffect, useState } from 'react';
-import Character, { ICharacterValue } from '../Character';
-import styles from './style.module.scss';
+import cn from "classnames";
+import React, { FunctionComponent, memo, useEffect, useState } from "react";
+import Character, { ICharacterValue } from "../Character";
+import styles from "./style.module.scss";
 
 interface ITimeProps {
   className?: string;
@@ -20,12 +20,12 @@ interface ITimeState {
   m2: ICharacterValue;
 }
 
-const Time: FunctionComponent<ITimeProps> = memo((props) => {
+const Time: FunctionComponent<ITimeProps> = memo(props => {
   const [state, setState] = useState<ITimeState>({
-    h1: '0' as ICharacterValue,
-    m1: '0' as ICharacterValue,
-    h2: '0' as ICharacterValue,
-    m2: '0' as ICharacterValue,
+    h1: "0" as ICharacterValue,
+    m1: "0" as ICharacterValue,
+    h2: "0" as ICharacterValue,
+    m2: "0" as ICharacterValue,
   });
 
   function calcTime() {

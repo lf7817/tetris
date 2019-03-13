@@ -4,44 +4,49 @@
  * @Last Modified by: lifan
  * @Last Modified time: 2019-01-16 14:06:45
  */
-import cn from 'classnames';
-import React, { FunctionComponent, memo } from 'react';
-import styles from './style.module.scss';
+import cn from "classnames";
+import React, { FunctionComponent, memo } from "react";
+import styles from "./style.module.scss";
 
 interface IMyButtonProps {
   title: string;
   classNames: string;
-  textDirection?: 'column' | 'row';
+  textDirection?: "column" | "row";
   active?: boolean;
   isMobile?: boolean;
   touchStartHandler: (() => void) | undefined;
   touchEndtHandler: (() => void) | undefined;
 }
 
-const MyButton: FunctionComponent<IMyButtonProps> = memo((props) => {
+const MyButton: FunctionComponent<IMyButtonProps> = memo(props => {
   const {
-    classNames, title, textDirection = 'column', active = false,
-    touchStartHandler, touchEndtHandler, isMobile = false,
+    classNames,
+    title,
+    textDirection = "column",
+    active = false,
+    touchStartHandler,
+    touchEndtHandler,
+    isMobile = false,
   } = props;
 
   return (
     <div className={cn(styles.myButton, classNames)} style={{ flexDirection: textDirection }}>
-      {
-        isMobile ?
-          <span
-            className={cn(styles.button, { [styles.active]: active })}
-            onTouchStart={touchStartHandler}
-            onTouchEnd={touchEndtHandler}
-          /> :
-          <span
-            className={cn(styles.button, { [styles.active]: active })}
-            onMouseDown={touchStartHandler}
-            onMouseUp={touchEndtHandler}
-          />
-      }
+      {isMobile ? (
+        <span
+          className={cn(styles.button, { [styles.active]: active })}
+          onTouchStart={touchStartHandler}
+          onTouchEnd={touchEndtHandler}
+        />
+      ) : (
+        <span
+          className={cn(styles.button, { [styles.active]: active })}
+          onMouseDown={touchStartHandler}
+          onMouseUp={touchEndtHandler}
+        />
+      )}
       <span
         className={styles.title}
-        style={{ textAlign: textDirection === 'row' ? 'left' : 'center' }}
+        style={{ textAlign: textDirection === "row" ? "left" : "center" }}
       >
         {title}
       </span>

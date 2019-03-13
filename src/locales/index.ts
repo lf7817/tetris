@@ -5,8 +5,8 @@
  * @Last Modified time: 2019-01-08 14:14:12
  */
 export const LOCALES = {
-  'en-US': require('./en-US.json'),
-  'zh-CN': require('./zh-CN.json'),
+  "en-US": require("./en-US.json"),
+  "zh-CN": require("./zh-CN.json"),
 };
 
-export type GameLocales = 'en-US' | 'zh-CN';
+export type GameLocales = "en-US" | "zh-CN";
